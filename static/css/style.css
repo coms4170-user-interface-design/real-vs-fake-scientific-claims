@@ -10,3 +10,21 @@ main.container {
   flex-direction: column;
   justify-content: center;
 }
+
+.flaggable {
+  cursor: pointer;
+  background-color: #fff3cd;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  transition: background-color 0.1s ease, border-color 0.1s ease;
+}
+
+.flaggable:hover {
+  border-color: #ffc107;
+}
+
+.flaggable.selected {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+}

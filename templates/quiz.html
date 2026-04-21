@@ -3,16 +3,59 @@
 {% block title %}Quiz {{ n }} — Real vs. Fake{% endblock %}
 
 {% block content %}
-<div class="text-muted small mb-2">Question {{ n }} of {{ total }}</div>
-<h1 class="h3 mb-4">{{ question.prompt }}</h1>
-
-<div class="alert alert-light border">
-  <p class="mb-1"><strong>Question type:</strong> <code>{{ question.type }}</code></p>
-  <p class="mb-0 text-muted">Interactive rendering for this question type comes in a later commit. The Next button below does not record an answer yet.</p>
+<div class="lesson-header mb-4">
+  <div class="text-muted small">Question {{ n }} of {{ total }}</div>
+  <h1 class="h3 mb-0">{{ question.prompt }}</h1>
 </div>
+
+{% if question.type == "click_flag" %}
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="fw-bold mb-2">{{ question.post.username }}</div>
+      <div class="text-muted small mb-3">{{ question.post.image_caption }}</div>
+      <div class="border rounded p-3 mb-3 bg-light">
+        {% for seg in question.post.headline_segments %}
+          {%- if seg.type == "flag" -%}
+            <span class="flaggable" data-flag-id="{{ seg.id }}">{{ seg.value }}</span>
+          {%- else -%}
+            {{ seg.value }}
+          {%- endif -%}
+        {% endfor %}
+      </div>
+      <div>
+        {% for seg in question.post.body_segments %}
+          {%- if seg.type == "flag" -%}
+            <span class="flaggable" data-flag-id="{{ seg.id }}">{{ seg.value }}</span>
+          {%- else -%}
+            {{ seg.value }}
+          {%- endif -%}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="alert alert-light border">
+    <p class="mb-1"><strong>Question type:</strong> <code>{{ question.type }}</code></p>
+    <p class="mb-0 text-muted">Interactive rendering for this question type comes in a later commit.</p>
+  </div>
+{% endif %}
 
 <div class="d-flex justify-content-between mt-4">
   <a href="/" class="btn btn-outline-secondary">Home</a>
-  <a href="{{ next_url }}" class="btn btn-primary">Next &rarr;</a>
+  {% if question.type == "click_flag" %}
+    <button id="submit-answer" class="btn btn-primary"
+            data-question-id="{{ question.id }}"
+            data-next-url="{{ next_url }}">
+      Submit &rarr;
+    </button>
+  {% else %}
+    <a href="{{ next_url }}" class="btn btn-primary">Next &rarr;</a>
+  {% endif %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+{% if question.type == "click_flag" %}
+<script src="{{ url_for('static', filename='js/click-flag.js') }}"></script>
+{% endif %}
 {% endblock %}
