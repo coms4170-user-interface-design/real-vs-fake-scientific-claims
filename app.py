@@ -43,12 +43,14 @@ def learn(n):
     lesson = LESSONS[n - 1]
     is_last = n == len(LESSONS)
     next_url = "/quiz/1" if is_last else f"/learn/{n + 1}"
+    prev_url = "/" if n == 1 else f"/learn/{n - 1}"
     return render_template(
         "learn.html",
         lesson=lesson,
         n=n,
         total=len(LESSONS),
         next_url=next_url,
+        prev_url=prev_url,
     )
 
 

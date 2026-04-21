@@ -137,7 +137,7 @@
 {% endif %}
 
 <div class="d-flex justify-content-between mt-5">
-  <a href="/" class="btn btn-outline-secondary">Home</a>
+  <a href="{{ prev_url }}" class="btn btn-outline-secondary">&larr; Previous</a>
   <a href="{{ next_url }}" class="btn btn-primary">
     {% if lesson.cta %}{{ lesson.cta }}{% else %}Next{% endif %} &rarr;
   </a>
