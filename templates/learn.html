@@ -3,16 +3,44 @@
 {% block title %}Lesson {{ n }} — {{ lesson.title }}{% endblock %}
 
 {% block content %}
-<div class="text-muted small mb-2">Lesson {{ n }} of {{ total }}</div>
-<h1 class="mb-4">{{ lesson.title }}</h1>
-
-<div class="alert alert-light border">
-  <p class="mb-1"><strong>Lesson type:</strong> <code>{{ lesson.type }}</code></p>
-  <p class="mb-0 text-muted">Rich rendering for this lesson type comes in a later commit.</p>
+<div class="lesson-header mb-4">
+  <div class="text-muted small">Lesson {{ n }} of {{ total }}</div>
+  <h1 class="mb-0">{{ lesson.title }}</h1>
 </div>
 
-<div class="d-flex justify-content-between mt-4">
+{% if lesson.type == "scenario" %}
+  <div class="row g-4 align-items-start">
+    <div class="col-md-6">
+      <div class="card post-card">
+        <div class="card-body">
+          <div class="post-username fw-bold mb-3">{{ lesson.post.username }}</div>
+          <div class="post-quote border rounded p-3 mb-3">
+            <div class="post-headline fw-bold mb-2">{{ lesson.post.headline }}</div>
+            <div class="post-highlight">{{ lesson.post.highlight }}</div>
+          </div>
+          <div class="post-body">{{ lesson.post.body }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <p class="lead mb-2">{{ lesson.intro }}</p>
+      <p class="text-muted mb-4">{{ lesson.sub_intro }}</p>
+      <div class="scenario-question border rounded p-3">
+        <strong>{{ lesson.question }}</strong>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="alert alert-light border">
+    <p class="mb-1"><strong>Lesson type:</strong> <code>{{ lesson.type }}</code></p>
+    <p class="mb-0 text-muted">Rich rendering for this lesson type comes in a later commit.</p>
+  </div>
+{% endif %}
+
+<div class="d-flex justify-content-between mt-5">
   <a href="/" class="btn btn-outline-secondary">Home</a>
-  <a href="{{ next_url }}" class="btn btn-primary">Next &rarr;</a>
+  <a href="{{ next_url }}" class="btn btn-primary">
+    {% if lesson.cta %}{{ lesson.cta }}{% else %}Next{% endif %} &rarr;
+  </a>
 </div>
 {% endblock %}
