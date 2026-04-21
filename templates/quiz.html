@@ -33,6 +33,35 @@
       </div>
     </div>
   </div>
+{% elif question.type == "drag_bucket" %}
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="fw-bold mb-2">{{ question.post.username }}</div>
+      <div class="text-muted small mb-2">{{ question.post.image_caption }}</div>
+      <div class="border rounded p-3 mb-3 bg-light fst-italic">{{ question.post.study_preview }}</div>
+      <div>{{ question.post.body }}</div>
+    </div>
+  </div>
+
+  <h2 class="h6 text-muted text-uppercase mb-2">Draggable items</h2>
+  <div id="drag-tray" class="drag-tray mb-4 p-2 border rounded bg-light">
+    {% for item in question.draggables %}
+      <div class="draggable-item" draggable="true" data-draggable-id="{{ item.id }}">
+        {{ item.text }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="row g-3 mb-4">
+    {% for bucket in question.buckets %}
+      <div class="col-6 col-md-3">
+        <div class="bucket h-100" data-bucket-id="{{ bucket.id }}">
+          <div class="bucket-label small fw-bold text-uppercase mb-2">{{ bucket.label }}</div>
+          <div class="bucket-drop"></div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% else %}
   <div class="alert alert-light border">
     <p class="mb-1"><strong>Question type:</strong> <code>{{ question.type }}</code></p>
@@ -42,7 +71,7 @@
 
 <div class="d-flex justify-content-between mt-4">
   <a href="/" class="btn btn-outline-secondary">Home</a>
-  {% if question.type == "click_flag" %}
+  {% if question.type in ["click_flag", "drag_bucket"] %}
     <button id="submit-answer" class="btn btn-primary"
             data-question-id="{{ question.id }}"
             data-next-url="{{ next_url }}">
@@ -57,5 +86,7 @@
 {% block scripts %}
 {% if question.type == "click_flag" %}
 <script src="{{ url_for('static', filename='js/click-flag.js') }}"></script>
+{% elif question.type == "drag_bucket" %}
+<script src="{{ url_for('static', filename='js/drag-bucket.js') }}"></script>
 {% endif %}
 {% endblock %}
