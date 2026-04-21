@@ -30,6 +30,28 @@
       </div>
     </div>
   </div>
+{% elif lesson.type == "three_signals" %}
+  {% set header_styles = {"teal": "bg-info text-white", "yellow": "bg-warning text-dark", "red": "bg-danger text-white"} %}
+  <div class="row g-4 mb-4">
+    {% for signal in lesson.signals %}
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header {{ header_styles.get(signal.color, 'bg-secondary text-white') }} py-3">
+            <div class="d-flex align-items-center">
+              <span class="fs-3 fw-bold me-2">{{ signal.number }}</span>
+              <span class="fw-bold">{{ signal.name }}</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="mb-0">{{ signal.body }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% if lesson.footnote %}
+    <p class="text-muted text-center fst-italic mt-3">{{ lesson.footnote }}</p>
+  {% endif %}
 {% else %}
   <div class="alert alert-light border">
     <p class="mb-1"><strong>Lesson type:</strong> <code>{{ lesson.type }}</code></p>
