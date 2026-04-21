@@ -52,6 +52,56 @@
   {% if lesson.footnote %}
     <p class="text-muted text-center fst-italic mt-3">{{ lesson.footnote }}</p>
   {% endif %}
+{% elif lesson.type == "comparison" %}
+  {% if lesson.subtitle %}
+    <p class="text-muted mb-4">{{ lesson.subtitle }}</p>
+  {% endif %}
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100 border-success">
+        <div class="card-header bg-success text-white">
+          <span class="me-2">&#10003;</span>
+          <span class="fw-bold">{{ lesson.good.username }}</span>
+        </div>
+        <div class="card-body">
+          <div class="small text-muted mb-2">{{ lesson.good.citation }}</div>
+          <div class="fw-bold mb-1">{{ lesson.good.study_title }}</div>
+          {% if lesson.good.authors %}
+            <div class="small text-muted mb-3">{{ lesson.good.authors }}</div>
+          {% endif %}
+          <blockquote class="fst-italic border-start border-2 ps-3 mb-3">{{ lesson.good.quote }}</blockquote>
+          <ul class="list-unstyled mb-0">
+            {% for check in lesson.good.checks %}
+              <li class="text-success-emphasis mb-1"><span class="me-2">&#10004;</span>{{ check }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100 border-danger">
+        <div class="card-header bg-danger text-white">
+          <span class="me-2">&#10007;</span>
+          <span class="fw-bold">{{ lesson.bad.username }}</span>
+        </div>
+        <div class="card-body">
+          <div class="fw-bold mb-1">{{ lesson.bad.citation }}</div>
+          {% if lesson.bad.study_title %}
+            <div class="small text-muted mb-3">{{ lesson.bad.study_title }}</div>
+          {% endif %}
+          {% if lesson.bad.authors %}
+            <div class="small text-muted mb-3">{{ lesson.bad.authors }}</div>
+          {% endif %}
+          <blockquote class="fst-italic border-start border-2 ps-3 mb-3">{{ lesson.bad.quote }}</blockquote>
+          <ul class="list-unstyled mb-0">
+            {% for check in lesson.bad.checks %}
+              <li class="text-danger-emphasis mb-1"><span class="me-2">&#10008;</span>{{ check }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 {% elif lesson.type == "signal_detail" %}
   {% set border_styles = {"teal": "border-info", "yellow": "border-warning", "red": "border-danger"} %}
   {% set title_styles = {"teal": "text-info-emphasis", "yellow": "text-warning-emphasis", "red": "text-danger-emphasis"} %}
