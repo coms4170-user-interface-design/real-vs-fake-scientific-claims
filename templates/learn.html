@@ -52,6 +52,33 @@
   {% if lesson.footnote %}
     <p class="text-muted text-center fst-italic mt-3">{{ lesson.footnote }}</p>
   {% endif %}
+{% elif lesson.type == "signal_detail" %}
+  {% set border_styles = {"teal": "border-info", "yellow": "border-warning", "red": "border-danger"} %}
+  {% set title_styles = {"teal": "text-info-emphasis", "yellow": "text-warning-emphasis", "red": "text-danger-emphasis"} %}
+  <div class="row g-4 align-items-start">
+    <div class="col-md-6">
+      <div class="card post-card">
+        <div class="card-body">
+          <div class="post-username fw-bold mb-3">{{ lesson.post.username }}</div>
+          <div class="post-quote border rounded p-3 mb-3">
+            <div class="post-headline fw-bold mb-2">{{ lesson.post.headline }}</div>
+            <div class="post-highlight">{{ lesson.post.highlight }}</div>
+          </div>
+          <div class="post-body">{{ lesson.post.body }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      {% for ann in lesson.annotations %}
+        <div class="card mb-3 shadow-sm border-start border-4 {{ border_styles.get(ann.color, '') }}">
+          <div class="card-body">
+            <h5 class="card-title {{ title_styles.get(ann.color, '') }} fw-bold">{{ ann.title }}</h5>
+            <p class="card-text mb-0">{{ ann.body }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% else %}
   <div class="alert alert-light border">
     <p class="mb-1"><strong>Lesson type:</strong> <code>{{ lesson.type }}</code></p>
