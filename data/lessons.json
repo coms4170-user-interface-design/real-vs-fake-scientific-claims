@@ -1,0 +1,159 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "type": "scenario",
+      "title": "Scenario",
+      "intro": "You're scrolling TikTok and stop on this post.",
+      "sub_intro": "It claims ashwagandha is guaranteed to boost your focus.",
+      "post": {
+        "username": "@healthadvice",
+        "headline": "KEY BENEFITS OF ASHWAGANDHA",
+        "highlight": "Ashwagandha is GUARANTEED to improve your focus, attention, and clarity of mind!",
+        "body": "Ashwagandha has been shown to improve focus, attention span, and clarity."
+      },
+      "question": "Before you buy, what should you check first?",
+      "cta": "Let's find out"
+    },
+    {
+      "id": 2,
+      "type": "three_signals",
+      "title": "Three Signals to Check",
+      "signals": [
+        {
+          "number": 1,
+          "name": "Source Signal",
+          "color": "teal",
+          "body": "Is a specific journal or study linked, not just mentioned? A post that names 'a study' without a clickable DOI or link is giving you zero verifiable evidence."
+        },
+        {
+          "number": 2,
+          "name": "Language Signal",
+          "color": "yellow",
+          "body": "Does the wording hedge ('may support', 'suggests') or overclaim ('proven', 'guaranteed', 'cures')? Science speaks in probabilities. Absolutes are a red flag."
+        },
+        {
+          "number": 3,
+          "name": "Poster Signal",
+          "color": "red",
+          "body": "Who is posting? A credentialed researcher, a for-profit supplement brand, or an anonymous wellness account? Conflict of interest shapes what gets shared."
+        }
+      ],
+      "footnote": "All three matter. A post can have one signal right and two signals wrong."
+    },
+    {
+      "id": 3,
+      "type": "signal_detail",
+      "title": "Signal 1: Source Check",
+      "accent": "red",
+      "post": {
+        "username": "@healthadvice",
+        "headline": "KEY BENEFITS OF ASHWAGANDHA",
+        "highlight": "Ashwagandha is GUARANTEED to improve your focus, attention, and clarity of mind",
+        "body": "Ashwagandha has been shown to improve focus, attention span, and clarity."
+      },
+      "annotations": [
+        {
+          "color": "red",
+          "title": "No source mentioned",
+          "body": "'Has been shown' \u2014 ask yourself: by whom? Which study? Without a linked source, this is an opinion presented as fact."
+        },
+        {
+          "color": "teal",
+          "title": "What to look for instead",
+          "body": "A clickable DOI link (e.g. doi.org/...) or a PubMed ID. Journal name + author names alone are not enough \u2014 they can be fabricated."
+        },
+        {
+          "color": "yellow",
+          "title": "Also notice the language",
+          "body": "'GUARANTEED' is problematic language; no health supplement can guarantee outcomes. This is overclaiming."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "comparison",
+      "title": "How do these two posts differ?",
+      "subtitle": "Signal 2: Language + Source",
+      "good": {
+        "username": "@journalofhealth",
+        "citation": "Nutrients. 2024 Jun 8;16(12):1813. doi: 10.3390/nu16121813",
+        "study_title": "Acute and Repeated Ashwagandha Supplementation Improves Markers of Cognitive Function and Mood",
+        "authors": "\u2014 Megan Leonard et al.",
+        "quote": "Research suggests ashwagandha may support focus in some adults.",
+        "checks": [
+          "Peer-reviewed journal linked",
+          "Hedged language ('may support')",
+          "Neutral, non-commercial poster"
+        ]
+      },
+      "bad": {
+        "username": "@healthadvice",
+        "citation": "KEY BENEFITS OF ASHWAGANDHA",
+        "study_title": "[no journal, no doi, no authors]",
+        "quote": "Ashwagandha is GUARANTEED to improve your focus, attention, and clarity of mind!",
+        "checks": [
+          "No source linked",
+          "Overclaims with 'guaranteed'",
+          "Anonymous wellness account"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "type": "signal_detail",
+      "title": "Signal 3: The Tricky Case",
+      "accent": "yellow",
+      "post": {
+        "username": "@vitamin&co",
+        "headline": "Nutrients. 2024 \u2014 Acute and Repeated Ashwagandha Supplementation\u2026 [doi link shown]",
+        "highlight": "Research suggests ashwagandha may support focus in some adults.",
+        "body": "Come to our Brooklyn location \u2014 or order online!"
+      },
+      "annotations": [
+        {
+          "color": "teal",
+          "title": "Has a real journal citation with DOI",
+          "body": "The source here is actually verifiable."
+        },
+        {
+          "color": "teal",
+          "title": "Uses hedged language ('may support')",
+          "body": "The wording matches how science actually talks."
+        },
+        {
+          "color": "red",
+          "title": "Poster is a supplement company \u2014 direct financial interest",
+          "body": "Even accurate citations can be used selectively by a biased source. Ask: does the poster have a financial stake in what you believe?"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "recap",
+      "title": "Recap: 3 Signals",
+      "signals": [
+        {
+          "number": 1,
+          "name": "Source Signal",
+          "color": "teal",
+          "body": "A claim without a linked, verifiable study (DOI or clickable URL) is an opinion. Screenshots alone are not enough."
+        },
+        {
+          "number": 2,
+          "name": "Language Signal",
+          "color": "yellow",
+          "body": "Hedged words ('may', 'suggests') = honest science. Absolute words ('proven', 'cures', 'guaranteed') = red flag. Conspiracy framing ('they don't want you to know') is an automatic flag."
+        },
+        {
+          "number": 3,
+          "name": "Poster Signal",
+          "color": "red",
+          "body": "Who's posting matters. A supplement seller, an anonymous wellness account, or a user with no institutional affiliation all warrant skepticism \u2014 even when they cite real studies."
+        }
+      ],
+      "footnote": "Next time a health post stops your scroll, run the 3 signals before you believe it, share it, or buy it.",
+      "cta": "Start the quiz"
+    }
+  ]
+}
