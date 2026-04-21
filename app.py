@@ -86,6 +86,7 @@ def quiz_result():
             "question": q,
             "answer": user_answer,
             "is_correct": is_correct,
+            "details": _build_details(q, user_answer),
         })
     data["score"] = score
     save_user_data(data)
@@ -95,6 +96,66 @@ def quiz_result():
         total=len(QUIZ),
         breakdown=breakdown,
     )
+
+
+def _build_details(question, answer):
+    answer = answer or {}
+    qtype = question["type"]
+    if qtype == "click_flag":
+        selected = set(answer.get("selected_ids", []))
+        flaggables = []
+        segments = (
+            question["post"]["headline_segments"]
+            + question["post"]["body_segments"]
+        )
+        for seg in segments:
+            if seg.get("type") != "flag":
+                continue
+            is_red_flag = seg["is_red_flag"]
+            user_selected = seg["id"] in selected
+            flaggables.append({
+                "value": seg["value"],
+                "why": seg["why"],
+                "is_red_flag": is_red_flag,
+                "user_selected": user_selected,
+                "user_correct": user_selected == is_red_flag,
+            })
+        return {"flaggables": flaggables}
+    if qtype == "drag_bucket":
+        placements = answer.get("placements", {})
+        bucket_labels = {b["id"]: b["label"] for b in question["buckets"]}
+        items = []
+        for d in question["draggables"]:
+            user_bucket_id = placements.get(d["id"])
+            items.append({
+                "text": d["text"],
+                "correct_bucket": bucket_labels.get(d["correct_bucket"], d["correct_bucket"]),
+                "user_bucket": bucket_labels.get(user_bucket_id, "Not placed") if user_bucket_id else "Not placed",
+                "why": d["why"],
+                "user_correct": user_bucket_id == d["correct_bucket"],
+            })
+        return {"rows": items}
+    if qtype == "slider_justify":
+        slider_value = answer.get("slider_value")
+        selected = set(answer.get("selected_signal_ids", []))
+        lo, hi = question["slider"]["correct_range"]
+        signals = []
+        for s in question["signals"]:
+            user_selected = s["id"] in selected
+            signals.append({
+                "label": s["label"],
+                "is_red_flag": s["is_red_flag"],
+                "user_selected": user_selected,
+                "why": s["why"],
+                "user_correct": user_selected == s["is_red_flag"],
+            })
+        return {
+            "slider_value": slider_value,
+            "correct_range": [lo, hi],
+            "slider_ok": slider_value is not None and lo <= slider_value <= hi,
+            "signals": signals,
+        }
+    return {}
 
 
 def _grade(question, answer):

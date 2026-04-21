@@ -3,25 +3,129 @@
 {% block title %}Quiz Result — Real vs. Fake{% endblock %}
 
 {% block content %}
-<h1 class="mb-2">Your Score</h1>
-<p class="display-3 mb-4">{{ score }} / {{ total }}</p>
+<div class="mb-4">
+  <h1 class="mb-1">Your Score</h1>
+  <p class="display-3 mb-0">{{ score }} / {{ total }}</p>
+</div>
 
 <h2 class="h4 mb-3">Breakdown</h2>
-<ul class="list-group mb-4">
-  {% for item in breakdown %}
-    <li class="list-group-item">
-      <div class="d-flex justify-content-between align-items-center mb-1">
-        <strong>Q{{ item.question.id }}</strong>
+
+{% for item in breakdown %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <div class="text-muted small text-uppercase fw-bold">Question {{ item.question.id }}</div>
         {% if item.is_correct %}
           <span class="badge bg-success">Correct</span>
         {% else %}
           <span class="badge bg-danger">Incorrect</span>
         {% endif %}
       </div>
-      <div class="text-muted small">{{ item.question.explanation }}</div>
-    </li>
-  {% endfor %}
-</ul>
+      <p class="mb-3">{{ item.question.prompt }}</p>
 
-<a href="/" class="btn btn-outline-secondary">Back to Home</a>
+      {% if item.question.type == "click_flag" %}
+        <ul class="list-group list-group-flush mb-3">
+          {% for f in item.details.flaggables %}
+            <li class="list-group-item px-0">
+              <div class="d-flex">
+                <div class="me-2">
+                  {% if f.user_correct %}
+                    <span class="text-success">&#10004;</span>
+                  {% else %}
+                    <span class="text-danger">&#10008;</span>
+                  {% endif %}
+                </div>
+                <div class="flex-grow-1">
+                  <div><code>{{ f.value }}</code></div>
+                  <div class="small text-muted">
+                    {% if f.is_red_flag %}Red flag{% else %}Not a red flag{% endif %} —
+                    you {% if f.user_selected %}selected{% else %}did not select{% endif %} this.
+                    {{ f.why }}
+                  </div>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+
+      {% elif item.question.type == "drag_bucket" %}
+        <ul class="list-group list-group-flush mb-3">
+          {% for d in item.details.rows %}
+            <li class="list-group-item px-0">
+              <div class="d-flex">
+                <div class="me-2">
+                  {% if d.user_correct %}
+                    <span class="text-success">&#10004;</span>
+                  {% else %}
+                    <span class="text-danger">&#10008;</span>
+                  {% endif %}
+                </div>
+                <div class="flex-grow-1">
+                  <div>{{ d.text }}</div>
+                  <div class="small text-muted">
+                    You placed it in <strong>{{ d.user_bucket }}</strong>;
+                    correct bucket is <strong>{{ d.correct_bucket }}</strong>. {{ d.why }}
+                  </div>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+
+      {% elif item.question.type == "slider_justify" %}
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item px-0">
+            <div class="d-flex">
+              <div class="me-2">
+                {% if item.details.slider_ok %}
+                  <span class="text-success">&#10004;</span>
+                {% else %}
+                  <span class="text-danger">&#10008;</span>
+                {% endif %}
+              </div>
+              <div class="flex-grow-1">
+                <div><strong>Credibility rating</strong></div>
+                <div class="small text-muted">
+                  You rated
+                  {% if item.details.slider_value is none %}(not submitted){% else %}{{ item.details.slider_value }}{% endif %}
+                  (correct range: {{ item.details.correct_range[0] }}–{{ item.details.correct_range[1] }}).
+                </div>
+              </div>
+            </div>
+          </li>
+          {% for s in item.details.signals %}
+            <li class="list-group-item px-0">
+              <div class="d-flex">
+                <div class="me-2">
+                  {% if s.user_correct %}
+                    <span class="text-success">&#10004;</span>
+                  {% else %}
+                    <span class="text-danger">&#10008;</span>
+                  {% endif %}
+                </div>
+                <div class="flex-grow-1">
+                  <div>{{ s.label }}</div>
+                  <div class="small text-muted">
+                    {% if s.is_red_flag %}Red flag{% else %}Not a red flag{% endif %} —
+                    you {% if s.user_selected %}selected{% else %}did not select{% endif %} this.
+                    {{ s.why }}
+                  </div>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <div class="p-3 bg-light rounded border">
+        <div class="small text-muted text-uppercase fw-bold mb-1">Takeaway</div>
+        <div>{{ item.question.explanation }}</div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+<div class="mt-4">
+  <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+</div>
 {% endblock %}
