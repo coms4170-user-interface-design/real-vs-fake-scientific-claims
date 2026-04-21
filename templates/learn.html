@@ -30,7 +30,7 @@
       </div>
     </div>
   </div>
-{% elif lesson.type == "three_signals" %}
+{% elif lesson.type in ["three_signals", "recap"] %}
   {% set header_styles = {"teal": "bg-info text-white", "yellow": "bg-warning text-dark", "red": "bg-danger text-white"} %}
   <div class="row g-4 mb-4">
     {% for signal in lesson.signals %}
