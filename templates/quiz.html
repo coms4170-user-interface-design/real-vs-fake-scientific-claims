@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz {{ n }} — Real vs. Fake{% endblock %}
+
+{% block content %}
+<div class="text-muted small mb-2">Question {{ n }} of {{ total }}</div>
+<h1 class="h3 mb-4">{{ question.prompt }}</h1>
+
+<div class="alert alert-light border">
+  <p class="mb-1"><strong>Question type:</strong> <code>{{ question.type }}</code></p>
+  <p class="mb-0 text-muted">Interactive rendering for this question type comes in a later commit. The Next button below does not record an answer yet.</p>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+  <a href="/" class="btn btn-outline-secondary">Home</a>
+  <a href="{{ next_url }}" class="btn btn-primary">Next &rarr;</a>
+</div>
+{% endblock %}
