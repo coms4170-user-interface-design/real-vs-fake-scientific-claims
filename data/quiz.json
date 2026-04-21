@@ -1,0 +1,77 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "click_flag",
+      "prompt": "Click on every word or phrase that is a red flag in this post, then submit.",
+      "post": {
+        "username": "@healthguru",
+        "image_caption": "[yoga studio photo]",
+        "headline_segments": [
+          {"type": "text", "value": "Ashwagandha is "},
+          {"type": "flag", "id": "t1", "value": "GUARANTEED", "is_red_flag": true, "why": "'Guaranteed' is an overclaim. No supplement can guarantee outcomes (Language signal)."},
+          {"type": "text", "value": " to improve your focus, attention, and clarity of mind"}
+        ],
+        "body_segments": [
+          {"type": "text", "value": "@healthguru: Get in touch with your zen by attending yoga classes at our Queens location and "},
+          {"type": "flag", "id": "t2", "value": "picking up some Ashwagandha supplements on your way out", "is_red_flag": true, "why": "@healthguru sells supplements from their yoga studio \u2014 financial motive (Poster signal)."},
+          {"type": "text", "value": ". Ashwagandha has been shown by the "},
+          {"type": "flag", "id": "t3", "value": "Journal of Public Health", "is_red_flag": false, "why": "Naming a journal isn't itself a red flag. The real weakness here is that no DOI or link is provided, not the citation."},
+          {"type": "text", "value": " to improve focus."}
+        ]
+      },
+      "correct_ids": ["t1", "t2"],
+      "explanation": "'GUARANTEED' is an overclaim (Language signal), and the yoga-studio-selling-supplements framing is a financial conflict of interest (Poster signal). Naming the Journal of Public Health isn't itself a red flag \u2014 the real issue is that no DOI or link is provided."
+    },
+    {
+      "id": 2,
+      "type": "drag_bucket",
+      "prompt": "Drag each element of this post into the correct signal bucket.",
+      "post": {
+        "username": "@healthnut",
+        "image_caption": "[Screenshot of a PubMed-style study page]",
+        "study_preview": "Effects of Acute Ashwagandha Ingestion on Cognitive Function \u2014 Looks like an official study\u2026",
+        "body": "Ashwagandha has been shown to improve your focus, attention, and clarity of mind. If you're struggling with attention or focus, ashwagandha might help."
+      },
+      "buckets": [
+        {"id": "source", "label": "Source Signal", "color": "teal"},
+        {"id": "language", "label": "Language Signal", "color": "yellow"},
+        {"id": "poster", "label": "Poster Signal", "color": "red"},
+        {"id": "ok", "label": "Not a red flag", "color": "green"}
+      ],
+      "draggables": [
+        {"id": "d1", "text": "Study screenshot with no clickable DOI", "correct_bucket": "source", "why": "A screenshot can be fabricated, cropped, or outdated. Without a clickable DOI or PubMed ID, it cannot be verified."},
+        {"id": "d2", "text": "\"has been shown to improve your focus\"", "correct_bucket": "language", "why": "'Has been shown' is an overclaim compared to hedged wording like 'suggests' or 'may support'."},
+        {"id": "d3", "text": "\"ashwagandha might help\"", "correct_bucket": "ok", "why": "'Might help' is properly hedged language \u2014 that's how honest science actually talks."},
+        {"id": "d4", "text": "Anonymous wellness handle @healthnut", "correct_bucket": "poster", "why": "No institutional affiliation, no listed credentials. Anonymous wellness accounts warrant skepticism."}
+      ],
+      "explanation": "A screenshot is not the same as a verifiable source. Strong language and anonymous posters are red flags. Hedged language like 'might help' is fine."
+    },
+    {
+      "id": 3,
+      "type": "slider_justify",
+      "prompt": "Rate this post from Fake to Credible, then select every signal that is a red flag.",
+      "post": {
+        "username": "@dr.wellness_official",
+        "image_caption": "[professional headshot photo]",
+        "headline": "Science has PROVEN that Vitamin D cures immune deficiencies. Doctors don't want you to know this!",
+        "body": "@dr.wellness_official: I've researched this for years. Trust the science!"
+      },
+      "slider": {
+        "min": 0,
+        "max": 100,
+        "start": 50,
+        "labels": {"0": "Fake", "50": "Unclear", "100": "Credible"},
+        "correct_range": [0, 35]
+      },
+      "signals": [
+        {"id": "s1", "label": "Source: no study or journal linked", "is_red_flag": true, "why": "'I've researched this' is not evidence. No DOI, no journal, no study linked."},
+        {"id": "s2", "label": "Language: 'proven' and 'cures' are overclaims", "is_red_flag": true, "why": "Science says 'suggests', 'is associated with', 'may reduce risk'. 'Proven' and 'cures' are red flags."},
+        {"id": "s3", "label": "Language: conspiracy framing ('doctors don't want you to know')", "is_red_flag": true, "why": "Conspiracy framing is designed to pre-empt skepticism. It's a manipulation tactic."},
+        {"id": "s4", "label": "Poster: 'dr.' in the username means this is a credible expert", "is_red_flag": false, "why": "Anyone can put 'dr.' in a handle. Verify through institutional affiliation, not the username."}
+      ],
+      "correct_signal_ids": ["s1", "s2", "s3"],
+      "explanation": "This post is clearly fake. No source linked, multiple language red flags (absolutes + conspiracy framing), and 'dr.' in a handle is not a real credential."
+    }
+  ]
+}
