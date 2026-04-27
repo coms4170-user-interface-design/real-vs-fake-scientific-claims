@@ -1,42 +1,160 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Lesson {{ step }}</title>
-  <link rel="stylesheet" 
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') 
-}}">
-</head>
-<body>
-  <div class="container py-4">
-    <div class="progress mb-4">
-      <div class="progress-bar" style="width: {{ (step / total * 100)|int 
-}}%"></div>
-    </div>
-    <h2>{{ lesson.title }}</h2>
-    <p class="text-muted">{{ lesson.subtitle }}</p>
+{% extends "base.html" %}
+{% block title %}Lesson {{ n }} — {{ lesson.title }}{% endblock %}
+{% block content %}
 
-    {% if lesson.signals %}
-    <div class="row mt-4">
-      {% for signal in lesson.signals %}
-      <div class="col-md-4 mb-3">
-        <div class="card h-100 p-3">
-          <h5>{{ loop.index }}. {{ signal.name }}</h5>
-          <p>{{ signal.description }}</p>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
+<!-- Progress Stepper -->
+<div class="d-flex align-items-center gap-2 mb-5 px-1">
+  {% for i in range(1, total + 1) %}
+    <a href="/learn/{{ i }}" class="text-decoration-none">
+      <div style="
+        width: 30px; height: 30px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 12px; font-weight: 600; transition: all 0.2s;
+        {% if i == n %}
+          background: #0a0a0f; color: #38bdf8; border: 2px solid #38bdf8; box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
+        {% elif i < n %}
+          background: #38bdf8; color: #0a0a0f; border: 2px solid #38bdf8;
+        {% else %}
+          background: #1e1e2e; color: rgba(255,255,255,0.3); border: 2px solid rgba(255,255,255,0.1);
+        {% endif %}
+      ">{{ i }}</div>
+    </a>
+    {% if not loop.last %}
+      <div style="flex:1; height:1px; background: {% if i < n %}#38bdf8{% else %}rgba(255,255,255,0.08){% endif %};"></div>
     {% endif %}
+  {% endfor %}
+</div>
 
-    <div class="mt-4">
-      {% if step < total %}
-        <a href="/learn/{{ step + 1 }}" class="btn btn-primary">Next 
-→</a>
-      {% else %}
-        <a href="/quiz/1" class="btn btn-success">Take the Quiz →</a>
-      {% endif %}
+<!-- Header -->
+<div class="mb-4">
+  <span class="badge-{% if lesson.type == 'recap' %}teal{% else %}teal{% endif %} mb-2 d-inline-block">Lesson {{ n }} of {{ total }}</span>
+  <h1 style="font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em;">{{ lesson.title }}</h1>
+</div>
+
+{% if lesson.type == "scenario" %}
+<div class="row g-4 align-items-start">
+  <div class="col-md-6">
+    <div class="post-card-dark p-4">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:rgba(255,255,255,0.4)"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+        </div>
+        <span style="color:rgba(255,255,255,0.5); font-size:0.85rem;">{{ lesson.post.username }}</span>
+      </div>
+      <div class="post-highlight-dark mb-3">
+        <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.35); margin-bottom:0.4rem;">{{ lesson.post.headline }}</div>
+        <div style="font-weight:600; color:#fbbf24;">{{ lesson.post.highlight }}</div>
+      </div>
+      <p style="color:rgba(255,255,255,0.4); font-size:0.9rem; margin:0;">{{ lesson.post.body }}</p>
     </div>
   </div>
-</body>
-</html>
+  <div class="col-md-6 d-flex flex-column justify-content-center">
+    <p style="font-size:1.15rem; font-weight:600; margin-bottom:0.5rem;">{{ lesson.intro }}</p>
+    <p style="color:rgba(255,255,255,0.4); margin-bottom:1.5rem;">{{ lesson.sub_intro }}</p>
+    <div class="scenario-q-dark">
+      <p style="font-weight:600; margin:0; color:#e2e8f0;">{{ lesson.question }}</p>
+    </div>
+  </div>
+</div>
+
+{% elif lesson.type in ["three_signals", "recap"] %}
+{% set badge_classes = {"teal": "badge-teal", "yellow": "badge-yellow", "red": "badge-red"} %}
+{% set card_classes = {"teal": "signal-card-teal", "yellow": "signal-card-yellow", "red": "signal-card-red"} %}
+{% set name_colors = {"teal": "#38bdf8", "yellow": "#fbbf24", "red": "#f87171"} %}
+<div class="row g-3 mb-4">
+  {% for signal in lesson.signals %}
+  <div class="col-md-4">
+    <div class="{{ card_classes.get(signal.color, '') }} p-4 h-100" style="border-radius:14px; border: 1px solid rgba(255,255,255,0.05);">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="{{ badge_classes.get(signal.color, '') }}">Signal {{ signal.number }}</span>
+      </div>
+      <h5 style="font-weight:700; color:{{ name_colors.get(signal.color, '#e2e8f0') }}; margin-bottom:0.75rem;">{{ signal.name }}</h5>
+      <p style="color:rgba(255,255,255,0.55); font-size:0.88rem; line-height:1.65; margin:0;">{{ signal.body }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% if lesson.footnote %}
+<div class="footnote-bar"><p style="color:rgba(255,255,255,0.35); font-size:0.85rem; font-style:italic; margin:0;">{{ lesson.footnote }}</p></div>
+{% endif %}
+
+{% elif lesson.type == "comparison" %}
+{% if lesson.subtitle %}<p style="color:rgba(255,255,255,0.4); margin-bottom:1.5rem;">{{ lesson.subtitle }}</p>{% endif %}
+<div class="row g-4">
+  <div class="col-md-6">
+    <div class="good-card h-100">
+      <div class="good-header"><span style="color:#4ade80; font-weight:700;">&#10003; {{ lesson.good.username }}</span></div>
+      <div class="p-4">
+        <div style="font-size:0.78rem; color:rgba(255,255,255,0.3); margin-bottom:0.25rem;">{{ lesson.good.citation }}</div>
+        <div style="font-weight:600; margin-bottom:0.25rem; color:#e2e8f0;">{{ lesson.good.study_title }}</div>
+        {% if lesson.good.authors %}<div style="font-size:0.8rem; color:rgba(255,255,255,0.3); margin-bottom:1rem;">{{ lesson.good.authors }}</div>{% endif %}
+        <blockquote class="fst-italic ps-3 mb-3" style="border-left:3px solid rgba(74,222,128,0.3)!important; color:rgba(255,255,255,0.55)!important;">{{ lesson.good.quote }}</blockquote>
+        <ul class="list-unstyled mb-0">
+          {% for check in lesson.good.checks %}
+          <li style="color:#4ade80; font-size:0.88rem; margin-bottom:0.4rem;"><span class="me-2">&#10004;</span>{{ check }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="bad-card h-100">
+      <div class="bad-header"><span style="color:#f87171; font-weight:700;">&#10007; {{ lesson.bad.username }}</span></div>
+      <div class="p-4">
+        <div style="font-weight:600; margin-bottom:0.25rem; color:#e2e8f0;">{{ lesson.bad.citation }}</div>
+        {% if lesson.bad.study_title %}<div style="font-size:0.8rem; color:rgba(255,255,255,0.3); margin-bottom:1rem;">{{ lesson.bad.study_title }}</div>{% endif %}
+        <blockquote class="fst-italic ps-3 mb-3" style="border-left:3px solid rgba(248,113,113,0.3)!important; color:rgba(255,255,255,0.55)!important;">{{ lesson.bad.quote }}</blockquote>
+        <ul class="list-unstyled mb-0">
+          {% for check in lesson.bad.checks %}
+          <li style="color:#f87171; font-size:0.88rem; margin-bottom:0.4rem;"><span class="me-2">&#10008;</span>{{ check }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% elif lesson.type == "signal_detail" %}
+{% set ann_classes = {"teal": "ann-teal", "yellow": "ann-yellow", "red": "ann-red"} %}
+{% set ann_colors = {"teal": "#38bdf8", "yellow": "#fbbf24", "red": "#f87171"} %}
+<div class="row g-4 align-items-start">
+  <div class="col-md-6">
+    <div class="post-card-dark p-4">
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:rgba(255,255,255,0.4)"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+        </div>
+        <span style="color:rgba(255,255,255,0.5); font-size:0.85rem;">{{ lesson.post.username }}</span>
+      </div>
+      <div class="post-highlight-dark mb-3">
+        <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.35); margin-bottom:0.4rem;">{{ lesson.post.headline }}</div>
+        <div style="font-weight:600; color:#fbbf24;">{{ lesson.post.highlight }}</div>
+      </div>
+      <p style="color:rgba(255,255,255,0.4); font-size:0.9rem; margin:0;">{{ lesson.post.body }}</p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    {% for ann in lesson.annotations %}
+    <div class="{{ ann_classes.get(ann.color, '') }}">
+      <h6 style="font-weight:700; color:{{ ann_colors.get(ann.color, '#e2e8f0') }}; margin-bottom:0.4rem;">{{ ann.title }}</h6>
+      <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; margin:0;">{{ ann.body }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% else %}
+<div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:1rem;">
+  <p style="color:rgba(255,255,255,0.3); margin:0;">Lesson type: <code>{{ lesson.type }}</code></p>
+</div>
+{% endif %}
+
+<!-- Nav -->
+<div class="d-flex justify-content-between mt-5">
+  <a href="{{ prev_url }}" class="btn btn-outline-secondary px-4">← Previous</a>
+  <a href="{{ next_url }}" class="btn btn-primary px-4">
+    {% if lesson.cta %}{{ lesson.cta }}{% else %}Next{% endif %} →
+  </a>
+</div>
+
+{% endblock %}
