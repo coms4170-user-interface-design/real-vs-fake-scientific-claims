@@ -3,15 +3,42 @@
 {% block title %}Quiz Result — Real vs. Fake{% endblock %}
 
 {% block content %}
+<style>
+  .result-score {
+    color: #38bdf8;
+    letter-spacing: -0.02em;
+  }
+  .result-card {
+    background: #13131a;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+  }
+  .result-list .list-group-item {
+    background: transparent;
+    color: #e2e8f0;
+    border-color: rgba(255,255,255,0.08);
+  }
+  .result-list code {
+    background: rgba(56,189,248,0.14);
+    color: #7dd3fc;
+    padding: 0.1rem 0.4rem;
+    border-radius: 6px;
+  }
+  .takeaway-dark {
+    background: rgba(56,189,248,0.08);
+    border: 1px solid rgba(56,189,248,0.2);
+    border-radius: 10px;
+  }
+</style>
 <div class="mb-4">
   <h1 class="mb-1">Your Score</h1>
-  <p class="display-3 mb-0">{{ score }} / {{ total }}</p>
+  <p class="display-3 mb-0 result-score">{{ score }} / {{ total }}</p>
 </div>
 
 <h2 class="h4 mb-3">Breakdown</h2>
 
 {% for item in breakdown %}
-  <div class="card mb-3">
+  <div class="card mb-3 result-card">
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-start mb-2">
         <div class="text-muted small text-uppercase fw-bold">Question {{ item.question.id }}</div>
@@ -24,7 +51,7 @@
       <p class="mb-3">{{ item.question.prompt }}</p>
 
       {% if item.question.type == "click_flag" %}
-        <ul class="list-group list-group-flush mb-3">
+        <ul class="list-group list-group-flush mb-3 result-list">
           {% for f in item.details.flaggables %}
             <li class="list-group-item px-0">
               <div class="d-flex">
@@ -49,7 +76,7 @@
         </ul>
 
       {% elif item.question.type == "drag_bucket" %}
-        <ul class="list-group list-group-flush mb-3">
+        <ul class="list-group list-group-flush mb-3 result-list">
           {% for d in item.details.rows %}
             <li class="list-group-item px-0">
               <div class="d-flex">
@@ -73,7 +100,7 @@
         </ul>
 
       {% elif item.question.type == "slider_justify" %}
-        <ul class="list-group list-group-flush mb-3">
+        <ul class="list-group list-group-flush mb-3 result-list">
           <li class="list-group-item px-0">
             <div class="d-flex">
               <div class="me-2">
@@ -117,7 +144,7 @@
         </ul>
       {% endif %}
 
-      <div class="p-3 bg-light rounded border">
+      <div class="p-3 takeaway-dark">
         <div class="small text-muted text-uppercase fw-bold mb-1">Takeaway</div>
         <div>{{ item.question.explanation }}</div>
       </div>
