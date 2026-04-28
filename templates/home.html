@@ -1,24 +1,109 @@
 {% extends "base.html" %}
-
 {% block title %}Real vs. Fake Scientific Claims{% endblock %}
-
 {% block content %}
-<div style="min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
-  <div style="margin-bottom: 1.5rem;">
-    <span style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.8rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); text-transform: uppercase;">Digital Literacy</span>
+
+<canvas id="c" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
+<div style="position:relative;z-index:1;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;">
+  <div style="margin-bottom:1.5rem;">
+    <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:0.4rem 1rem;border-radius:999px;font-size:0.8rem;letter-spacing:0.08em;color:rgba(255,255,255,0.6);text-transform:uppercase;">Digital Literacy</span>
   </div>
-  <h1 style="font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.1; max-width: 800px; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
+  <h1 style="font-size:clamp(2.2rem,6vw,4.5rem);font-weight:700;line-height:1.1;max-width:800px;margin-bottom:1.5rem;letter-spacing:-0.02em;">
     Can you spot a fake<br>
-    <span style="background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">scientific claim?</span>
+    <span style="background:linear-gradient(90deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">scientific claim?</span>
   </h1>
-<p style="font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 600; color: #e2e8f0; max-width: 700px; line-height: 1.3; margin-bottom: 1.5rem;">Health misinformation is everywhere, and it's getting harder to spot.</p>
-  <p style="color: rgba(255,255,255,0.45); font-size: 1.1rem; max-width: 480px; line-height: 1.7; margin-bottom: 2.5rem; font-weight: 300; letter-spacing: 0.01em;">
-    A short interactive lesson on spotting misleading health posts using three signals.
-  </p>
+  <p style="font-size:clamp(1.2rem,3vw,1.8rem);font-weight:600;color:#e2e8f0;max-width:700px;line-height:1.3;margin-bottom:1.5rem;">Health misinformation is everywhere, and it's getting harder to spot.</p>
+  <p style="color:rgba(255,255,255,0.45);font-size:1.1rem;max-width:480px;line-height:1.7;margin-bottom:2.5rem;font-weight:300;">A short interactive lesson on spotting misleading health posts using three signals.</p>
   <form action="/start" method="post">
-    <button type="submit" style="background: linear-gradient(135deg, #38bdf8, #818cf8); border: none; color: white; font-size: 1rem; font-weight: 600; padding: 0.85rem 2.5rem; border-radius: 999px; cursor: pointer; letter-spacing: 0.02em; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-      Start the lesson
-    </button>
+    <button type="submit" style="background:linear-gradient(135deg,#38bdf8,#818cf8);border:none;color:white;font-size:1rem;font-weight:600;padding:0.85rem 2.5rem;border-radius:999px;cursor:pointer;letter-spacing:0.02em;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Start the lesson</button>
   </form>
 </div>
+
+<script>
+const cv = document.getElementById('c'), cx = cv.getContext('2d');
+const C = [{r:56,g:189,b:248},{r:129,g:140,b:248},{r:45,g:212,b:191}];
+let W, H, t = 0;
+
+function col(c, a) { return `rgba(${c.r},${c.g},${c.b},${a})`; }
+function rnd(n) { return Math.random() * n; }
+function resize() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+window.addEventListener('resize', resize); resize();
+
+// Particles
+const P = Array.from({length:50}, () => ({
+  x:rnd(W), y:rnd(H), vx:(rnd(1)-.5)*.3, vy:-(0.25+rnd(.5)),
+  r:1+rnd(2.5), life:rnd(300), max:180+rnd(300),
+  col:C[~~rnd(3)], ph:rnd(Math.PI*2), sp:0.02+rnd(.03)
+}));
+
+function tickParticle(p) {
+  p.x+=p.vx; p.y+=p.vy; p.life++;
+  if(p.life>p.max||p.y<-10){p.x=rnd(W);p.y=H+10;p.life=0;p.max=180+rnd(300);}
+  const f=p.life/p.max, fade=f<.1?f/.1:f>.8?(1-f)/.2:1;
+  const pulse=.85+.15*Math.sin(t*p.sp+p.ph);
+  cx.beginPath(); cx.arc(p.x,p.y,p.r*pulse,0,Math.PI*2);
+  cx.fillStyle=col(p.col,fade*.55*pulse); cx.fill();
+}
+
+// DNA
+const DNA = Array.from({length:3}, (_,i) => ({
+  x:W/(4)*(i+1), y:rnd(H-300), h:260+rnd(160),
+  ph:rnd(Math.PI*2), sp:.008+rnd(.006), amp:22+rnd(14),
+  ca:C[i%3], cb:C[(i+1)%3], drift:(rnd(1)-.5)*.15
+}));
+
+function drawDNA(d) {
+  const phase=d.ph+t*d.sp, steps=18, sh=d.h/steps;
+  d.x+=d.drift;
+  if(d.x<-60)d.x=W+60; if(d.x>W+60)d.x=-60;
+  for(let s=0;s<steps;s++){
+    const fr=s/(steps-1), y=d.y+s*sh, a=phase+fr*Math.PI*3.5;
+    const ef=Math.sin(fr*Math.PI), al=.18*ef;
+    if(s<steps-1){
+      const am=(a+(phase+(fr+1/(steps-1))*Math.PI*3.5))/2;
+      cx.beginPath(); cx.moveTo(d.x+Math.cos(am)*d.amp,(y+d.y+(s+1)*sh)/2);
+      cx.lineTo(d.x-Math.cos(am)*d.amp,(y+d.y+(s+1)*sh)/2);
+      cx.strokeStyle=col(d.ca,al*.7); cx.lineWidth=1; cx.stroke();
+    }
+    [[d.x+Math.cos(a)*d.amp,d.ca],[d.x-Math.cos(a)*d.amp,d.cb]].forEach(([px,c])=>{
+      cx.beginPath(); cx.arc(px,y,2.2,0,Math.PI*2);
+      cx.fillStyle=col(c,al+.08); cx.fill();
+    });
+  }
+  [d.ca,d.cb].forEach((c,i)=>{
+    cx.beginPath();
+    for(let s=0;s<=steps;s++){const fr=s/steps,y=d.y+s*sh,a=phase+fr*Math.PI*3.5,xp=d.x+(i?-1:1)*Math.cos(a)*d.amp;s?cx.lineTo(xp,y):cx.moveTo(xp,y);}
+    cx.strokeStyle=col(c,.12); cx.lineWidth=1.2; cx.stroke();
+  });
+}
+
+// Shapes
+const S = Array.from({length:7}, () => ({
+  x:60+rnd(W-120), y:60+rnd(H-120), type:~~rnd(3),
+  sz:18+rnd(36), rot:rnd(Math.PI*2), rs:(rnd(1)-.5)*.006,
+  ph:rnd(Math.PI*2), sp:.012+rnd(.01), col:C[~~rnd(3)]
+}));
+
+function drawShape(s) {
+  s.rot+=s.rs;
+  const pulse=Math.sin(t*s.sp+s.ph), r=s.sz*(1+.12*pulse), al=.08+.1*((pulse+1)/2);
+  cx.strokeStyle=col(s.col,al); cx.lineWidth=1;
+  const n=s.type===0?6:3;
+  if(s.type<2){
+    cx.beginPath();
+    for(let i=0;i<n;i++){const a=s.rot+(i/n)*Math.PI*2-(s.type?Math.PI/2:0);i?cx.lineTo(s.x+Math.cos(a)*r,s.y+Math.sin(a)*r):cx.moveTo(s.x+Math.cos(a)*r,s.y+Math.sin(a)*r);}
+    cx.closePath(); cx.stroke();
+  } else {
+    cx.beginPath(); cx.arc(s.x,s.y,r,0,Math.PI*2); cx.stroke();
+    cx.beginPath(); cx.arc(s.x,s.y,r*.55,0,Math.PI*2); cx.strokeStyle=col(s.col,al*.5); cx.lineWidth=.7; cx.stroke();
+  }
+}
+
+(function loop(){
+  cx.clearRect(0,0,W,H); t++;
+  S.forEach(drawShape); DNA.forEach(drawDNA); P.forEach(tickParticle);
+  requestAnimationFrame(loop);
+})();
+</script>
+
 {% endblock %}
