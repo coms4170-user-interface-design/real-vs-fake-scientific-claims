@@ -135,7 +135,8 @@ def quiz_result():
 
 @app.route("/feed")
 def feed():
-    return render_template("feed.html", questions=FEED_QUIZ)
+    lessons_by_id = {l["id"]: l for l in LESSONS}
+    return render_template("feed.html", questions=FEED_QUIZ, lessons_by_id=lessons_by_id)
 
 
 def _build_details(question, answer):

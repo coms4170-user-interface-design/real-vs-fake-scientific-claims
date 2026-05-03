@@ -304,3 +304,202 @@ main.container:has(.feed-page) {
   letter-spacing: 0.05em;
   font-weight: 600;
 }
+
+/* ───────── Lesson block (inline remediation on wrong answer) ───────── */
+.lesson-block {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.lesson-block-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.lesson-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.lesson-block-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.lesson-subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 0.75rem 0;
+  font-style: italic;
+}
+
+/* Three-signals layout */
+.lesson-signal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.lesson-signal {
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  border-left: 3px solid;
+}
+
+.lesson-signal-teal {
+  background: rgba(8, 145, 178, 0.1);
+  border-left-color: #0dcaf0;
+}
+
+.lesson-signal-yellow {
+  background: rgba(202, 138, 4, 0.1);
+  border-left-color: #fbbf24;
+}
+
+.lesson-signal-red {
+  background: rgba(185, 28, 28, 0.1);
+  border-left-color: #ef4444;
+}
+
+.lesson-signal-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+  flex-shrink: 0;
+  width: 1.1rem;
+}
+
+.lesson-signal-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.15rem;
+}
+
+.lesson-signal-body {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.45;
+}
+
+/* Signal-detail (annotations) layout */
+.lesson-annotation-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.lesson-annotation {
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  border-left: 3px solid;
+}
+
+.lesson-annotation-teal {
+  background: rgba(8, 145, 178, 0.1);
+  border-left-color: #0dcaf0;
+}
+
+.lesson-annotation-yellow {
+  background: rgba(202, 138, 4, 0.1);
+  border-left-color: #fbbf24;
+}
+
+.lesson-annotation-red {
+  background: rgba(185, 28, 28, 0.1);
+  border-left-color: #ef4444;
+}
+
+.lesson-annotation-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.2rem;
+}
+
+.lesson-annotation-body {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.45;
+}
+
+/* Comparison layout */
+.lesson-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+@media (max-width: 480px) {
+  .lesson-compare {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lesson-compare-side {
+  padding: 0.7rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid;
+}
+
+.lesson-compare-side.is-good {
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+.lesson-compare-side.is-bad {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.lesson-compare-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.4rem;
+}
+
+.lesson-compare-side ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lesson-compare-side li {
+  padding-left: 0.9rem;
+  position: relative;
+  margin-bottom: 0.25rem;
+}
+
+.lesson-compare-side li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.35);
+}

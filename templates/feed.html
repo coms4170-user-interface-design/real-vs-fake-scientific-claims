@@ -18,7 +18,8 @@
                data-mode="feed"
                data-correct-verdict="{{ q.correct_verdict }}"
                data-why="{{ q.why }}"
-               data-signals="{{ q.signals | join(',') }}">
+               data-signals="{{ q.signals | join(',') }}"
+               data-lesson-id="{{ q.lesson_id }}">
 
         <header class="feed-card-header">
           <div class="avatar-circle"></div>
@@ -47,5 +48,6 @@
 {% endblock %}
 
 {% block scripts %}
+<script type="application/json" id="lessons-data">{{ lessons_by_id | tojson }}</script>
 <script src="{{ url_for('static', filename='js/feed.js') }}"></script>
 {% endblock %}

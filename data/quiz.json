@@ -21,7 +21,8 @@
         ]
       },
       "correct_ids": ["t1", "t2"],
-      "explanation": "'GUARANTEED' is an overclaim (Language signal), and the yoga-studio-selling-supplements framing is a financial conflict of interest (Poster signal). Naming the Journal of Public Health isn't itself a red flag \u2014 the real issue is that no DOI or link is provided."
+      "explanation": "'GUARANTEED' is an overclaim (Language signal), and the yoga-studio-selling-supplements framing is a financial conflict of interest (Poster signal). Naming the Journal of Public Health isn't itself a red flag \u2014 the real issue is that no DOI or link is provided.",
+      "lesson_id": 3
     },
     {
       "id": 2,
@@ -45,7 +46,8 @@
         {"id": "d3", "text": "\"ashwagandha might help\"", "correct_bucket": "ok", "why": "'Might help' is properly hedged language \u2014 that's how honest science actually talks."},
         {"id": "d4", "text": "Anonymous wellness handle @healthnut", "correct_bucket": "poster", "why": "No institutional affiliation, no listed credentials. Anonymous wellness accounts warrant skepticism."}
       ],
-      "explanation": "A screenshot is not the same as a verifiable source. Strong language and anonymous posters are red flags. Hedged language like 'might help' is fine."
+      "explanation": "A screenshot is not the same as a verifiable source. Strong language and anonymous posters are red flags. Hedged language like 'might help' is fine.",
+      "lesson_id": 2
     },
     {
       "id": 3,
@@ -71,7 +73,8 @@
         {"id": "s4", "label": "Poster: 'dr.' in the username means this is a credible expert", "is_red_flag": false, "why": "Anyone can put 'dr.' in a handle. Verify through institutional affiliation, not the username."}
       ],
       "correct_signal_ids": ["s1", "s2", "s3"],
-      "explanation": "This post is clearly fake. No source linked, multiple language red flags (absolutes + conspiracy framing), and 'dr.' in a handle is not a real credential."
+      "explanation": "This post is clearly fake. No source linked, multiple language red flags (absolutes + conspiracy framing), and 'dr.' in a handle is not a real credential.",
+      "lesson_id": 5
     },
     {
       "id": 4,
@@ -84,7 +87,8 @@
       },
       "correct_verdict": "fake",
       "why": "\"Cures\" is an overclaim and \"Harvard\" is name-dropped without a study link. Personal anecdote isn't evidence, and the affiliate link signals financial motive.",
-      "signals": ["language", "source", "poster"]
+      "signals": ["language", "source", "poster"],
+      "lesson_id": 2
     },
     {
       "id": 5,
@@ -97,7 +101,8 @@
       },
       "correct_verdict": "real",
       "why": "Peer-reviewed source with a DOI, hedged language (\"may improve,\" \"small,\" \"varied\"), neutral institutional poster, and the post acknowledges its own limitations.",
-      "signals": []
+      "signals": [],
+      "lesson_id": 4
     },
     {
       "id": 6,
@@ -110,7 +115,8 @@
       },
       "correct_verdict": "fake",
       "why": "\"Literally cause\" is an overclaim, \"studies show\" with no citation is empty rhetoric, the conspiracy framing (\"Big Food doesn't want you to know\") is a manipulation tactic, and the poster is an anonymous lifestyle account with no credentials.",
-      "signals": ["language", "source", "poster"]
+      "signals": ["language", "source", "poster"],
+      "lesson_id": 2
     },
     {
       "id": 7,
@@ -123,7 +129,8 @@
       },
       "correct_verdict": "fake",
       "why": "\"Proved\" and \"reverses\" are overclaims — the actual NEJM intermittent fasting research shows mixed, modest effects, not 6-week reversals. \"The science is settled\" is rhetorical absolutism, and the 2023 NEJM study is named but not actually cited.",
-      "signals": ["language", "source"]
+      "signals": ["language", "source"],
+      "lesson_id": 4
     },
     {
       "id": 8,
@@ -136,7 +143,8 @@
       },
       "correct_verdict": "fake",
       "why": "The language is properly hedged (\"may,\" \"modestly,\" \"appears\") and the claim is roughly consistent with real research — but no study or DOI is linked. Hedged language without a verifiable source is still an unverifiable claim, and \"@dr.evidence\" is an anonymous handle (anyone can put \"dr.\" in front).",
-      "signals": ["source", "poster"]
+      "signals": ["source", "poster"],
+      "lesson_id": 3
     },
     {
       "id": 9,
@@ -149,7 +157,8 @@
       },
       "correct_verdict": "fake",
       "why": "Hedged language, plausible-sounding source, sounds careful — but the poster is a clinic that sells the exact treatment they're citing. Even when sources and language pass the test, a direct financial stake in your conclusion is a red flag (Poster signal).",
-      "signals": ["poster"]
+      "signals": ["poster"],
+      "lesson_id": 5
     },
     {
       "id": 10,
@@ -162,7 +171,8 @@
       },
       "correct_verdict": "real",
       "why": "Peer-reviewed primary source with a DOI from a top-tier journal, hedged language (\"associated with,\" \"observational,\" \"vary by population\"), institutional poster with no commercial interest. The post acknowledges its own methodological limits.",
-      "signals": []
+      "signals": [],
+      "lesson_id": 4
     },
     {
       "id": 11,
@@ -175,7 +185,8 @@
       },
       "correct_verdict": "fake",
       "why": "Conspiracy framing (\"won't admit it,\" \"Big Pharma\") is a manipulation tactic that pre-empts skepticism. The claim contradicts decades of dermatology research, no source is cited, and an anonymous \"truth community\" account has no expertise.",
-      "signals": ["language", "source", "poster"]
+      "signals": ["language", "source", "poster"],
+      "lesson_id": 2
     },
     {
       "id": 12,
@@ -188,7 +199,8 @@
       },
       "correct_verdict": "fake",
       "why": "The cited research on L. rhamnosus GG is real and properly hedged — but the seller's product is a different 12-strain blend that may not contain L. rhamnosus GG at clinical doses. Citing real research to sell a different product is a classic poster-bias tactic.",
-      "signals": ["poster"]
+      "signals": ["poster"],
+      "lesson_id": 5
     },
     {
       "id": 13,
@@ -201,7 +213,8 @@
       },
       "correct_verdict": "fake",
       "why": "\"Stanford\" is name-dropped without a citation, and the \"250%\" figure misrepresents a small study (Šrámek et al. — not Stanford) by generalizing transient dopamine elevation as a daily life-outcome metric. Personal anecdote is presented as evidence.",
-      "signals": ["language", "source"]
+      "signals": ["language", "source"],
+      "lesson_id": 4
     },
     {
       "id": 14,
@@ -214,7 +227,8 @@
       },
       "correct_verdict": "fake",
       "why": "A single anecdote isn't evidence, no clinical source supports the broader claim, and the \"doctors were wrong\" framing pre-empts medical skepticism. \"Reversed\" is an overclaim; chronic conditions rarely reverse from dietary change alone.",
-      "signals": ["language", "source", "poster"]
+      "signals": ["language", "source", "poster"],
+      "lesson_id": 2
     },
     {
       "id": 15,
@@ -227,7 +241,8 @@
       },
       "correct_verdict": "real",
       "why": "Peer-reviewed source with a DOI, properly hedged language (\"appears,\" \"modest,\" \"little to no\"), institutional government poster, and the post deliberately distinguishes between deficient and replete populations rather than promoting blanket use.",
-      "signals": []
+      "signals": [],
+      "lesson_id": 4
     },
     {
       "id": 16,
@@ -240,7 +255,8 @@
       },
       "correct_verdict": "fake",
       "why": "A single supplement claimed to fix five different symptoms is a textbook overgeneralization. \"Probably deficient\" with no diagnostic basis, \"fixes all of it in 7 days\" is an overclaim, and the discount code makes the financial motive explicit.",
-      "signals": ["language", "source", "poster"]
+      "signals": ["language", "source", "poster"],
+      "lesson_id": 2
     },
     {
       "id": 17,
@@ -253,7 +269,8 @@
       },
       "correct_verdict": "fake",
       "why": "\"A 2024 study\" with no journal, authors, or DOI cannot be verified. The mechanistic claim oversimplifies decades of contested research on linoleic acid. \"Ancestral_md\" is credential mimicry — anyone can use \"md\" in a handle.",
-      "signals": ["source", "poster"]
+      "signals": ["source", "poster"],
+      "lesson_id": 3
     },
     {
       "id": 18,
@@ -266,7 +283,8 @@
       },
       "correct_verdict": "real",
       "why": "Peer-reviewed meta-analysis with a DOI, hedged language (\"may,\" \"on average,\" \"varies widely\"), and the post explicitly acknowledges individual variation rather than prescribing a one-size-fits-all rule.",
-      "signals": []
+      "signals": [],
+      "lesson_id": 4
     }
   ]
 }
