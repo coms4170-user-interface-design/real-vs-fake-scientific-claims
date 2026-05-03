@@ -103,7 +103,7 @@ def quiz(n):
 @app.route("/quiz/result")
 def quiz_result():
     data = load_user_data()
-    answers = data.get("quiz_answers", {})
+    answers = data["quiz_answers"]["classic"]
     breakdown = []
     score = 0
     for q in QUIZ:
@@ -118,7 +118,7 @@ def quiz_result():
             "is_correct": is_correct,
             "details": _build_details(q, user_answer),
         })
-    data["score"] = score
+    data["scores"]["classic"] = score
     save_user_data(data)
     return render_template(
         "result.html",
