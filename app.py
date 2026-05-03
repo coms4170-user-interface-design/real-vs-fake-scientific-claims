@@ -12,6 +12,11 @@ USER_DATA_FILE = DATA_DIR / "user_data.json"
 LESSONS = json.loads((DATA_DIR / "lessons.json").read_text())["lessons"]
 QUIZ = json.loads((DATA_DIR / "quiz.json").read_text())["questions"]
 
+CLASSIC_TYPES = ("click_flag", "drag_bucket", "slider_justify")
+FEED_TYPES = ("swipe_verdict",)
+CLASSIC_QUIZ = [q for q in QUIZ if q["type"] in CLASSIC_TYPES]
+FEED_QUIZ = [q for q in QUIZ if q["type"] in FEED_TYPES]
+
 MODES = ("classic", "feed")
 
 
@@ -86,16 +91,16 @@ def learn(n):
 
 @app.route("/quiz/<int:n>")
 def quiz(n):
-    if n < 1 or n > len(QUIZ):
+    if n < 1 or n > len(CLASSIC_QUIZ):
         return redirect("/")
-    question = QUIZ[n - 1]
-    is_last = n == len(QUIZ)
+    question = CLASSIC_QUIZ[n - 1]
+    is_last = n == len(CLASSIC_QUIZ)
     next_url = "/quiz/result" if is_last else f"/quiz/{n + 1}"
     return render_template(
         "quiz.html",
         question=question,
         n=n,
-        total=len(QUIZ),
+        total=len(CLASSIC_QUIZ),
         next_url=next_url,
     )
 
@@ -106,7 +111,7 @@ def quiz_result():
     answers = data["quiz_answers"]["classic"]
     breakdown = []
     score = 0
-    for q in QUIZ:
+    for q in CLASSIC_QUIZ:
         qid = str(q["id"])
         user_answer = answers.get(qid)
         is_correct = _grade(q, user_answer)
@@ -123,9 +128,14 @@ def quiz_result():
     return render_template(
         "result.html",
         score=score,
-        total=len(QUIZ),
+        total=len(CLASSIC_QUIZ),
         breakdown=breakdown,
     )
+
+
+@app.route("/feed")
+def feed():
+    return render_template("feed.html", questions=FEED_QUIZ)
 
 
 def _build_details(question, answer):
@@ -185,6 +195,15 @@ def _build_details(question, answer):
             "slider_ok": slider_value is not None and lo <= slider_value <= hi,
             "signals": signals,
         }
+    if qtype == "swipe_verdict":
+        user_verdict = answer.get("verdict")
+        return {
+            "user_verdict": user_verdict,
+            "correct_verdict": question.get("correct_verdict"),
+            "user_correct": user_verdict == question.get("correct_verdict"),
+            "why": question.get("why"),
+            "signals": question.get("signals", []),
+        }
     return {}
 
 
@@ -207,6 +226,8 @@ def _grade(question, answer):
         slider_ok = slider_value is not None and lo <= slider_value <= hi
         signals_ok = signals_selected == set(question["correct_signal_ids"])
         return slider_ok and signals_ok
+    if qtype == "swipe_verdict":
+        return answer.get("verdict") == question.get("correct_verdict")
     return False
 
 
