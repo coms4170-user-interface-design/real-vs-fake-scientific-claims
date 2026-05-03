@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% set mode = mode | default("classic") %}
 
-{% block title %}Quiz Result — Real vs. Fake{% endblock %}
+{% block title %}{% if mode == "feed" %}Feed Results{% else %}Quiz Result{% endif %} — Real vs. Fake{% endblock %}
 
 {% block content %}
 <style>
@@ -31,11 +32,24 @@
   }
 </style>
 <div class="mb-4">
+  <div class="text-muted small text-uppercase fw-bold mb-1" style="letter-spacing: 0.08em;">
+    {% if mode == "feed" %}Feed Results{% else %}Quiz Result{% endif %}
+  </div>
   <h1 class="mb-1">Your Score</h1>
-  <p class="display-3 mb-0 result-score">{{ score }} / {{ total }}</p>
+  {% if total > 0 %}
+    <p class="display-3 mb-0 result-score">{{ score }} / {{ total }}</p>
+    {% if mode == "feed" %}
+      <p class="text-muted small mt-2 mb-0">Across the {{ total }} post{{ '' if total == 1 else 's' }} you swiped on so far.</p>
+    {% endif %}
+  {% else %}
+    <p class="display-3 mb-0 result-score">— / —</p>
+    <p class="text-muted mt-3">You haven't answered any posts yet. Head back to the feed to start swiping.</p>
+  {% endif %}
 </div>
 
+{% if breakdown %}
 <h2 class="h4 mb-3">Breakdown</h2>
+{% endif %}
 
 {% for item in breakdown %}
   <div class="card mb-3 result-card">
@@ -48,7 +62,12 @@
           <span class="badge bg-danger">Incorrect</span>
         {% endif %}
       </div>
-      <p class="mb-3">{{ item.question.prompt }}</p>
+      {% if item.question.prompt %}
+        <p class="mb-3">{{ item.question.prompt }}</p>
+      {% elif item.question.post and item.question.post.headline %}
+        <div class="text-muted small mb-1">{{ item.question.post.username }}</div>
+        <p class="mb-3 fw-semibold">{{ item.question.post.headline }}</p>
+      {% endif %}
 
       {% if item.question.type == "click_flag" %}
         <ul class="list-group list-group-flush mb-3 result-list">
@@ -142,17 +161,48 @@
             </li>
           {% endfor %}
         </ul>
+
+      {% elif item.question.type == "swipe_verdict" %}
+        <ul class="list-group list-group-flush mb-3 result-list">
+          <li class="list-group-item px-0">
+            <div class="d-flex">
+              <div class="me-2">
+                {% if item.details.user_correct %}
+                  <span class="text-success">&#10004;</span>
+                {% else %}
+                  <span class="text-danger">&#10008;</span>
+                {% endif %}
+              </div>
+              <div class="flex-grow-1">
+                <div>
+                  You said
+                  <strong>{{ (item.details.user_verdict or "—") | capitalize }}</strong>;
+                  correct answer is
+                  <strong>{{ (item.details.correct_verdict or "—") | capitalize }}</strong>.
+                </div>
+                {% if item.details.signals %}
+                  <div class="small text-muted mt-1">
+                    Signals at play: {{ item.details.signals | join(", ") }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </li>
+        </ul>
       {% endif %}
 
       <div class="p-3 takeaway-dark">
         <div class="small text-muted text-uppercase fw-bold mb-1">Takeaway</div>
-        <div>{{ item.question.explanation }}</div>
+        <div>{{ item.question.explanation or item.question.why }}</div>
       </div>
     </div>
   </div>
 {% endfor %}
 
-<div class="mt-4">
+<div class="mt-4 d-flex gap-2">
   <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+  {% if mode == "feed" %}
+    <a href="/feed" class="btn btn-primary">Keep scrolling →</a>
+  {% endif %}
 </div>
 {% endblock %}

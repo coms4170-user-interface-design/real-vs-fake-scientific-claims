@@ -130,6 +130,7 @@ def quiz_result():
         score=score,
         total=len(CLASSIC_QUIZ),
         breakdown=breakdown,
+        mode="classic",
     )
 
 
@@ -137,6 +138,37 @@ def quiz_result():
 def feed():
     lessons_by_id = {l["id"]: l for l in LESSONS}
     return render_template("feed.html", questions=FEED_QUIZ, lessons_by_id=lessons_by_id)
+
+
+@app.route("/feed/result")
+def feed_result():
+    data = load_user_data()
+    answers = data["quiz_answers"]["feed"]
+    breakdown = []
+    score = 0
+    for q in FEED_QUIZ:
+        qid = str(q["id"])
+        if qid not in answers:
+            continue
+        user_answer = answers[qid]
+        is_correct = _grade(q, user_answer)
+        if is_correct:
+            score += 1
+        breakdown.append({
+            "question": q,
+            "answer": user_answer,
+            "is_correct": is_correct,
+            "details": _build_details(q, user_answer),
+        })
+    data["scores"]["feed"] = score
+    save_user_data(data)
+    return render_template(
+        "result.html",
+        score=score,
+        total=len(breakdown),
+        breakdown=breakdown,
+        mode="feed",
+    )
 
 
 def _build_details(question, answer):
