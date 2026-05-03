@@ -12,11 +12,41 @@ USER_DATA_FILE = DATA_DIR / "user_data.json"
 LESSONS = json.loads((DATA_DIR / "lessons.json").read_text())["lessons"]
 QUIZ = json.loads((DATA_DIR / "quiz.json").read_text())["questions"]
 
+MODES = ("classic", "feed")
+
+
+def _empty_user_data():
+    return {
+        "events": [],
+        "quiz_answers": {mode: {} for mode in MODES},
+        "scores": {mode: None for mode in MODES},
+    }
+
 
 def load_user_data():
     if not USER_DATA_FILE.exists():
-        return {"events": [], "quiz_answers": {}, "score": None}
-    return json.loads(USER_DATA_FILE.read_text())
+        return _empty_user_data()
+    data = json.loads(USER_DATA_FILE.read_text())
+
+    answers = data.get("quiz_answers") or {}
+    if not any(mode in answers for mode in MODES):
+        # Old flat shape: {<qid>: {...}} → move under "classic"
+        answers = {"classic": answers, "feed": {}}
+    else:
+        for mode in MODES:
+            answers.setdefault(mode, {})
+    data["quiz_answers"] = answers
+
+    scores = data.get("scores") or {}
+    if "score" in data and "classic" not in scores:
+        scores["classic"] = data.pop("score")
+    for mode in MODES:
+        scores.setdefault(mode, None)
+    data.pop("score", None)
+    data["scores"] = scores
+
+    data.setdefault("events", [])
+    return data
 
 
 def save_user_data(data):
