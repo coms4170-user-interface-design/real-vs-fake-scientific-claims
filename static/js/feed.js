@@ -21,6 +21,86 @@
     card.querySelectorAll(".verdict-btn").forEach((btn) => {
       btn.addEventListener("click", () => handleVerdict(card, btn.dataset.verdict));
     });
+    attachSwipe(card);
+  }
+
+  function attachSwipe(card) {
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let pointerId = null;
+
+    const SWIPE_THRESHOLD = 100; // px past which the swipe commits
+    const ROTATION_DIVISOR = 25; // larger = gentler tilt
+    const OVERLAY_FULL = 120; // px at which overlay is fully opaque
+
+    card.addEventListener("pointerdown", onPointerDown);
+    card.addEventListener("pointermove", onPointerMove);
+    card.addEventListener("pointerup", onPointerEnd);
+    card.addEventListener("pointercancel", onPointerEnd);
+
+    function onPointerDown(e) {
+      if (card.classList.contains("submitted")) return;
+      // Let buttons handle their own clicks
+      if (e.target.closest(".verdict-btn")) return;
+      isDragging = true;
+      pointerId = e.pointerId;
+      startX = e.clientX;
+      currentX = 0;
+      card.classList.add("dragging");
+      card.style.transition = "none";
+      try { card.setPointerCapture(pointerId); } catch (_) {}
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging || e.pointerId !== pointerId) return;
+      currentX = e.clientX - startX;
+      const rotation = currentX / ROTATION_DIVISOR;
+      card.style.transform = `translateX(${currentX}px) rotate(${rotation}deg)`;
+      const progress = Math.min(1, Math.abs(currentX) / OVERLAY_FULL);
+      card.style.setProperty("--swipe-progress", progress);
+      card.dataset.swipeDirection = currentX > 0 ? "real" : currentX < 0 ? "fake" : "";
+    }
+
+    function onPointerEnd(e) {
+      if (!isDragging || e.pointerId !== pointerId) return;
+      isDragging = false;
+      card.classList.remove("dragging");
+      try { card.releasePointerCapture(pointerId); } catch (_) {}
+
+      if (Math.abs(currentX) > SWIPE_THRESHOLD) {
+        const verdict = currentX > 0 ? "real" : "fake";
+        flyOff(card, currentX > 0 ? 1 : -1).then(() => {
+          card.style.transition = "none";
+          card.style.transform = "";
+          card.style.setProperty("--swipe-progress", 0);
+          card.dataset.swipeDirection = "";
+          requestAnimationFrame(() => { card.style.transition = ""; });
+          handleVerdict(card, verdict);
+        });
+      } else {
+        card.style.transition = "transform 0.2s ease-out";
+        card.style.transform = "";
+        card.style.setProperty("--swipe-progress", 0);
+        card.dataset.swipeDirection = "";
+        setTimeout(() => { card.style.transition = ""; }, 220);
+      }
+      currentX = 0;
+      pointerId = null;
+    }
+  }
+
+  function flyOff(card, direction) {
+    return new Promise((resolve) => {
+      const flyX = direction * (window.innerWidth || 600);
+      card.style.transition = "transform 0.25s ease-out, opacity 0.25s ease-out";
+      card.style.transform = `translateX(${flyX}px) rotate(${direction * 22}deg)`;
+      card.style.opacity = "0";
+      setTimeout(() => {
+        card.style.opacity = "";
+        resolve();
+      }, 260);
+    });
   }
 
   async function handleVerdict(card, verdict) {

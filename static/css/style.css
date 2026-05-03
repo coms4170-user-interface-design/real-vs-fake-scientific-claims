@@ -136,7 +136,20 @@ main.container:has(.feed-page) {
   border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  transition: border-color 0.2s ease, opacity 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.2s ease-out, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.feed-card.dragging {
+  cursor: grabbing;
+}
+
+.feed-card:not(.submitted):not(.dragging) {
+  cursor: grab;
 }
 
 .feed-card-header {
@@ -220,6 +233,51 @@ main.container:has(.feed-page) {
 
 .feed-card.submitted .card-actions {
   display: none;
+}
+
+.feed-card.submitted {
+  cursor: default;
+  touch-action: auto;
+}
+
+/* Swipe overlay labels (REAL / FAKE) shown during drag */
+.swipe-overlay {
+  position: absolute;
+  top: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  padding: 0.4rem 1rem;
+  border: 3px solid;
+  border-radius: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: rotate(-8deg);
+  z-index: 2;
+  transition: opacity 0.1s linear;
+}
+
+.swipe-overlay-real {
+  right: 1.25rem;
+  color: #86efac;
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.swipe-overlay-fake {
+  left: 1.25rem;
+  color: #fca5a5;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+  transform: rotate(8deg);
+}
+
+.feed-card[data-swipe-direction="real"] .swipe-overlay-real {
+  opacity: var(--swipe-progress, 0);
+}
+
+.feed-card[data-swipe-direction="fake"] .swipe-overlay-fake {
+  opacity: var(--swipe-progress, 0);
 }
 
 .feed-card.submitted.user-correct {
@@ -502,4 +560,68 @@ main.container:has(.feed-page) {
   position: absolute;
   left: 0;
   color: rgba(255, 255, 255, 0.35);
+}
+
+/* ───────── Mobile (≤480px) ───────── */
+@media (max-width: 480px) {
+  main.container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .feed-stack {
+    max-width: 100%;
+  }
+
+  .feed-card {
+    padding: 1.1rem;
+    margin-bottom: 1rem;
+    border-radius: 14px;
+  }
+
+  .feed-card .image-caption {
+    padding: 1rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .feed-card .post-headline {
+    font-size: 1rem;
+  }
+
+  .feed-card .post-body {
+    font-size: 0.92rem;
+  }
+
+  .verdict-btn {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .swipe-overlay {
+    top: 0.9rem;
+    font-size: 1.2rem;
+    padding: 0.3rem 0.75rem;
+    border-width: 2px;
+  }
+
+  .swipe-overlay-real { right: 0.9rem; }
+  .swipe-overlay-fake { left: 0.9rem; }
+
+  .card-result {
+    padding: 0.85rem;
+  }
+
+  .lesson-block {
+    padding: 0.85rem;
+  }
+
+  .lesson-signal,
+  .lesson-annotation {
+    padding: 0.55rem 0.65rem;
+  }
+
+  .lesson-signal-body,
+  .lesson-annotation-body {
+    font-size: 0.78rem;
+  }
 }
