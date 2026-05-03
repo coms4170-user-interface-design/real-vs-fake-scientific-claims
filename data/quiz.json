@@ -72,6 +72,201 @@
       ],
       "correct_signal_ids": ["s1", "s2", "s3"],
       "explanation": "This post is clearly fake. No source linked, multiple language red flags (absolutes + conspiracy framing), and 'dr.' in a handle is not a real credential."
+    },
+    {
+      "id": 4,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@sleepmaxx_official",
+        "image_caption": "[bedside table photo with supplement bottles]",
+        "headline": "NEW research from Harvard confirms: 10mg melatonin nightly resets your circadian rhythm and CURES insomnia.",
+        "body": "I've been sleeping 8 hours straight every night since I started. Link in bio for the supplement we recommend."
+      },
+      "correct_verdict": "fake",
+      "why": "\"Cures\" is an overclaim and \"Harvard\" is name-dropped without a study link. Personal anecdote isn't evidence, and the affiliate link signals financial motive.",
+      "signals": ["language", "source", "poster"]
+    },
+    {
+      "id": 5,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@journal_of_physiology",
+        "image_caption": "[thumbnail of a research paper PDF]",
+        "headline": "Soberg et al., Cell Reports Medicine, 2021. doi.org/10.1016/j.xcrm.2021.100408",
+        "body": "Repeated cold exposure may improve glucose tolerance in some adults. Effects were small and varied across participants — more research needed in larger populations."
+      },
+      "correct_verdict": "real",
+      "why": "Peer-reviewed source with a DOI, hedged language (\"may improve,\" \"small,\" \"varied\"), neutral institutional poster, and the post acknowledges its own limitations.",
+      "signals": []
+    },
+    {
+      "id": 6,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@cleanlivingmom",
+        "image_caption": "[mason jar of beef tallow on a kitchen counter]",
+        "headline": "Seed oils literally cause inflammation in your body.",
+        "body": "Studies show linoleic acid is the #1 driver of chronic disease. That's why I switched my whole family to tallow and never looked back. Big Food doesn't want you to know this."
+      },
+      "correct_verdict": "fake",
+      "why": "\"Literally cause\" is an overclaim, \"studies show\" with no citation is empty rhetoric, the conspiracy framing (\"Big Food doesn't want you to know\") is a manipulation tactic, and the poster is an anonymous lifestyle account with no credentials.",
+      "signals": ["language", "source", "poster"]
+    },
+    {
+      "id": 7,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@nutrition_signals",
+        "image_caption": "[clock showing 8:00 next to a plate of food]",
+        "headline": "A 2023 NEJM study PROVED that intermittent fasting REVERSES type 2 diabetes in 6 weeks.",
+        "body": "If you're pre-diabetic and not doing 16:8, you're choosing to stay sick. The science is settled."
+      },
+      "correct_verdict": "fake",
+      "why": "\"Proved\" and \"reverses\" are overclaims — the actual NEJM intermittent fasting research shows mixed, modest effects, not 6-week reversals. \"The science is settled\" is rhetorical absolutism, and the 2023 NEJM study is named but not actually cited.",
+      "signals": ["language", "source"]
+    },
+    {
+      "id": 8,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@dr.evidence",
+        "image_caption": "[creatine scoop on a kitchen scale]",
+        "headline": "Recent research suggests creatine may modestly improve memory in sleep-deprived adults.",
+        "body": "Effects appear strongest in vegetarians and people under cognitive load. Standard 5g/day."
+      },
+      "correct_verdict": "fake",
+      "why": "The language is properly hedged (\"may,\" \"modestly,\" \"appears\") and the claim is roughly consistent with real research — but no study or DOI is linked. Hedged language without a verifiable source is still an unverifiable claim, and \"@dr.evidence\" is an anonymous handle (anyone can put \"dr.\" in front).",
+      "signals": ["source", "poster"]
+    },
+    {
+      "id": 9,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@cellulartherapy_md",
+        "image_caption": "[clinical room with an IV drip stand]",
+        "headline": "IV vitamin C therapy may support immune resilience in some adults.",
+        "body": "Citation: a 2024 review in Mayo Clinic Proceedings [link]. Book your drip at our Manhattan clinic."
+      },
+      "correct_verdict": "fake",
+      "why": "Hedged language, plausible-sounding source, sounds careful — but the poster is a clinic that sells the exact treatment they're citing. Even when sources and language pass the test, a direct financial stake in your conclusion is a red flag (Poster signal).",
+      "signals": ["poster"]
+    },
+    {
+      "id": 10,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@harvard_sph",
+        "image_caption": "[Harvard School of Public Health logo with a paper preview]",
+        "headline": "Estruch et al., NEJM, 2018. doi.org/10.1056/NEJMoa1800389 (PREDIMED follow-up)",
+        "body": "Adherence to a Mediterranean diet was associated with a ~30% relative reduction in major cardiovascular events in high-risk adults over ~5 years. Findings are observational at the diet level; effect sizes vary by population."
+      },
+      "correct_verdict": "real",
+      "why": "Peer-reviewed primary source with a DOI from a top-tier journal, hedged language (\"associated with,\" \"observational,\" \"vary by population\"), institutional poster with no commercial interest. The post acknowledges its own methodological limits.",
+      "signals": []
+    },
+    {
+      "id": 11,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@truth.health.community",
+        "image_caption": "[crossed-out sunscreen bottle]",
+        "headline": "Sunscreen is causing the skin cancer epidemic, not preventing it.",
+        "body": "The chemicals are toxic. Dermatologists won't admit it because they're paid by Big Pharma. Use coconut oil and get sunlight."
+      },
+      "correct_verdict": "fake",
+      "why": "Conspiracy framing (\"won't admit it,\" \"Big Pharma\") is a manipulation tactic that pre-empts skepticism. The claim contradicts decades of dermatology research, no source is cited, and an anonymous \"truth community\" account has no expertise.",
+      "signals": ["language", "source", "poster"]
+    },
+    {
+      "id": 12,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@gutbalance_official",
+        "image_caption": "[probiotic capsules on a wooden surface]",
+        "headline": "New study: Lactobacillus rhamnosus GG may reduce stress markers in healthy adults [study link].",
+        "body": "Try our 12-strain Gut Balance blend — formulated with research-backed probiotics. 20% off this week."
+      },
+      "correct_verdict": "fake",
+      "why": "The cited research on L. rhamnosus GG is real and properly hedged — but the seller's product is a different 12-strain blend that may not contain L. rhamnosus GG at clinical doses. Citing real research to sell a different product is a classic poster-bias tactic.",
+      "signals": ["poster"]
+    },
+    {
+      "id": 13,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@biohackerbrad",
+        "image_caption": "[guy stepping into a chest-freezer ice bath]",
+        "headline": "Cold plunges boost dopamine 250% (Stanford).",
+        "body": "I do 3 minutes at 38°F every morning. Mood, focus, energy — completely different person. Don't sleep on this."
+      },
+      "correct_verdict": "fake",
+      "why": "\"Stanford\" is name-dropped without a citation, and the \"250%\" figure misrepresents a small study (Šrámek et al. — not Stanford) by generalizing transient dopamine elevation as a daily life-outcome metric. Personal anecdote is presented as evidence.",
+      "signals": ["language", "source"]
+    },
+    {
+      "id": 14,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@meat.heals_",
+        "image_caption": "[plate of seared ribeye steaks]",
+        "headline": "The carnivore diet REVERSED my autoimmune disease in 90 days.",
+        "body": "Doctors said I'd be on medication for life. They were wrong. The results speak for themselves — try it for 30 days and tell me I'm crazy."
+      },
+      "correct_verdict": "fake",
+      "why": "A single anecdote isn't evidence, no clinical source supports the broader claim, and the \"doctors were wrong\" framing pre-empts medical skepticism. \"Reversed\" is an overclaim; chronic conditions rarely reverse from dietary change alone.",
+      "signals": ["language", "source", "poster"]
+    },
+    {
+      "id": 15,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@nih_news",
+        "image_caption": "[NIH building exterior]",
+        "headline": "Bouillon et al., Endocrine Reviews, 2019. doi.org/10.1210/er.2018-00126",
+        "body": "Vitamin D supplementation appears to provide modest benefits primarily in adults with documented deficiency. Routine supplementation in vitamin-D-replete adults shows little to no clinical effect in most outcomes studied."
+      },
+      "correct_verdict": "real",
+      "why": "Peer-reviewed source with a DOI, properly hedged language (\"appears,\" \"modest,\" \"little to no\"), institutional government poster, and the post deliberately distinguishes between deficient and replete populations rather than promoting blanket use.",
+      "signals": []
+    },
+    {
+      "id": 16,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@magnesiumdaily",
+        "image_caption": "[bottles of magnesium glycinate on a vanity]",
+        "headline": "If you have anxiety, brain fog, headaches, fatigue, or trouble sleeping — you're probably magnesium deficient.",
+        "body": "Our triple-blend magnesium fixes all of it in 7 days. Use code RELAX20 for 20% off."
+      },
+      "correct_verdict": "fake",
+      "why": "A single supplement claimed to fix five different symptoms is a textbook overgeneralization. \"Probably deficient\" with no diagnostic basis, \"fixes all of it in 7 days\" is an overclaim, and the discount code makes the financial motive explicit.",
+      "signals": ["language", "source", "poster"]
+    },
+    {
+      "id": 17,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@ancestral_md",
+        "image_caption": "[graphic comparing a bottle of canola oil to a stick of butter]",
+        "headline": "A 2024 study confirms what we've known for years: seed oils trigger heart disease at the cellular level.",
+        "body": "Linoleic acid oxidizes inside arterial walls. Switch to butter, ghee, or tallow. Your future self will thank you."
+      },
+      "correct_verdict": "fake",
+      "why": "\"A 2024 study\" with no journal, authors, or DOI cannot be verified. The mechanistic claim oversimplifies decades of contested research on linoleic acid. \"Ancestral_md\" is credential mimicry — anyone can use \"md\" in a handle.",
+      "signals": ["source", "poster"]
+    },
+    {
+      "id": 18,
+      "type": "swipe_verdict",
+      "post": {
+        "username": "@evidencebased_md",
+        "image_caption": "[coffee cup on a desk next to a wall clock at 2 PM]",
+        "headline": "Drysdale et al., Sleep Medicine Reviews, 2023. doi.org/10.1016/j.smrv.2023.101764",
+        "body": "Meta-analysis of 24 studies: caffeine within ~9 hours of bedtime may meaningfully reduce sleep quality on average. Individual sensitivity varies widely — some people are unaffected, others should cut off earlier."
+      },
+      "correct_verdict": "real",
+      "why": "Peer-reviewed meta-analysis with a DOI, hedged language (\"may,\" \"on average,\" \"varies widely\"), and the post explicitly acknowledges individual variation rather than prescribing a one-size-fits-all rule.",
+      "signals": []
     }
   ]
 }
