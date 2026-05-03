@@ -49,6 +49,7 @@
         placements[item.dataset.draggableId] = null;
       }
     });
+    const mode = submitBtn.dataset.mode || "classic";
 
     submitBtn.disabled = true;
     try {
@@ -58,6 +59,7 @@
         body: JSON.stringify({
           question_id: parseInt(submitBtn.dataset.questionId, 10),
           answer: { placements: placements },
+          mode: mode,
         }),
       });
       if (!res.ok) throw new Error("save failed");

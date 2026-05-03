@@ -230,10 +230,13 @@ def quiz_answer():
     body = request.get_json(silent=True) or {}
     qid = str(body.get("question_id", ""))
     answer = body.get("answer")
+    mode = body.get("mode", "classic")
     if not qid or answer is None:
         return jsonify({"ok": False, "error": "missing question_id or answer"}), 400
+    if mode not in MODES:
+        return jsonify({"ok": False, "error": f"invalid mode: {mode}"}), 400
     data = load_user_data()
-    data["quiz_answers"][qid] = answer
+    data["quiz_answers"][mode][qid] = answer
     save_user_data(data)
     return jsonify({"ok": True})
 

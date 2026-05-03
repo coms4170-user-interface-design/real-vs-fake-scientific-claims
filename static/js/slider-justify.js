@@ -13,6 +13,7 @@
     const sliderValue = parseInt(slider.value, 10);
     const selected = Array.from(document.querySelectorAll(".signal-check:checked"))
       .map((el) => el.dataset.signalId);
+    const mode = submitBtn.dataset.mode || "classic";
 
     submitBtn.disabled = true;
     try {
@@ -25,6 +26,7 @@
             slider_value: sliderValue,
             selected_signal_ids: selected,
           },
+          mode: mode,
         }),
       });
       if (!res.ok) throw new Error("save failed");

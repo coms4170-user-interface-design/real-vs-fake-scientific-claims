@@ -14,6 +14,7 @@
       .map((el) => el.dataset.flagId);
     const questionId = parseInt(submitBtn.dataset.questionId, 10);
     const nextUrl = submitBtn.dataset.nextUrl;
+    const mode = submitBtn.dataset.mode || "classic";
 
     submitBtn.disabled = true;
     try {
@@ -23,6 +24,7 @@
         body: JSON.stringify({
           question_id: questionId,
           answer: { selected_ids: selected },
+          mode: mode,
         }),
       });
       if (!res.ok) throw new Error("save failed");

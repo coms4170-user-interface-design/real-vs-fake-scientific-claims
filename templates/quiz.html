@@ -113,7 +113,8 @@
   {% if question.type in ["click_flag", "drag_bucket", "slider_justify"] %}
     <button id="submit-answer" class="btn btn-primary"
             data-question-id="{{ question.id }}"
-            data-next-url="{{ next_url }}">
+            data-next-url="{{ next_url }}"
+            data-mode="classic">
       Submit &rarr;
     </button>
   {% else %}
