@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Feed — Real vs. Fake{% endblock %}
+
+{% block content %}
+<div class="feed-page">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <a href="/" class="btn btn-outline-secondary btn-sm">&larr; Home</a>
+    <span class="text-muted small text-uppercase" style="letter-spacing: 0.08em;">Real vs. Fake feed</span>
+    <span style="width: 60px;"></span>
+  </div>
+
+  <div class="feed-stack">
+    {% for q in questions %}
+      <article class="feed-card post-card-dark"
+               data-question-id="{{ q.id }}"
+               data-question-type="{{ q.type }}"
+               data-mode="feed"
+               data-correct-verdict="{{ q.correct_verdict }}"
+               data-why="{{ q.why }}"
+               data-signals="{{ q.signals | join(',') }}">
+
+        <header class="feed-card-header">
+          <div class="avatar-circle"></div>
+          <div class="fw-bold">{{ q.post.username }}</div>
+        </header>
+
+        <div class="image-caption">{{ q.post.image_caption }}</div>
+
+        <div class="post-headline">{{ q.post.headline }}</div>
+        <div class="post-body">{{ q.post.body }}</div>
+
+        <div class="card-actions">
+          <button class="verdict-btn verdict-fake" data-verdict="fake">Fake</button>
+          <button class="verdict-btn verdict-real" data-verdict="real">Real</button>
+        </div>
+
+        <div class="card-result d-none"></div>
+      </article>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-4 mb-5">
+    <a href="/" class="btn btn-outline-secondary">Back to home</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/feed.js') }}"></script>
+{% endblock %}
