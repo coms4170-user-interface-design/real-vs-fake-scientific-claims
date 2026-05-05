@@ -1,56 +1,76 @@
 {% extends "base.html" %}
-
 {% block title %}Feed — Real vs. Fake{% endblock %}
-
 {% block content %}
+<style>
+body, html { background-color: #f0ede6 !important; color: #1a1a18 !important; }
+.feed-page { background-color: #f0ede6; }
+.post-card-dark {
+  background: #faf8f3 !important;
+  border-color: #ddd8cc !important;
+  color: #1a1a18 !important;
+}
+.post-card-dark * { color: #1a1a18 !important; }
+.post-card-dark .image-caption {
+  background: #ece8e0 !important;
+  border-color: #c4bdb0 !important;
+  color: #6b5f4e !important;
+}
+.post-card-dark .post-headline { color: #1a1a18 !important; }
+.post-card-dark .post-body { color: #4a3f32 !important; }
+.post-card-dark .fw-bold { color: #1a1a18 !important; }
+.verdict-btn {
+  background: transparent !important;
+  border-color: #a89880 !important;
+  color: #4a3f32 !important;
+}
+.verdict-btn:hover { background: #e8e3da !important; }
+.text-muted { color: #a89880 !important; }
+.btn-outline-secondary {
+  border-color: #a89880 !important;
+  color: #4a3f32 !important;
+  background: transparent !important;
+}
+.btn-outline-secondary:hover { background: #e8e3da !important; }
+</style>
 <div class="feed-page">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <a href="/" class="btn btn-outline-secondary btn-sm">&larr; Home</a>
-    <span class="text-muted small text-uppercase" style="letter-spacing: 0.08em;">Real vs. Fake feed</span>
-    <span style="width: 60px;"></span>
-  </div>
-
-  <div class="feed-stack">
+<div class="d-flex justify-content-between align-items-center mb-4">
+<a href="/" class="btn btn-outline-secondary btn-sm">&larr; Home</a>
+<span class="text-muted small text-uppercase" style="letter-spacing: 0.08em;">Real vs. Fake feed</span>
+<span style="width: 60px;"></span>
+</div>
+<div class="feed-stack">
     {% for q in questions %}
-      <article class="feed-card post-card-dark"
-               data-question-id="{{ q.id }}"
-               data-question-type="{{ q.type }}"
-               data-mode="feed"
-               data-correct-verdict="{{ q.correct_verdict }}"
-               data-why="{{ q.why }}"
-               data-signals="{{ q.signals | join(',') }}"
-               data-lesson-id="{{ q.lesson_id }}">
-
-        <header class="feed-card-header">
-          <div class="avatar-circle"></div>
-          <div class="fw-bold">{{ q.post.username }}</div>
-        </header>
-
-        <div class="image-caption">{{ q.post.image_caption }}</div>
-
-        <div class="post-headline">{{ q.post.headline }}</div>
-        <div class="post-body">{{ q.post.body }}</div>
-
-        <div class="card-actions">
-          <button class="verdict-btn verdict-fake" data-verdict="fake">Fake</button>
-          <button class="verdict-btn verdict-real" data-verdict="real">Real</button>
-        </div>
-
-        <div class="swipe-overlay swipe-overlay-fake">FAKE</div>
-        <div class="swipe-overlay swipe-overlay-real">REAL</div>
-
-        <div class="card-result d-none"></div>
-      </article>
+<article class="feed-card post-card-dark"
+data-question-id="{{ q.id }}"
+data-question-type="{{ q.type }}"
+data-mode="feed"
+data-correct-verdict="{{ q.correct_verdict }}"
+data-why="{{ q.why }}"
+data-signals="{{ q.signals | join(',') }}"
+data-lesson-id="{{ q.lesson_id }}">
+<header class="feed-card-header">
+<div class="avatar-circle"></div>
+<div class="fw-bold">{{ q.post.username }}</div>
+</header>
+<div class="image-caption">{{ q.post.image_caption }}</div>
+<div class="post-headline">{{ q.post.headline }}</div>
+<div class="post-body">{{ q.post.body }}</div>
+<div class="card-actions">
+<button class="verdict-btn verdict-fake" data-verdict="fake">Fake</button>
+<button class="verdict-btn verdict-real" data-verdict="real">Real</button>
+</div>
+<div class="swipe-overlay swipe-overlay-fake">FAKE</div>
+<div class="swipe-overlay swipe-overlay-real">REAL</div>
+<div class="card-result d-none"></div>
+</article>
     {% endfor %}
-  </div>
-
-  <div class="text-center mt-4 mb-5 d-flex gap-2 justify-content-center flex-wrap">
-    <a href="/" class="btn btn-outline-secondary">Home</a>
-    <a href="/feed/result" class="btn btn-primary">See your results &rarr;</a>
-  </div>
+</div>
+<div class="text-center mt-4 mb-5 d-flex gap-2 justify-content-center flex-wrap">
+<a href="/" class="btn btn-outline-secondary">Home</a>
+<a href="/feed/result" class="btn btn-primary">See your results &rarr;</a>
+</div>
 </div>
 {% endblock %}
-
 {% block scripts %}
 <script type="application/json" id="lessons-data">{{ lessons_by_id | tojson }}</script>
 <script src="{{ url_for('static', filename='js/feed.js') }}"></script>

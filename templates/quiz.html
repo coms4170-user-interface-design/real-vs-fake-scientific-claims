@@ -3,6 +3,24 @@
 {% block title %}Quiz {{ n }} — Real vs. Fake{% endblock %}
 
 {% block content %}
+<style>
+  .text-muted { color: #a89880 !important; }
+  .form-check-label { color: #1a1a18 !important; }
+  .form-check-input { border-color: #a89880 !important; }
+  .card { background: #faf8f3 !important; border-color: #ddd8cc !important; color: #1a1a18 !important; }
+  .card * { color: #1a1a18 !important; }
+  .bg-light { background: #ece8e0 !important; }
+  .border { border-color: #ddd8cc !important; }
+  .badge.bg-secondary { background: #a89880 !important; color: #faf8f3 !important; }
+  .form-range::-webkit-slider-thumb { background: #1a1a18; }
+  .form-range::-webkit-slider-runnable-track { background: #ddd8cc; }
+  .drag-tray { background: #ece8e0 !important; border-color: #ddd8cc !important; }
+  .draggable-item { background: #faf8f3; border: 1px solid #ddd8cc; color: #1a1a18; }
+  .bucket { background: #ece8e0; border: 1px solid #ddd8cc; color: #1a1a18; }
+  .flaggable { border-bottom: 2px dashed #a89880; color: #1a1a18; cursor: pointer; }
+  h1, h2, h3 { color: #1a1a18 !important; }
+</style>
+
 <div class="lesson-header mb-4">
   <div class="text-muted small">Question {{ n }} of {{ total }}</div>
   <h1 class="h3 mb-0">{{ question.prompt }}</h1>

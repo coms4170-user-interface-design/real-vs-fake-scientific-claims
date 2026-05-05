@@ -5,31 +5,33 @@
 
 {% block content %}
 <style>
-  .result-score {
-    color: #38bdf8;
-    letter-spacing: -0.02em;
-  }
+  body, html { color: #2c2018 !important; }
+  h1, h2 { color: #2c2018; }
+  .result-score { color: #8b5e3c; letter-spacing: -0.02em; }
+  .text-muted { color: #7a6a58 !important; }
   .result-card {
-    background: #13131a;
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #faf8f4;
+    border: 1px solid #ddd8ce;
     border-radius: 14px;
   }
   .result-list .list-group-item {
     background: transparent;
-    color: #e2e8f0;
-    border-color: rgba(255,255,255,0.08);
+    color: #2c2018;
+    border-color: #ddd8ce;
   }
   .result-list code {
-    background: rgba(56,189,248,0.14);
-    color: #7dd3fc;
+    background: rgba(139,94,60,0.12);
+    color: #8b5e3c;
     padding: 0.1rem 0.4rem;
     border-radius: 6px;
   }
   .takeaway-dark {
-    background: rgba(56,189,248,0.08);
-    border: 1px solid rgba(56,189,248,0.2);
+    background: rgba(139,94,60,0.08);
+    border: 1px solid rgba(139,94,60,0.2);
     border-radius: 10px;
+    color: #2c2018;
   }
+  .btn-outline-secondary { border-color: #b8b2a6 !important; color: #2c2018 !important; }
 </style>
 <div class="mb-4">
   <div class="text-muted small text-uppercase fw-bold mb-1" style="letter-spacing: 0.08em;">
