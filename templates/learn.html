@@ -2,6 +2,51 @@
 {% block title %}Lesson {{ n }} — {{ lesson.title }}{% endblock %}
 {% block content %}
 <style>
+  @import 
+url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+body, .lesson-page {
+  background: #f0ede6 !important;
+  color: #1a1a18 !important;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.stepper-dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; transition: all 0.2s;
+  text-decoration: none;
+}
+.stepper-dot.active { background: #1a1a18; color: #f0ede6; border: 2px 
+solid #1a1a18; }
+.stepper-dot.done   { background: #1a1a18; color: #f0ede6; border: 2px 
+solid #1a1a18; }
+.stepper-dot.future { background: transparent; color: #a89880; border: 2px 
+solid #c5b99a; }
+.stepper-line { flex: 1; height: 1px; }
+.stepper-line.done   { background: #1a1a18; }
+.stepper-line.future { background: #c5b99a; }
+
+.lesson-badge {
+  display: inline-block;
+  border: 1.5px solid #a89880;
+  border-radius: 99px;
+  padding: 4px 14px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #6b5f4e;
+  font-weight: 500;
+}
+
+.lesson-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem; font-weight: 300;
+  letter-spacing: -0.02em; color: #1a1a18;
+}
+
+.scenario-layout {
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 40px; align-items: start;
 }
 .scenario-left  { display: flex; flex-direction: column; gap: 18px; padding-top: 8px; }
