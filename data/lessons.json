@@ -48,14 +48,27 @@
       "accent": "red",
       "post": {
         "username": "@healthadvice",
-        "segments": [
-          {"text": "Ashwagandha "},
-          {"text": "has been shown", "key": "shown", "color": "red"},
-          {"text": " to improve your focus, attention, and clarity. It is "},
-          {"text": "GUARANTEED", "key": "guaranteed", "color": "yellow"},
-          {"text": " to work. "},
-          {"text": "try it today", "key": "try", "color": "teal"}
-        ]
+	"segments": [
+  	{"text": "Ashwagandha", "key": "w1", "color": null},
+  	{"text": "has", "key": "w2", "color": null},
+  	{"text": "been", "key": "w3", "color": null},
+  	{"text": "shown", "key": "shown", "color": "red"},
+  	{"text": "to", "key": "w4", "color": null},
+  	{"text": "improve", "key": "w5", "color": null},
+  	{"text": "your", "key": "w6", "color": null},
+  	{"text": "focus,", "key": "w7", "color": null},
+  	{"text": "attention,", "key": "w8", "color": null},
+  	{"text": "and", "key": "w9", "color": null},
+  	{"text": "clarity.", "key": "w10", "color": null},
+  	{"text": "It", "key": "w11", "color": null},
+  	{"text": "is", "key": "w12", "color": null},
+  	{"text": "GUARANTEED", "key": "guaranteed", "color": "yellow"},
+  	{"text": "to", "key": "w13", "color": null},
+  	{"text": "work.", "key": "w14", "color": null},
+  	{"text": "try", "key": "try", "color": "teal"},
+  	{"text": "it", "key": "w15", "color": null},
+  	{"text": "today", "key": "w16", "color": null}
+	]
       },
       "annotations": [
         {
@@ -117,15 +130,29 @@
       "accent": "yellow",
       "post": {
         "username": "@vitamin&co",
-        "segments": [
-          {"text": "Nutrients. 2024. Acute and Repeated Ashwagandha Supplementation ["},
-          {"text": "doi link shown", "key": "doi", "color": "teal"},
-          {"text": "]. Research "},
-          {"text": "may support", "key": "maysupport", "color": "teal"},
-          {"text": " focus in some adults. Come to our "},
-          {"text": "@vitamin&co store", "key": "company", "color": "red"},
-          {"text": " or order online!"}
-        ]
+	"segments": [
+  	{"text": "Nutrients.", "key": "w1", "color": null},
+  	{"text": "2024.", "key": "w2", "color": null},
+  	{"text": "Acute", "key": "w3", "color": null},
+  	{"text": "and", "key": "w4", "color": null},
+  	{"text": "Repeated", "key": "w5", "color": null},
+  	{"text": "Ashwagandha", "key": "w6", "color": null},
+  	{"text": "Supplementation", "key": "w7", "color": null},
+  	{"text": "doi link shown", "key": "doi", "color": "teal"},
+  	{"text": "Research", "key": "w10", "color": null},
+  	{"text": "may support", "key": "maysupport", "color": "teal"},
+  	{"text": "focus", "key": "w11", "color": null},
+  	{"text": "in", "key": "w12", "color": null},
+  	{"text": "some", "key": "w13", "color": null},
+  	{"text": "adults.", "key": "w14", "color": null},
+  	{"text": "Come", "key": "w15", "color": null},
+  	{"text": "to", "key": "w16", "color": null},
+  	{"text": "our", "key": "w17", "color": null},
+  	{"text": "@vitamin&co store", "key": "company", "color": "red"},
+  	{"text": "or", "key": "w18", "color": null},
+  	{"text": "order", "key": "w19", "color": null},
+  	{"text": "online!", "key": "w20", "color": null}
+       ]
       },
       "annotations": [
         {

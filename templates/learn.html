@@ -2,47 +2,6 @@
 {% block title %}Lesson {{ n }} — {{ lesson.title }}{% endblock %}
 {% block content %}
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
-
-body, .lesson-page {
-  background: #f0ede6 !important;
-  color: #1a1a18 !important;
-  font-family: 'DM Sans', sans-serif;
-}
-
-.stepper-dot {
-  width: 30px; height: 30px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 600; transition: all 0.2s;
-  text-decoration: none;
-}
-.stepper-dot.active { background: #1a1a18; color: #f0ede6; border: 2px solid #1a1a18; }
-.stepper-dot.done   { background: #1a1a18; color: #f0ede6; border: 2px solid #1a1a18; }
-.stepper-dot.future { background: transparent; color: #a89880; border: 2px solid #c5b99a; }
-.stepper-line { flex: 1; height: 1px; }
-.stepper-line.done   { background: #1a1a18; }
-.stepper-line.future { background: #c5b99a; }
-
-.lesson-badge {
-  display: inline-block;
-  border: 1.5px solid #a89880;
-  border-radius: 99px;
-  padding: 4px 14px;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: #6b5f4e;
-  font-weight: 500;
-}
-
-.lesson-title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.8rem; font-weight: 300;
-  letter-spacing: -0.02em; color: #1a1a18;
-}
-
-.scenario-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.6fr;
   gap: 40px; align-items: start;
 }
 .scenario-left  { display: flex; flex-direction: column; gap: 18px; padding-top: 8px; }
@@ -620,10 +579,10 @@ body, .lesson-page {
   </div>
 </div>
 
-
 {% elif lesson.type == "signal_detail" %}
 <p style="color:#a89880; font-size:0.88rem; margin-bottom:1.5rem;">
-  Tap the <strong style="color:#1a1a18;">suspicious words</strong> in the post to uncover what's wrong.
+  Tap the <strong style="color:#1a1a18;">suspicious words</strong> in the 
+post, then submit.
 </p>
 
 <div class="row g-4 align-items-start">
@@ -637,17 +596,29 @@ body, .lesson-page {
       </div>
       <div class="tap-post-text" id="tap-post-text">
         {% for seg in lesson.post.segments %}
-          {% if seg.key is defined %}
-            <span class="hot-word" data-key="{{ seg.key }}" data-color="{{ seg.color }}" onclick="tapWord(this)">{{ seg.text }}</span>
-          {% else %}
-            {{ seg.text }}
-          {% endif %}
+          <span class="hot-word"
+            data-key="{{ seg.key }}"
+            data-color="{{ seg.color if seg.color and seg.color != 'None' else '' }}"
+            data-correct="{{ 'true' if seg.color and seg.color != 'None' else 'false' }}"
+	    onclick="tapWord(this)"> {{ seg.text }} </span>
         {% endfor %}
       </div>
       <div class="tap-hint-row" id="tap-hint">
         <div class="hint-dot"></div>
         <span id="hint-text">{{ lesson.annotations | length }} things to find</span>
       </div>
+      <button id="submit-btn" onclick="submitAnswers()" 
+style="display:none; margin-top:16px; width:100%; background:#1a1a18; 
+color:#f0ede6; border:none; border-radius:8px; padding:10px 0; 
+font-weight:600; font-size:0.9rem; cursor:pointer;">
+        Submit
+      </button>
+      <button id="retry-btn" onclick="retryQuestion()" 
+style="display:none; margin-top:8px; width:100%; background:transparent; 
+color:#1a1a18; border:1.5px solid #a89880; border-radius:8px; padding:10px 
+0; font-weight:600; font-size:0.9rem; cursor:pointer;">
+        Retry
+      </button>
     </div>
   </div>
   <div class="col-md-6">
@@ -667,24 +638,105 @@ body, .lesson-page {
 </div>
 
 <script>
-  const total = {{ lesson.annotations | length }};
-  const found = new Set();
+  const annotatedKeys = new Set({{ lesson.annotations | map(attribute='key') | list | tojson }});
+  let selected = new Set();
+  let submitted = false;
+
   function tapWord(el) {
-    const key   = el.dataset.key;
-    const color = el.dataset.color;
-    if (found.has(key)) return;
-    found.add(key);
-    el.classList.add('found-' + color);
-    const card = document.getElementById('finding-' + key);
-    if (card) card.classList.add('revealed');
-    const remaining = total - found.size;
-    const hint = document.getElementById('hint-text');
-    if (remaining > 0) {
-      hint.textContent = remaining + ' more to find';
+    if (submitted) return;
+    const key = el.dataset.key;
+    if (selected.has(key)) {
+      selected.delete(key);
+      el.style.background = '';
+      el.style.borderBottomColor = '';
+      el.style.color = '';
     } else {
-      document.getElementById('tap-hint').style.display = 'none';
-      document.getElementById('all-found-banner').classList.add('show');
+      selected.add(key);
+      el.style.background = '#ece8e0';
+      el.style.borderBottomColor = '#a89880';
     }
+    document.getElementById('submit-btn').style.display = selected.size > 0 ? 'block' : 'none';
+    const annotatedFound = [...selected].filter(k => annotatedKeys.has(k)).length;
+    const remaining = annotatedKeys.size - annotatedFound;
+    document.getElementById('hint-text').textContent = remaining > 0
+      ? remaining + ' more to find'
+      : 'Ready — hit Submit when you\'re done';
+  }
+
+  function submitAnswers() {
+    if (submitted) return;
+    submitted = true;
+    document.getElementById('submit-btn').style.display = 'none';
+    document.getElementById('tap-hint').style.display = 'none';
+    document.querySelectorAll('.hot-word').forEach(el => el.style.cursor = 'default');
+
+    // Grade every word
+    document.querySelectorAll('.hot-word').forEach(el => {
+      const key = el.dataset.key;
+      const isCorrect = annotatedKeys.has(key);
+      const wasSelected = selected.has(key);
+      if (wasSelected && isCorrect) {
+        el.style.background = '#dcfce7';
+        el.style.color = '#15803d';
+        el.style.borderBottomColor = '#86efac';
+      } else if (wasSelected && !isCorrect) {
+        el.style.background = '#fee2e2';
+        el.style.color = '#991b1b';
+        el.style.borderBottomColor = '#f87171';
+      } else if (!wasSelected && isCorrect) {
+        // missed — highlight yellow so they can see what they missed
+        el.style.background = '#fef9c3';
+        el.style.color = '#854d0e';
+        el.style.borderBottomColor = '#fbbf24';
+      }
+    });
+
+    // Reveal all finding cards
+    annotatedKeys.forEach(key => {
+      const card = document.getElementById('finding-' + key);
+      if (card) card.classList.add('revealed');
+    });
+
+    // Banner
+    const allCorrect = [...annotatedKeys].every(k => selected.has(k)) &&
+                       [...selected].every(k => annotatedKeys.has(k));
+    const banner = document.getElementById('all-found-banner');
+    if (allCorrect) {
+      banner.classList.add('show');
+    } else {
+      banner.style.background = '#fff7ed';
+      banner.style.borderColor = '#fed7aa';
+      banner.style.color = '#c2410c';
+      banner.textContent = 'Not quite — yellow words are ones you missed, red are incorrect picks.';
+      banner.classList.add('show');
+    }
+
+    document.getElementById('retry-btn').style.display = 'block';
+  }
+
+  function retryQuestion() {
+    submitted = false;
+    selected = new Set();
+    document.querySelectorAll('.hot-word').forEach(el => {
+      el.style.background = '';
+      el.style.color = '';
+      el.style.borderBottomColor = '';
+      el.style.cursor = '';
+    });
+    annotatedKeys.forEach(key => {
+      const card = document.getElementById('finding-' + key);
+      if (card) card.classList.remove('revealed');
+    });
+    const banner = document.getElementById('all-found-banner');
+    banner.classList.remove('show');
+    banner.style.background = '';
+    banner.style.borderColor = '';
+    banner.style.color = '';
+    banner.textContent = 'Nice — you found everything. You\'re already thinking like a fact-checker.';
+    document.getElementById('tap-hint').style.display = 'flex';
+    document.getElementById('hint-text').textContent = annotatedKeys.size + ' things to find';
+    document.getElementById('submit-btn').style.display = 'none';
+    document.getElementById('retry-btn').style.display = 'none';
   }
 </script>
 

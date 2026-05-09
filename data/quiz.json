@@ -8,19 +8,27 @@
         "username": "@healthguru",
         "image_caption": "[yoga studio photo]",
         "headline_segments": [
-          {"type": "text", "value": "Ashwagandha is "},
-          {"type": "flag", "id": "t1", "value": "GUARANTEED", "is_red_flag": true, "why": "'Guaranteed' is an overclaim. No supplement can guarantee outcomes (Language signal)."},
-          {"type": "text", "value": " to improve your focus, attention, and clarity of mind"}
-        ],
-        "body_segments": [
-          {"type": "text", "value": "@healthguru: Get in touch with your zen by attending yoga classes at our Queens location and "},
-          {"type": "flag", "id": "t2", "value": "picking up some Ashwagandha supplements on your way out", "is_red_flag": true, "why": "@healthguru sells supplements from their yoga studio \u2014 financial motive (Poster signal)."},
-          {"type": "text", "value": ". Ashwagandha has been shown by the "},
-          {"type": "flag", "id": "t3", "value": "Journal of Public Health", "is_red_flag": false, "why": "Naming a journal isn't itself a red flag. The real weakness here is that no DOI or link is provided, not the citation."},
-          {"type": "text", "value": " to improve focus."}
-        ]
+	  {"type": "flag", "id": "h1", "value": "Ashwagandha", "is_red_flag": false, "why": "Just the subject; not a red flag."},
+  	  {"type": "flag", "id": "h2", "value": "is", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "h3", "value": "GUARANTEED", "is_red_flag": true, "why": "'Guaranteed' is an overclaim. No supplement can guarantee outcomes (Language signal)."},
+  	  {"type": "flag", "id": "h4", "value": "to improve your focus,", "is_red_flag": false, "why": "Not a red flag on its own."},
+	  {"type": "flag", "id": "h5", "value": "attention,", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "h6", "value": "and clarity of mind", "is_red_flag": false, "why": "Not a red flag."}
+	],
+	"body_segments": [
+ 	  {"type": "flag", "id": "b1", "value": "@healthguru:", "is_red_flag": false, "why": "Just the username."},
+  	  {"type": "flag", "id": "b2", "value": "Get in touch with your zen", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "b3", "value": "by attending yoga classes", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "b4", "value": "at our Queens location", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "b5", "value": "and picking up some Ashwagandha supplements on your way out", "is_red_flag": true, "why": "@healthguru sells supplements from their yoga studio; there is a financial motive (Poster signal)."},
+  	  {"type": "flag", "id": "b6", "value": "Ashwagandha", "is_red_flag": 	false, "why": "Just naming the supplement — not a red flag."},
+  	  {"type": "flag", "id": "b7", "value": "has been shown", "is_red_flag": false, "why": "Vague sourcing, but the actual red flag in this question is the missing DOI, not this phrase alone."},
+  	  {"type": "flag", "id": "b8", "value": "by the", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "b9", "value": "Journal of Public Health", "is_red_flag": false, "why": "Naming a journal isn't itself a red flag; the real issue is no DOI or link."},
+	  {"type": "flag", "id": "b10", "value": "to improve focus.", "is_red_flag": false, "why": "Not a red flag."}
+	]
       },
-      "correct_ids": ["t1", "t2"],
+      "correct_ids": ["h3", "b5"],
       "explanation": "'GUARANTEED' is an overclaim (Language signal), and the yoga-studio-selling-supplements framing is a financial conflict of interest (Poster signal). Naming the Journal of Public Health isn't itself a red flag \u2014 the real issue is that no DOI or link is provided.",
       "lesson_id": 3
     },
