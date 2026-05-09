@@ -2,13 +2,14 @@
 {% block title %}Lesson {{ n }} — {{ lesson.title }}{% endblock %}
 {% block content %}
 <style>
-/* ── Base ── */
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
 body, .lesson-page {
   background: #f0ede6 !important;
   color: #1a1a18 !important;
+  font-family: 'DM Sans', sans-serif;
 }
 
-/* ── Progress Stepper ── */
 .stepper-dot {
   width: 30px; height: 30px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -22,7 +23,6 @@ body, .lesson-page {
 .stepper-line.done   { background: #1a1a18; }
 .stepper-line.future { background: #c5b99a; }
 
-/* ── Badge ── */
 .lesson-badge {
   display: inline-block;
   border: 1.5px solid #a89880;
@@ -34,67 +34,43 @@ body, .lesson-page {
   font-weight: 500;
 }
 
-/* ── Page title ── */
 .lesson-title {
-  font-size: 1.8rem; font-weight: 700;
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem; font-weight: 300;
   letter-spacing: -0.02em; color: #1a1a18;
 }
 
-/* ── Scenario layout ── */
 .scenario-layout {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 60px; align-items: center;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 40px; align-items: start;
 }
-.scenario-left  { display: flex; flex-direction: column; gap: 18px; }
-.scenario-right { display: flex; align-items: flex-start; gap: 28px; }
+.scenario-left  { display: flex; flex-direction: column; gap: 18px; padding-top: 8px; }
+.scenario-right { display: flex; flex-direction: row; align-items: flex-start; gap: 28px; flex-wrap: nowrap; }
 
-/* ── Mission card ── */
 .mission-card {
   background: #faf8f3;
   border: 1px solid #ddd8cc;
   border-radius: 14px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   padding: 26px;
+  font-family: 'DM Sans', sans-serif;
 }
 .mission-title    { color: #b84c1e; font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; }
 .mission-main,
 .mission-question { color: #1a1a18; font-weight: 700; margin-bottom: 6px; }
 .mission-sub      { color: #a89880; margin-bottom: 18px; }
 
-/* ── Post card (signal_detail) ── */
-.post-card-dark {
-  background: #faf8f3; border: 1px solid #ddd8cc;
-  border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-}
-.profile-circle {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: #ece8e0; border: 1px solid #ddd8cc;
-  display: flex; align-items: center; justify-content: center;
-}
-.post-user { color: #a89880; font-size: 0.85rem; }
-.post-highlight-dark {
-  background: rgba(184,76,30,0.08); border-left: 3px solid #b84c1e;
-  border-radius: 0; padding: 14px; margin-bottom: 12px;
-}
-.post-headline  { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #a89880; margin-bottom: 0.4rem; }
-.post-highlight { color: #b84c1e; font-weight: 600; }
-.post-body      { color: #a89880; font-size: 0.9rem; margin: 0; }
-
-/* ══════════════════════════════════════════
-   TikTok Phone — 380 × 760
-   ══════════════════════════════════════════ */
 .phone-outer {
-  background: #e8e1d5;
-  border: 3px solid #c5b99a;
+  background: #1a1a1a;
+  border: 3px solid #333;
   border-radius: 62px;
   padding: 14px;
   display: inline-block;
   flex-shrink: 0;
 }
 .phone-frame {
-  width: 380px;
-  height: 760px;
+  width: 380px; height: 760px;
   background: #050505;
   border-radius: 50px;
   padding: 12px;
@@ -115,7 +91,6 @@ body, .lesson-page {
 }
 .tiktok-feed::-webkit-scrollbar { display: none; }
 
-/* ── Posts ── */
 .tiktok-post {
   height: 100%; scroll-snap-align: start; position: relative; overflow: hidden;
   background:
@@ -136,29 +111,28 @@ body, .lesson-page {
     linear-gradient(135deg, #1f0a0a, #1e1b1b, #020617);
 }
 
-/* ── Top nav tabs ── */
 .tiktok-topbar {
-  position: absolute; top: 58px; width: 100%;
+  position: absolute; top: 48px; width: 100%;
   display: flex; justify-content: center; gap: 32px; z-index: 5;
 }
-.tiktok-tab { color: rgba(255,255,255,0.5); font-weight: 700; font-size: 16px; }
+.tiktok-tab { color: rgba(255,255,255,0.5); font-weight: 700; font-size: 16px; font-family: sans-serif; }
 .tiktok-tab.active { color: #fff; border-bottom: 2.5px solid #fff; padding-bottom: 4px; }
 
-/* ── Big video title ── */
 .tiktok-video-text {
   position: absolute; top: 130px; left: 18px; right: 70px; z-index: 3;
 }
 .tiktok-video-text h2 {
-  color: #fff; font-size: 30px; font-weight: 900;
-  margin: 0 0 5px; letter-spacing: -0.02em;
+  color: #fff; font-size: 28px; font-weight: 900;
+  margin: 0 0 5px; letter-spacing: -0.01em;
+  font-family: 'Arial Black', sans-serif;
   text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 .tiktok-video-text h3 {
-  color: #facc15; font-size: 17px; font-weight: 800;
-  margin: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  color: #facc15; font-size: 16px; font-weight: 800;
+  margin: 0; font-family: sans-serif;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
 
-/* ── Supplement bottle ── */
 .bottle {
   position: absolute;
   width: 90px; height: 154px;
@@ -181,47 +155,47 @@ body, .lesson-page {
   text-transform: uppercase; letter-spacing: 0.04em;
 }
 
-/* ── Caption ── */
 .tiktok-content {
   position: absolute; bottom: 88px;
   left: 0; right: 64px;
   padding: 0 16px 0 18px; z-index: 3;
 }
-.tiktok-username { color: #fff; font-weight: 700; font-size: 16px; margin-bottom: 9px; }
-.tiktok-desc     { color: rgba(255,255,255,0.9); font-size: 14px; line-height: 1.5; margin-bottom: 10px; }
-.tiktok-sound    { color: rgba(255,255,255,0.65); font-size: 13px; display: flex; align-items: center; gap: 7px; }
+.tiktok-username { color: #fff; font-weight: 700; font-size: 15px; margin-bottom: 6px; font-family: sans-serif; }
+.tiktok-desc     { color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.5; margin-bottom: 8px; font-family: sans-serif; }
+.tiktok-sound    { color: rgba(255,255,255,0.65); font-size: 12px; display: flex; align-items: center; gap: 7px; font-family: sans-serif; }
 .sound-dot {
   width: 16px; height: 16px; background: rgba(255,255,255,0.2);
   border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 9px;
 }
 
-/* ── Side action buttons ── */
 .tiktok-actions {
-  position: absolute; right: 12px; bottom: 98px;
+  position: absolute; right: 10px; bottom: 98px;
   display: flex; flex-direction: column; align-items: center;
-  gap: 20px; z-index: 4;
+  gap: 18px; z-index: 4;
 }
 .action-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .action-icon {
   width: 44px; height: 44px;
   background: rgba(255,255,255,0.15); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
 }
-.action-count { color: rgba(255,255,255,0.9); font-size: 12px; font-weight: 700; }
+.action-count { color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700; font-family: sans-serif; }
 
-/* ── Bottom nav bar ── */
 .tiktok-bottom {
   position: absolute; bottom: 0; width: 100%;
   padding: 10px 18px 20px;
-  display: flex; justify-content: space-around;
-  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+  display: flex; justify-content: space-around; align-items: center;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
   z-index: 5;
 }
-.bottom-tab { display: flex; flex-direction: column; align-items: center; gap: 3px; color: rgba(255,255,255,0.55); font-size: 11px; font-weight: 600; }
+.bottom-tab {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 3px; color: rgba(255,255,255,0.55);
+  font-size: 10px; font-weight: 600; font-family: sans-serif;
+}
 .bottom-tab.active { color: #fff; }
-.bottom-icon { font-size: 22px; line-height: 1; }
+.bottom-tab svg { display: block; }
 
-/* ── Scroll dots ── */
 .tiktok-dots {
   position: absolute; right: 16px; top: 50%;
   transform: translateY(-50%);
@@ -230,13 +204,11 @@ body, .lesson-page {
 .scroll-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.3); border-radius: 50%; }
 .scroll-dot.active { background: #fff; height: 14px; border-radius: 2px; }
 
-/* ── Swipe hint ── */
 .swipe-note { color: #4a3f32; max-width: 160px; padding-top: 50px; }
-.swipe-note h4 { font-weight: 800; margin-bottom: 8px; color: #1a1a18; font-size: 16px; }
+.swipe-note h4 { font-weight: 800; margin-bottom: 8px; color: #1a1a18; font-size: 16px; font-family: 'DM Sans', sans-serif; }
 .swipe-note p  { color: #a89880; line-height: 1.5; font-size: 14px; margin: 0; }
 .swipe-arrow   { font-size: 30px; color: #a89880; margin-top: 12px; }
 
-/* ── Signal cards (three_signals / recap) ── */
 .signal-card-teal   { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 14px; }
 .signal-card-yellow { background: #fffbeb; border: 1px solid #fde68a; border-radius: 14px; }
 .signal-card-red    { background: #fff1f2; border: 1px solid #fecdd3; border-radius: 14px; }
@@ -244,21 +216,13 @@ body, .lesson-page {
 .badge-yellow { background: #fef9c3; color: #854d0e; border-radius: 99px; padding: 3px 12px; font-size: 0.78rem; font-weight: 600; }
 .badge-red    { background: #fee2e2; color: #991b1b; border-radius: 99px; padding: 3px 12px; font-size: 0.78rem; font-weight: 600; }
 
-/* ── Comparison cards ── */
 .good-card   { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; }
 .good-header { padding: 14px 20px; border-bottom: 1px solid #bbf7d0; }
 .bad-card    { background: #fff1f2; border: 1px solid #fecdd3; border-radius: 14px; }
 .bad-header  { padding: 14px 20px; border-bottom: 1px solid #fecdd3; }
 
-/* ── Annotations (fallback) ── */
-.ann-teal   { background: #f0f9ff; border-left: 3px solid #38bdf8; padding: 14px; margin-bottom: 12px; }
-.ann-yellow { background: #fffbeb; border-left: 3px solid #fbbf24; padding: 14px; margin-bottom: 12px; }
-.ann-red    { background: #fff1f2; border-left: 3px solid #f87171; padding: 14px; margin-bottom: 12px; }
-
-/* ── Footnote ── */
 .footnote-bar { background: #faf8f3; border: 1px solid #ddd8cc; border-radius: 10px; padding: 1rem; margin-top: 1rem; }
 
-/* ── Nav buttons ── */
 .btn-outline-secondary {
   background: transparent !important; border: 1.5px solid #a89880 !important;
   color: #4a3f32 !important; border-radius: 8px !important;
@@ -270,11 +234,6 @@ body, .lesson-page {
 }
 .btn-primary:hover { background: #2c2c2a !important; }
 
-/* ══════════════════════════════════════════
-   TAP-TO-REVEAL — signal_detail interactive
-   ══════════════════════════════════════════ */
-
-/* Post bubble */
 .tap-post-wrap {
   background: #faf8f3;
   border: 1px solid #ddd8cc;
@@ -282,10 +241,7 @@ body, .lesson-page {
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   padding: 24px;
 }
-.tap-post-handle {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 16px;
-}
+.tap-post-handle { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .tap-post-avatar {
   width: 34px; height: 34px; border-radius: 50%;
   background: #ece8e0; border: 1px solid #ddd8cc;
@@ -293,98 +249,57 @@ body, .lesson-page {
   font-size: 13px; font-weight: 600; color: #6b5f4e;
 }
 .tap-post-username { color: #a89880; font-size: 0.85rem; }
-.tap-post-text {
-  font-size: 1rem; color: #1a1a18; line-height: 1.7;
-}
+.tap-post-text { font-size: 1rem; color: #1a1a18; line-height: 1.7; }
 
-/* Hotspot words */
 .hot-word {
-  display: inline;
-  border-radius: 4px;
-  padding: 1px 4px;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  display: inline; border-radius: 4px; padding: 1px 4px;
+  cursor: pointer; transition: background 0.15s, color 0.15s;
   border-bottom: 2px dashed #c5b99a;
-  font-weight: 600;
-  color: #1a1a18;
-  position: relative;
+  font-weight: 600; color: #1a1a18; position: relative;
 }
-.hot-word:hover {
-  background: #ece8e0;
-}
+.hot-word:hover { background: #ece8e0; }
 .hot-word.found-red    { background: #fee2e2; color: #991b1b; border-bottom-color: #f87171; }
 .hot-word.found-yellow { background: #fef9c3; color: #854d0e; border-bottom-color: #fbbf24; }
 .hot-word.found-teal   { background: #e0f2fe; color: #0369a1; border-bottom-color: #38bdf8; }
 
-/* Counter hint */
-.tap-hint-row {
-  display: flex; align-items: center; gap: 8px;
-  margin-top: 16px;
-  font-size: 0.8rem; color: #a89880;
-}
+.tap-hint-row { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 0.8rem; color: #a89880; }
 .hint-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: #c5b99a;
+  width: 7px; height: 7px; border-radius: 50%; background: #c5b99a;
   animation: blink 1.6s ease-in-out infinite;
 }
 @keyframes blink { 0%,100%{opacity:0.3} 50%{opacity:1} }
 
-/* Finding cards */
-.findings-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.findings-grid { display: flex; flex-direction: column; gap: 12px; }
 .finding-card {
-  border-radius: 12px;
-  border: 1px solid #ddd8cc;
-  background: #ece8e0;
-  padding: 16px 18px;
-  opacity: 0.25;
+  border-radius: 12px; border: 1px solid #ddd8cc; background: #ece8e0;
+  padding: 16px 18px; opacity: 0.25;
   transform: translateY(6px) scale(0.98);
   transition: opacity 0.35s cubic-bezier(0.34,1.4,0.64,1),
               transform 0.35s cubic-bezier(0.34,1.4,0.64,1),
               background 0.2s, border-color 0.2s;
   pointer-events: none;
 }
-.finding-card.revealed {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
+.finding-card.revealed { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
 .finding-card.color-red    { background: #fff1f2; border-color: #fecdd3; }
 .finding-card.color-yellow { background: #fffbeb; border-color: #fde68a; }
 .finding-card.color-teal   { background: #f0f9ff; border-color: #bae6fd; }
 
 .finding-icon  { font-size: 20px; margin-bottom: 6px; display: block; }
-.finding-title {
-  font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;
-}
+.finding-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
 .color-red    .finding-title { color: #991b1b; }
 .color-yellow .finding-title { color: #854d0e; }
 .color-teal   .finding-title { color: #0369a1; }
-
-.finding-body {
-  font-size: 0.8rem; line-height: 1.6; margin: 0;
-}
+.finding-body { font-size: 0.8rem; line-height: 1.6; margin: 0; }
 .color-red    .finding-body { color: #b91c1c; }
 .color-yellow .finding-body { color: #92400e; }
 .color-teal   .finding-body { color: #0369a1; }
 
-/* All-found banner */
 .all-found-banner {
-  margin-top: 16px;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 0.85rem;
-  color: #15803d;
-  font-weight: 600;
+  margin-top: 16px; background: #f0fdf4; border: 1px solid #bbf7d0;
+  border-radius: 10px; padding: 12px 16px;
+  font-size: 0.85rem; color: #15803d; font-weight: 600;
   display: flex; align-items: center; gap: 8px;
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
+  opacity: 0; transition: opacity 0.4s; pointer-events: none;
 }
 .all-found-banner.show { opacity: 1; }
 
@@ -412,15 +327,14 @@ body, .lesson-page {
 
 
 {% if lesson.type == "scenario" %}
-<!-- ═══════════ SCENARIO ═══════════ -->
 <div class="scenario-layout">
   <div class="scenario-left">
     <div class="mission-card">
-      <div class="mission-title">✪ Your mission</div>
+      <div class="mission-title">Your mission</div>
       <p class="mission-main">You're scrolling TikTok and stop on this post.</p>
       <p class="mission-sub">It claims ashwagandha is guaranteed to boost your focus.</p>
       <p class="mission-question">Before you buy, what should you check first?</p>
-      <p class="mission-sub">Scroll inside the phone to compare more posts.</p>
+      <p class="mission-sub" style="margin-bottom:0;">Scroll inside the phone to compare more posts.</p>
     </div>
   </div>
 
@@ -430,6 +344,7 @@ body, .lesson-page {
         <div class="phone-notch"></div>
         <div class="tiktok-screen">
           <div class="tiktok-feed">
+
             <!-- Post 1 -->
             <div class="tiktok-post">
               <div class="tiktok-topbar">
@@ -438,20 +353,32 @@ body, .lesson-page {
               </div>
               <div class="tiktok-video-text">
                 <h2>ASHWAGANDHA</h2>
-                <h3>The Natural Way to Better Focus 🌿</h3>
+                <h3>The Natural Way to Better Focus</h3>
               </div>
               <div class="bottle">
                 <div class="bottle-label">Organic<br>ASHWA-<br>GANDHA</div>
               </div>
               <div class="tiktok-actions">
-                <div class="action-btn"><div class="action-icon">❤️</div><span class="action-count">12.6K</span></div>
-                <div class="action-btn"><div class="action-icon">💬</div><span class="action-count">342</span></div>
-                <div class="action-btn"><div class="action-icon">🔖</div><span class="action-count">2.1K</span></div>
-                <div class="action-btn"><div class="action-icon">↗</div><span class="action-count">880</span></div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                  <span class="action-count">12.6K</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+                  <span class="action-count">342</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                  <span class="action-count">2.1K</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div>
+                  <span class="action-count">880</span>
+                </div>
               </div>
               <div class="tiktok-content">
                 <div class="tiktok-username">{{ lesson.post.username }}</div>
-                <div class="tiktok-desc">Ashwagandha is GUARANTEED to improve your focus, attention, and clarity! Try it today 🌿</div>
+                <div class="tiktok-desc">Ashwagandha is GUARANTEED to improve your focus, attention, and clarity! Try it today</div>
                 <div class="tiktok-sound"><span class="sound-dot">♫</span> Original sound - healthadvice</div>
               </div>
               <div class="tiktok-dots">
@@ -460,13 +387,30 @@ body, .lesson-page {
                 <div class="scroll-dot"></div>
               </div>
               <div class="tiktok-bottom">
-                <div class="bottom-tab active"><span class="bottom-icon">⌂</span>Home</div>
-                <div class="bottom-tab"><span class="bottom-icon">👥</span>Friends</div>
-                <div class="bottom-tab"><span class="bottom-icon" style="font-size:28px;color:#fff;">⊕</span></div>
-                <div class="bottom-tab"><span class="bottom-icon">✉</span>Inbox</div>
-                <div class="bottom-tab"><span class="bottom-icon">☰</span>Profile</div>
+                <div class="bottom-tab active">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                  <span>Home</span>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                  <span>Friends</span>
+                </div>
+                <div class="bottom-tab">
+                  <div style="width:42px;height:28px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                  </div>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                  <span>Inbox</span>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  <span>Profile</span>
+                </div>
               </div>
             </div>
+
             <!-- Post 2 -->
             <div class="tiktok-post post-two">
               <div class="tiktok-topbar">
@@ -478,10 +422,22 @@ body, .lesson-page {
                 <h3>One pill replaces anxiety medicine?</h3>
               </div>
               <div class="tiktok-actions">
-                <div class="action-btn"><div class="action-icon">❤️</div><span class="action-count">8.4K</span></div>
-                <div class="action-btn"><div class="action-icon">💬</div><span class="action-count">510</span></div>
-                <div class="action-btn"><div class="action-icon">🔖</div><span class="action-count">1.8K</span></div>
-                <div class="action-btn"><div class="action-icon">↗</div><span class="action-count">620</span></div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                  <span class="action-count">8.4K</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+                  <span class="action-count">510</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                  <span class="action-count">1.8K</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div>
+                  <span class="action-count">620</span>
+                </div>
               </div>
               <div class="tiktok-content">
                 <div class="tiktok-username">@wellnessdaily</div>
@@ -494,13 +450,30 @@ body, .lesson-page {
                 <div class="scroll-dot"></div>
               </div>
               <div class="tiktok-bottom">
-                <div class="bottom-tab active"><span class="bottom-icon">⌂</span>Home</div>
-                <div class="bottom-tab"><span class="bottom-icon">👥</span>Friends</div>
-                <div class="bottom-tab"><span class="bottom-icon" style="font-size:28px;color:#fff;">⊕</span></div>
-                <div class="bottom-tab"><span class="bottom-icon">✉</span>Inbox</div>
-                <div class="bottom-tab"><span class="bottom-icon">☰</span>Profile</div>
+                <div class="bottom-tab active">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                  <span>Home</span>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                  <span>Friends</span>
+                </div>
+                <div class="bottom-tab">
+                  <div style="width:42px;height:28px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                  </div>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                  <span>Inbox</span>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  <span>Profile</span>
+                </div>
               </div>
             </div>
+
             <!-- Post 3 -->
             <div class="tiktok-post post-three">
               <div class="tiktok-topbar">
@@ -509,13 +482,25 @@ body, .lesson-page {
               </div>
               <div class="tiktok-video-text">
                 <h2>DETOX DRINK</h2>
-                <h3>Burn fat while you sleep? 🔥</h3>
+                <h3>Burn fat while you sleep?</h3>
               </div>
               <div class="tiktok-actions">
-                <div class="action-btn"><div class="action-icon">❤️</div><span class="action-count">15.1K</span></div>
-                <div class="action-btn"><div class="action-icon">💬</div><span class="action-count">711</span></div>
-                <div class="action-btn"><div class="action-icon">🔖</div><span class="action-count">4.2K</span></div>
-                <div class="action-btn"><div class="action-icon">↗</div><span class="action-count">990</span></div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                  <span class="action-count">15.1K</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+                  <span class="action-count">711</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg></div>
+                  <span class="action-count">4.2K</span>
+                </div>
+                <div class="action-btn">
+                  <div class="action-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></div>
+                  <span class="action-count">990</span>
+                </div>
               </div>
               <div class="tiktok-content">
                 <div class="tiktok-username">@fitcleanse</div>
@@ -528,13 +513,30 @@ body, .lesson-page {
                 <div class="scroll-dot active"></div>
               </div>
               <div class="tiktok-bottom">
-                <div class="bottom-tab active"><span class="bottom-icon">⌂</span>Home</div>
-                <div class="bottom-tab"><span class="bottom-icon">👥</span>Friends</div>
-                <div class="bottom-tab"><span class="bottom-icon" style="font-size:28px;color:#fff;">⊕</span></div>
-                <div class="bottom-tab"><span class="bottom-icon">✉</span>Inbox</div>
-                <div class="bottom-tab"><span class="bottom-icon">☰</span>Profile</div>
+                <div class="bottom-tab active">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                  <span>Home</span>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                  <span>Friends</span>
+                </div>
+                <div class="bottom-tab">
+                  <div style="width:42px;height:28px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                  </div>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                  <span>Inbox</span>
+                </div>
+                <div class="bottom-tab">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255,255,255,0.5)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                  <span>Profile</span>
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -549,7 +551,6 @@ body, .lesson-page {
 
 
 {% elif lesson.type in ["three_signals", "recap"] %}
-<!-- ═══════════ THREE SIGNALS / RECAP ═══════════ -->
 {% set badge_classes = {"teal": "badge-teal", "yellow": "badge-yellow", "red": "badge-red"} %}
 {% set card_classes  = {"teal": "signal-card-teal", "yellow": "signal-card-yellow", "red": "signal-card-red"} %}
 {% set name_colors   = {"teal": "#0369a1", "yellow": "#854d0e", "red": "#991b1b"} %}
@@ -574,7 +575,6 @@ body, .lesson-page {
 
 
 {% elif lesson.type == "comparison" %}
-<!-- ═══════════ COMPARISON ═══════════ -->
 {% if lesson.subtitle %}
 <p style="color:#1a1a18; font-size:1.1rem; margin-bottom:1.5rem;">{{ lesson.subtitle }}</p>
 {% endif %}
@@ -622,14 +622,11 @@ body, .lesson-page {
 
 
 {% elif lesson.type == "signal_detail" %}
-<!-- ═══════════ SIGNAL DETAIL — TAP TO REVEAL ═══════════ -->
 <p style="color:#a89880; font-size:0.88rem; margin-bottom:1.5rem;">
   Tap the <strong style="color:#1a1a18;">suspicious words</strong> in the post to uncover what's wrong.
 </p>
 
 <div class="row g-4 align-items-start">
-
-  <!-- Left: post with tappable hotspots -->
   <div class="col-md-6">
     <div class="tap-post-wrap">
       <div class="tap-post-handle">
@@ -638,19 +635,6 @@ body, .lesson-page {
         </div>
         <span class="tap-post-username">{{ lesson.post.username }}</span>
       </div>
-
-      {#
-        Post body is stored as an array of segments in lessons.json:
-        "segments": [
-          {"text": "Ashwagandha is "},
-          {"text": "GUARANTEED", "key": "guaranteed", "color": "red"},
-          {"text": " to improve your focus. Studies "},
-          {"text": "have shown", "key": "shown", "color": "teal"},
-          {"text": " it works — "},
-          {"text": "doctors don't want you to know", "key": "doctors", "color": "yellow"},
-          {"text": ". Buy now ↓"}
-        ]
-      #}
       <div class="tap-post-text" id="tap-post-text">
         {% for seg in lesson.post.segments %}
           {% if seg.key is defined %}
@@ -660,15 +644,12 @@ body, .lesson-page {
           {% endif %}
         {% endfor %}
       </div>
-
       <div class="tap-hint-row" id="tap-hint">
         <div class="hint-dot"></div>
         <span id="hint-text">{{ lesson.annotations | length }} things to find</span>
       </div>
     </div>
   </div>
-
-  <!-- Right: finding cards, revealed one by one -->
   <div class="col-md-6">
     <div class="findings-grid">
       {% for ann in lesson.annotations %}
@@ -679,29 +660,23 @@ body, .lesson-page {
       </div>
       {% endfor %}
     </div>
-
     <div class="all-found-banner" id="all-found-banner">
-      ✓ Nice — you found everything. You're already thinking like a fact-checker.
+      Nice — you found everything. You're already thinking like a fact-checker.
     </div>
   </div>
-
 </div>
 
 <script>
   const total = {{ lesson.annotations | length }};
   const found = new Set();
-
   function tapWord(el) {
     const key   = el.dataset.key;
     const color = el.dataset.color;
     if (found.has(key)) return;
     found.add(key);
-
     el.classList.add('found-' + color);
-
     const card = document.getElementById('finding-' + key);
     if (card) card.classList.add('revealed');
-
     const remaining = total - found.size;
     const hint = document.getElementById('hint-text');
     if (remaining > 0) {
@@ -715,14 +690,12 @@ body, .lesson-page {
 
 
 {% else %}
-<!-- ═══════════ UNKNOWN TYPE FALLBACK ═══════════ -->
 <div style="background:#faf8f3; border:1px solid #ddd8cc; border-radius:10px; padding:1rem;">
   <p style="color:#a89880; margin:0;">Lesson type: <code>{{ lesson.type }}</code></p>
 </div>
 {% endif %}
 
 
-<!-- Nav -->
 <div class="d-flex justify-content-between mt-5">
   <a href="{{ prev_url }}" class="btn btn-outline-secondary px-4">← Previous</a>
   <a href="{{ next_url }}" class="btn btn-primary px-4">

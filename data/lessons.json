@@ -53,32 +53,31 @@
           {"text": "has been shown", "key": "shown", "color": "red"},
           {"text": " to improve your focus, attention, and clarity. It is "},
           {"text": "GUARANTEED", "key": "guaranteed", "color": "yellow"},
-          {"text": " to work — "},
-          {"text": "try it today", "key": "try", "color": "teal"},
-          {"text": " 🌿"}
+          {"text": " to work. "},
+          {"text": "try it today", "key": "try", "color": "teal"}
         ]
       },
       "annotations": [
         {
           "key": "shown",
           "color": "red",
-          "icon": "🔍",
+          "icon": "",
           "title": "No source mentioned",
-          "body": "'Has been shown' — ask yourself: by whom? Which study? Without a linked source, this is an opinion presented as fact."
+          "body": "'Has been shown' means nothing without a link. By whom? Which study? This is an opinion presented as fact."
         },
         {
           "key": "try",
           "color": "teal",
-          "icon": "🔗",
+          "icon": "",
           "title": "What to look for instead",
-          "body": "A clickable DOI link (e.g. doi.org/...) or a PubMed ID. Journal name + author names alone are not enough — they can be fabricated."
+          "body": "A clickable DOI link (e.g. doi.org/...) or a PubMed ID. Journal name and author names alone are not enough."
         },
         {
           "key": "guaranteed",
           "color": "yellow",
-          "icon": "⚠️",
+          "icon": "",
           "title": "Also notice the language",
-          "body": "'GUARANTEED' is problematic language; no health supplement can guarantee outcomes. This is overclaiming."
+          "body": "'GUARANTEED' is problematic. No health supplement can guarantee outcomes. This is overclaiming."
         }
       ]
     },
@@ -91,7 +90,7 @@
         "username": "@journalofhealth",
         "citation": "Nutrients. 2024 Jun 8;16(12):1813. doi: 10.3390/nu16121813",
         "study_title": "Acute and Repeated Ashwagandha Supplementation Improves Markers of Cognitive Function and Mood",
-        "authors": "— Megan Leonard et al.",
+        "authors": "Megan Leonard et al.",
         "quote": "Research suggests ashwagandha may support focus in some adults.",
         "checks": [
           "Peer-reviewed journal linked",
@@ -119,35 +118,35 @@
       "post": {
         "username": "@vitamin&co",
         "segments": [
-          {"text": "Nutrients. 2024 — Acute and Repeated Ashwagandha Supplementation ["},
+          {"text": "Nutrients. 2024. Acute and Repeated Ashwagandha Supplementation ["},
           {"text": "doi link shown", "key": "doi", "color": "teal"},
           {"text": "]. Research "},
           {"text": "may support", "key": "maysupport", "color": "teal"},
           {"text": " focus in some adults. Come to our "},
           {"text": "@vitamin&co store", "key": "company", "color": "red"},
-          {"text": " — or order online!"}
+          {"text": " or order online!"}
         ]
       },
       "annotations": [
         {
           "key": "doi",
           "color": "teal",
-          "icon": "✅",
+          "icon": "",
           "title": "Has a real journal citation with DOI",
           "body": "The source here is actually verifiable."
         },
         {
           "key": "maysupport",
           "color": "teal",
-          "icon": "✅",
+          "icon": "",
           "title": "Uses hedged language ('may support')",
           "body": "The wording matches how science actually talks."
         },
         {
           "key": "company",
           "color": "red",
-          "icon": "🚩",
-          "title": "Poster is a supplement company — direct financial interest",
+          "icon": "",
+          "title": "Poster is a supplement company with direct financial interest",
           "body": "Even accurate citations can be used selectively by a biased source. Ask: does the poster have a financial stake in what you believe?"
         }
       ]
@@ -173,7 +172,7 @@
           "number": 3,
           "name": "Poster Signal",
           "color": "red",
-          "body": "Who's posting matters. A supplement seller, an anonymous wellness account, or a user with no institutional affiliation all warrant skepticism — even when they cite real studies."
+          "body": "Who's posting matters. A supplement seller, an anonymous wellness account, or a user with no institutional affiliation all warrant skepticism, even when they cite real studies."
         }
       ],
       "footnote": "Next time a health post stops your scroll, run the 3 signals before you believe it, share it, or buy it.",
