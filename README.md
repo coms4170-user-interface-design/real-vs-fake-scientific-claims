@@ -4,6 +4,13 @@ A short interactive lesson + quiz that teaches how to spot misleading scientific
 
 Flask backend + HTML/Bootstrap/jQuery/JS frontend. Content is data-driven from JSON files.
 
+# Team Members
+
+- Siara Chowdhury — [@siara550](https://github.com/siara550)
+- Sharika Khaton — [@Skhaton23](https://github.com/Skhaton23)
+- Sumaiyah Rahman — [@sumaiyahr2004](https://github.com/sumaiyahr2004)
+- Mei Zhu — [@itsmeicode](https://github.com/itsmeicode)
+
 ## Run locally
 
 Requires Python 3.10+.
