@@ -177,8 +177,8 @@
   }
 
   .phone {
-    width: 320px;
-    height: 620px;
+    width: 340px;
+    height: 660px;
     background: #1a1a1a;
     border-radius: 60px;
     padding: 14px;
@@ -254,7 +254,7 @@
   }
 
   .screen-body {
-    padding: 12px 16px;
+    padding: 12px 20px 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -262,7 +262,6 @@
     overflow: hidden;
   }
 
-  /* ── Fixed: removed flex:1 so cards hug their content ── */
   .post-card {
     background: var(--cream);
     border-radius: 14px;
@@ -287,6 +286,7 @@
     color: #555;
     line-height: 1.45;
     margin-bottom: 10px;
+    flex: 1;
   }
 
   .badge {
@@ -298,6 +298,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     align-self: flex-start;
+    margin-top: auto;
   }
 
   .badge.bad  { color: #a63228; background: #f5e8e7; }
@@ -399,7 +400,7 @@
           </div>
           <div class="post-card">
             <div class="post-meta">Post · Nutrition</div>
-            <div style="background: #f5f5f5; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; border: 1px solid #e0e0e0;">
+            <div style="background: #f5f5f5; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; border: 1px solid #e0e0e0; flex-shrink: 0;">
               <div style="width: 28px; height: 28px; background: #003366; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                 <span style="color: white; font-size: 8px; font-weight: 900; letter-spacing: -0.5px;">C</span>
               </div>
@@ -412,6 +413,7 @@
             <span class="badge good">Credible</span>
           </div>
         </div>
+
       </div>
     </div>
   </div>
