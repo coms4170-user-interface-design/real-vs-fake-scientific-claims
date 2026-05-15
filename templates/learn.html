@@ -593,11 +593,15 @@ body, .lesson-page {
         <span style="color:#16a34a; font-weight:700;">&#10003; {{ lesson.good.username }}</span>
       </div>
       <div class="p-4">
-        <div style="font-size:0.78rem; color:#a89880; margin-bottom:0.25rem;">{{ lesson.good.citation }}</div>
-        <div style="font-weight:600; margin-bottom:0.25rem; color:#1a1a18;">{{ lesson.good.study_title }}</div>
-        {% if lesson.good.authors %}
-        <div style="font-size:0.8rem; color:#a89880; margin-bottom:1rem;">{{ lesson.good.authors }}</div>
-        {% endif %}
+        <a href="{{ lesson.good.source_url }}" target="_blank" rel="noopener"
+           class="source-pill d-inline-flex align-items-center gap-2 mb-3"
+           style="background:#dcfce7; border:1px solid #86efac; color:#166534;
+                  padding:6px 12px; border-radius:999px; font-size:0.82rem;
+                  font-weight:600; text-decoration:none;">
+          <span aria-hidden="true">&#128196;</span>
+          <span>{{ lesson.good.source_name }}</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
         <blockquote class="fst-italic ps-3 mb-3" style="border-left:3px solid #86efac !important; color:#6b5f4e !important;">{{ lesson.good.quote }}</blockquote>
         <ul class="list-unstyled mb-0">
           {% for check in lesson.good.checks %}
@@ -613,10 +617,15 @@ body, .lesson-page {
         <span style="color:#dc2626; font-weight:700;">&#10007; {{ lesson.bad.username }}</span>
       </div>
       <div class="p-4">
-        <div style="font-weight:600; margin-bottom:0.25rem; color:#1a1a18;">{{ lesson.bad.citation }}</div>
-        {% if lesson.bad.study_title %}
-        <div style="font-size:0.8rem; color:#a89880; margin-bottom:1rem;">{{ lesson.bad.study_title }}</div>
-        {% endif %}
+        <a href="{{ lesson.bad.source_url }}"
+           class="source-pill d-inline-flex align-items-center gap-2 mb-3"
+           style="background:#fee2e2; border:1px solid #fca5a5; color:#991b1b;
+                  padding:6px 12px; border-radius:999px; font-size:0.82rem;
+                  font-weight:600; text-decoration:none;">
+          <span aria-hidden="true">&#128241;</span>
+          <span>{{ lesson.bad.source_name }}</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
         <blockquote class="fst-italic ps-3 mb-3" style="border-left:3px solid #fca5a5 !important; color:#6b5f4e !important;">{{ lesson.bad.quote }}</blockquote>
         <ul class="list-unstyled mb-0">
           {% for check in lesson.bad.checks %}
