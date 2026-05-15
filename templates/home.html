@@ -91,6 +91,7 @@
     margin-bottom: 28px;
   }
 
+
   .hero-title em {
     font-style: italic;
     color: var(--blue);
@@ -177,8 +178,8 @@
   }
 
   .phone {
-    width: 340px;
-    height: 660px;
+    width: 320px;
+    height: 620px;
     background: #1a1a1a;
     border-radius: 60px;
     padding: 14px;
@@ -201,12 +202,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 24px 4px;
+    padding: 16px 24px 4px;
     flex-shrink: 0;
   }
 
   .status-time {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--ink);
   }
@@ -226,23 +227,23 @@
   }
 
   .screen-header {
-    padding: 10px 22px 14px;
+    padding: 16px 28px 22px;
     border-bottom: 1px solid var(--tan-light);
     flex-shrink: 0;
   }
 
   .screen-eyebrow {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--tan);
-    margin-bottom: 6px;
+    margin-bottom: 10px;
   }
 
   .screen-title {
     font-family: 'Fraunces', serif;
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 300;
     color: var(--ink);
     line-height: 1.2;
@@ -254,58 +255,59 @@
   }
 
   .screen-body {
-    padding: 12px 20px 20px;
+    padding: 20px 22px;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    overflow: hidden;
+    gap: 14px;
   }
 
   .post-card {
     background: var(--cream);
-    border-radius: 14px;
-    padding: 12px 14px;
+    border-radius: 18px;
+    padding: 18px 20px;
     border: 1px solid var(--tan-light);
+    flex: 1;
     display: flex;
     flex-direction: column;
   }
 
+  .post-card .post-text {
+    flex: 1;
+  }
+
   .post-meta {
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 400;
     color: var(--tan);
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   .post-text {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 300;
     color: #555;
-    line-height: 1.45;
-    margin-bottom: 10px;
-    flex: 1;
+    line-height: 1.55;
+    margin-bottom: 14px;
   }
 
   .badge {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     border-radius: 100px;
-    padding: 5px 12px;
+    padding: 6px 14px;
     display: inline-block;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    align-self: flex-start;
-    margin-top: auto;
   }
 
   .badge.bad  { color: #a63228; background: #f5e8e7; }
   .badge.good { color: #1f6b42; background: #e6f2ec; }
 
   .screen-footer {
-    padding: 10px 18px 22px;
+    padding: 14px 18px 26px;
     border-top: 1px solid var(--tan-light);
     flex-shrink: 0;
   }
@@ -352,7 +354,8 @@
       Can you spot a <em>fake</em><br>scientific claim?
     </h1>
     <p class="hero-sub">
-      Health misinformation is everywhere. Learn three signals that separate real science from noise in under 8 minutes.
+      Health misinformation is everywhere. Learn three signals that 
+separate real science from misinformation.
     </p>
     <div class="hero-btns">
       <form action="/start" method="post" style="display:inline;">
@@ -395,25 +398,17 @@
         <div class="screen-body">
           <div class="post-card">
             <div class="post-meta">Post · Health news</div>
-            <div class="post-text">"Scientists confirm sugar causes hyperactivity in children — new study"</div>
+            <div class="post-text">"Scientists confirm sugar causes 
+hyperactivity in children in a groundbreaking new study"</div>
             <span class="badge bad">Misleading source</span>
           </div>
           <div class="post-card">
             <div class="post-meta">Post · Nutrition</div>
-            <div style="background: #f5f5f5; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; border: 1px solid #e0e0e0; flex-shrink: 0;">
-              <div style="width: 28px; height: 28px; background: #003366; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <span style="color: white; font-size: 8px; font-weight: 900; letter-spacing: -0.5px;">C</span>
-              </div>
-              <div>
-                <div style="font-size: 9px; font-weight: 700; color: #1a1a18; letter-spacing: 0.02em;">Cochrane Library</div>
-                <div style="font-size: 8px; color: #a89880; margin-top: 1px;">doi.org/10.1002/14651858</div>
-              </div>
-            </div>
-            <div class="post-text">"Vitamin C supplements reduce cold duration, peer-reviewed meta-analysis"</div>
+            <div class="post-text">"Vitamin C supplements reduce cold 
+duration, according to peer-reviewed meta-analysis conducted at Stanford Medicine"</div>
             <span class="badge good">Credible</span>
           </div>
         </div>
-
       </div>
     </div>
   </div>

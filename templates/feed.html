@@ -52,7 +52,11 @@ data-lesson-id="{{ q.lesson_id }}">
 <div class="avatar-circle"></div>
 <div class="fw-bold">{{ q.post.username }}</div>
 </header>
+{% if q.post.image_url %}
+<img src="{{ q.post.image_url }}" alt="{{ q.post.image_caption }}" style="width:100%; border-radius:8px; margin-bottom:8px;">
+{% else %}
 <div class="image-caption">{{ q.post.image_caption }}</div>
+{% endif %}
 <div class="post-headline">{{ q.post.headline }}</div>
 <div class="post-body">{{ q.post.body }}</div>
 <div class="card-actions">

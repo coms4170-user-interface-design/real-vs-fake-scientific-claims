@@ -141,7 +141,7 @@
   	{"text": "Repeated", "key": "w5", "color": null},
   	{"text": "Ashwagandha", "key": "w6", "color": null},
   	{"text": "Supplementation", "key": "w7", "color": null},
-  	{"text": "doi link shown", "key": "doi", "color": "teal"},
+  	{"text": "[https://www.mdpi.com/2072-6643/16/12/1813]", "key": "doi", "color": "teal"},
   	{"text": "Research", "key": "w10", "color": null},
   	{"text": "may support", "key": "maysupport", "color": "teal"},
   	{"text": "focus", "key": "w11", "color": null},

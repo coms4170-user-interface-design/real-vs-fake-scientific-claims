@@ -3,43 +3,43 @@
     {
       "id": 1,
       "type": "click_flag",
-      "prompt": "Click every red flag in this post, then submit.",
+      "prompt": "Click on every word or phrase that is a red flag in this post, then submit.",
       "post": {
         "username": "@healthguru",
         "image_caption": "[yoga studio photo]",
         "headline_segments": [
-          {"type": "flag", "id": "h1", "value": "Ashwagandha", "is_red_flag": false, "why": "Just the subject; not a red flag."},
-          {"type": "flag", "id": "h2", "value": "is", "is_red_flag": false, "why": "Not a red flag."},
-          {"type": "flag", "id": "h3", "value": "GUARANTEED", "is_red_flag": true, "signal": "language", "why": "'Guaranteed' is an overclaim. No supplement can guarantee outcomes (Language signal)."},
-          {"type": "flag", "id": "h4", "value": "to improve your focus,", "is_red_flag": false, "why": "Not a red flag on its own."},
-          {"type": "flag", "id": "h5", "value": "attention,", "is_red_flag": false, "why": "Not a red flag."},
-          {"type": "flag", "id": "h6", "value": "and clarity of mind", "is_red_flag": false, "why": "Not a red flag."}
-        ],
-        "body_segments": [
-          {"type": "flag", "id": "b1", "value": "@healthguru:", "is_red_flag": false, "why": "Just the username."},
-          {"type": "flag", "id": "b2", "value": "Get in touch with your zen", "is_red_flag": false, "why": "Not a red flag."},
-          {"type": "flag", "id": "b3", "value": "by attending yoga classes", "is_red_flag": false, "why": "Not a red flag."},
-          {"type": "flag", "id": "b4", "value": "at our Queens location", "is_red_flag": false, "why": "Not a red flag."},
-          {"type": "flag", "id": "b5", "value": "and picking up some Ashwagandha supplements on your way out", "is_red_flag": true, "signal": "poster", "why": "@healthguru sells supplements from their yoga studio; there is a financial motive (Poster signal)."},
-          {"type": "flag", "id": "b6", "value": "Ashwagandha", "is_red_flag": false, "why": "Just naming the supplement, not a red flag."},
-          {"type": "flag", "id": "b7", "value": "has been shown", "is_red_flag": false, "why": "Vague sourcing, but the actual red flag is the missing DOI, not this phrase alone."},
-          {"type": "flag", "id": "b8", "value": "by the", "is_red_flag": false, "why": "Not a red flag."},
-          {"type": "flag", "id": "b9", "value": "Journal of Public Health", "is_red_flag": false, "why": "Naming a journal is not itself a red flag; the real issue is no DOI or link."},
-          {"type": "flag", "id": "b10", "value": "to improve focus.", "is_red_flag": false, "why": "Not a red flag."}
-        ]
+	  {"type": "flag", "id": "h1", "value": "Ashwagandha", "is_red_flag": false, "why": "Just the subject; not a red flag."},
+  	  {"type": "flag", "id": "h2", "value": "is", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "h3", "value": "GUARANTEED", "is_red_flag": true, "why": "'Guaranteed' is an overclaim. No supplement can guarantee outcomes (Language signal)."},
+  	  {"type": "flag", "id": "h4", "value": "to improve your focus,", "is_red_flag": false, "why": "Not a red flag on its own."},
+	  {"type": "flag", "id": "h5", "value": "attention,", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "h6", "value": "and clarity of mind", "is_red_flag": false, "why": "Not a red flag."}
+	],
+	"body_segments": [
+ 	  {"type": "flag", "id": "b1", "value": "@healthguru:", "is_red_flag": false, "why": "Just the username."},
+  	  {"type": "flag", "id": "b2", "value": "Get in touch with your zen", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "b3", "value": "by attending yoga classes", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "b4", "value": "at our Queens location", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "b5", "value": "and picking up some Ashwagandha supplements on your way out", "is_red_flag": true, "why": "@healthguru sells supplements from their yoga studio; there is a financial motive (Poster signal)."},
+  	  {"type": "flag", "id": "b6", "value": "Ashwagandha", "is_red_flag": 	false, "why": "Just naming the supplement — not a red flag."},
+  	  {"type": "flag", "id": "b7", "value": "has been shown", "is_red_flag": false, "why": "Vague sourcing, but the actual red flag in this question is the missing DOI, not this phrase alone."},
+  	  {"type": "flag", "id": "b8", "value": "by the", "is_red_flag": false, "why": "Not a red flag."},
+  	  {"type": "flag", "id": "b9", "value": "Journal of Public Health", "is_red_flag": false, "why": "Naming a journal isn't itself a red flag; the real issue is no DOI or link."},
+	  {"type": "flag", "id": "b10", "value": "to improve focus.", "is_red_flag": false, "why": "Not a red flag."}
+	]
       },
       "correct_ids": ["h3", "b5"],
-      "explanation": "'GUARANTEED' is an overclaim (Language signal), and the yoga-studio-selling-supplements framing is a financial conflict of interest (Poster signal). Naming the Journal of Public Health is not itself a red flag.",
+      "explanation": "'GUARANTEED' is an overclaim (Language signal), and the yoga-studio-selling-supplements framing is a financial conflict of interest (Poster signal). Naming the Journal of Public Health isn't itself a red flag \u2014 the real issue is that no DOI or link is provided.",
       "lesson_id": 3
     },
     {
       "id": 2,
       "type": "drag_bucket",
-      "prompt": "Drag each element into the correct signal bucket.",
+      "prompt": "Drag each element of this post into the correct signal bucket.",
       "post": {
         "username": "@healthnut",
         "image_caption": "[Screenshot of a PubMed-style study page]",
-        "study_preview": "Effects of Acute Ashwagandha Ingestion on Cognitive Function",
+        "study_preview": "Effects of Acute Ashwagandha Ingestion on Cognitive Function \u2014 Looks like an official study\u2026",
         "body": "Ashwagandha has been shown to improve your focus, attention, and clarity of mind. If you're struggling with attention or focus, ashwagandha might help."
       },
       "buckets": [
@@ -49,18 +49,18 @@
         {"id": "ok", "label": "Not a red flag", "color": "green"}
       ],
       "draggables": [
-        {"id": "d1", "text": "Study screenshot with no clickable DOI", "correct_bucket": "source", "why": "Screenshots can be faked. Without a DOI, it cannot be verified."},
-        {"id": "d2", "text": "\"has been shown to improve your focus\"", "correct_bucket": "language", "why": "'Has been shown' overclaims. Honest science says 'may support' or 'suggests'."},
-        {"id": "d3", "text": "\"ashwagandha might help\"", "correct_bucket": "ok", "why": "'Might help' is properly hedged language."},
-        {"id": "d4", "text": "Anonymous wellness handle @healthnut", "correct_bucket": "poster", "why": "No credentials or institutional affiliation."}
+        {"id": "d1", "text": "Study screenshot with no clickable DOI", "correct_bucket": "source", "why": "A screenshot can be fabricated, cropped, or outdated. Without a clickable DOI or PubMed ID, it cannot be verified."},
+        {"id": "d2", "text": "\"has been shown to improve your focus\"", "correct_bucket": "language", "why": "'Has been shown' is an overclaim compared to hedged wording like 'suggests' or 'may support'."},
+        {"id": "d3", "text": "\"ashwagandha might help\"", "correct_bucket": "ok", "why": "'Might help' is properly hedged language \u2014 that's how honest science actually talks."},
+        {"id": "d4", "text": "Anonymous wellness handle @healthnut", "correct_bucket": "poster", "why": "No institutional affiliation, no listed credentials. Anonymous wellness accounts warrant skepticism."}
       ],
-      "explanation": "A screenshot is not a verifiable source. Strong language and anonymous posters are red flags. Hedged language like 'might help' is fine.",
+      "explanation": "A screenshot is not the same as a verifiable source. Strong language and anonymous posters are red flags. Hedged language like 'might help' is fine.",
       "lesson_id": 2
     },
     {
       "id": 3,
       "type": "slider_justify",
-      "prompt": "Rate this post from Fake to Credible, then select every red flag.",
+      "prompt": "Rate this post from Fake to Credible, then select every signal that is a red flag.",
       "post": {
         "username": "@dr.wellness_official",
         "image_caption": "[professional headshot photo]",
@@ -75,13 +75,13 @@
         "correct_range": [0, 35]
       },
       "signals": [
-        {"id": "s1", "label": "Source: no study or journal linked", "is_red_flag": true, "signal": "source", "why": "No DOI, no journal, no study linked."},
-        {"id": "s2", "label": "Language: 'proven' and 'cures' are overclaims", "is_red_flag": true, "signal": "language", "why": "Science uses 'suggests' or 'may reduce risk', not 'proven' or 'cures'."},
-        {"id": "s3", "label": "Language: conspiracy framing ('doctors don't want you to know')", "is_red_flag": true, "signal": "language", "why": "Conspiracy framing is a manipulation tactic."},
-        {"id": "s4", "label": "Poster: 'dr.' in the username means this is a credible expert", "is_red_flag": false, "signal": "poster", "why": "Anyone can put 'dr.' in a handle. Check for institutional affiliation instead."}
+        {"id": "s1", "label": "Source: no study or journal linked", "is_red_flag": true, "why": "'I've researched this' is not evidence. No DOI, no journal, no study linked."},
+        {"id": "s2", "label": "Language: 'proven' and 'cures' are overclaims", "is_red_flag": true, "why": "Science says 'suggests', 'is associated with', 'may reduce risk'. 'Proven' and 'cures' are red flags."},
+        {"id": "s3", "label": "Language: conspiracy framing ('doctors don't want you to know')", "is_red_flag": true, "why": "Conspiracy framing is designed to pre-empt skepticism. It's a manipulation tactic."},
+        {"id": "s4", "label": "Poster: 'dr.' in the username means this is a credible expert", "is_red_flag": false, "why": "Anyone can put 'dr.' in a handle. Verify through institutional affiliation, not the username."}
       ],
       "correct_signal_ids": ["s1", "s2", "s3"],
-      "explanation": "No source, multiple language red flags, and 'dr.' in a handle is not a real credential.",
+      "explanation": "This post is clearly fake. No source linked, multiple language red flags (absolutes + conspiracy framing), and 'dr.' in a handle is not a real credential.",
       "lesson_id": 5
     },
     {
@@ -89,12 +89,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@sleepmaxx_official",
-        "image_caption": "[bedside table with supplement bottles]",
+	"image_url": "https://cdn.accentuate.io/8029085237387/1772489866175/Melatonin--Magnesium-Gummies_HL000736_1026x684.png?v=1772587218020&transform=resize=1026",
         "headline": "NEW research from Harvard confirms: 10mg melatonin nightly resets your circadian rhythm and CURES insomnia.",
         "body": "I've been sleeping 8 hours straight every night since I started. Link in bio for the supplement we recommend."
       },
       "correct_verdict": "fake",
-      "why": "'Cures' is an overclaim, Harvard is name-dropped without a link, and the affiliate link signals financial motive.",
+      "why": "\"Cures\" is an overclaim and \"Harvard\" is name-dropped without a study link. Personal anecdote isn't evidence, and the affiliate link signals financial motive.",
       "signals": ["language", "source", "poster"],
       "lesson_id": 2
     },
@@ -103,12 +103,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@journal_of_physiology",
-        "image_caption": "[thumbnail of a research paper PDF]",
+	"image_url": "/static/images/id5.jpg",
         "headline": "Soberg et al., Cell Reports Medicine, 2021. doi.org/10.1016/j.xcrm.2021.100408",
-        "body": "Repeated cold exposure may improve glucose tolerance in some adults. Effects were small and varied across participants."
+        "body": "Repeated cold exposure may improve glucose tolerance in some adults. Effects were small and varied across participants. More research needed in larger populations."
       },
       "correct_verdict": "real",
-      "why": "Peer-reviewed source with a DOI, hedged language, neutral institutional poster.",
+      "why": "Peer-reviewed source with a DOI, hedged language (\"may improve,\" \"small,\" \"varied\"), neutral institutional poster, and the post acknowledges its own limitations.",
       "signals": [],
       "lesson_id": 4
     },
@@ -117,12 +117,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@cleanlivingmom",
-        "image_caption": "[mason jar of beef tallow on a kitchen counter]",
+	"image_url": "https://fullyhealthy.com/cdn/shop/articles/feDGm_800x800.jpg?v=1775824257",
         "headline": "Seed oils literally cause inflammation in your body.",
-        "body": "Studies show linoleic acid is the number one driver of chronic disease. Big Food doesn't want you to know this."
+        "body": "Studies show linoleic acid is the #1 driver of chronic disease. That's why I switched my whole family to tallow and never looked back. Big Food doesn't want you to know this."
       },
       "correct_verdict": "fake",
-      "why": "'Literally cause' is an overclaim, 'studies show' with no citation is empty rhetoric, and conspiracy framing is a manipulation tactic.",
+      "why": "\"Literally cause\" is an overclaim, \"studies show\" with no citation is empty rhetoric, the conspiracy framing (\"Big Food doesn't want you to know\") is a manipulation tactic, and the poster is an anonymous lifestyle account with no credentials.",
       "signals": ["language", "source", "poster"],
       "lesson_id": 2
     },
@@ -131,12 +131,11 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@nutrition_signals",
-        "image_caption": "[clock showing 8:00 next to a plate of food]",
+	"image_url": "/static/images/id7.jpg",
         "headline": "A 2023 NEJM study PROVED that intermittent fasting REVERSES type 2 diabetes in 6 weeks.",
-        "body": "If you're pre-diabetic and not doing 16:8, you're choosing to stay sick. The science is settled."
-      },
+        "body": "If you're pre-diabetic and not doing 16:8, you're choosing to stay sick. The science is settled."},
       "correct_verdict": "fake",
-      "why": "'Proved' and 'reverses' are overclaims. The study is named but never linked.",
+      "why": "\"Proved\" and \"reverses\" are overclaims — the actual NEJM intermittent fasting research shows mixed, modest effects, not 6-week reversals. \"The science is settled\" is rhetorical absolutism, and the 2023 NEJM study is named but not actually cited.",
       "signals": ["language", "source"],
       "lesson_id": 4
     },
@@ -145,12 +144,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@dr.evidence",
-        "image_caption": "[creatine scoop on a kitchen scale]",
+	"image_url": "/static/images/id8.jpg",
         "headline": "Recent research suggests creatine may modestly improve memory in sleep-deprived adults.",
         "body": "Effects appear strongest in vegetarians and people under cognitive load. Standard 5g/day."
       },
       "correct_verdict": "fake",
-      "why": "Language is properly hedged but no study or DOI is linked, and '@dr.evidence' is an anonymous handle.",
+      "why": "The language is properly hedged (\"may,\" \"modestly,\" \"appears\") and the claim is roughly consistent with real research, but no study or DOI is linked. Hedged language without a verifiable source is still an unverifiable claim, and \"@dr.evidence\" is an anonymous handle (anyone can put \"dr.\" in front).",
       "signals": ["source", "poster"],
       "lesson_id": 3
     },
@@ -159,12 +158,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@cellulartherapy_md",
-        "image_caption": "[clinical room with an IV drip stand]",
+	"image_url": "/static/images/id9.jpg",
         "headline": "IV vitamin C therapy may support immune resilience in some adults.",
-        "body": "Citation: a 2024 review in Mayo Clinic Proceedings [link]. Book your drip at our Manhattan clinic."
+        "body": "Citation: a 2024 review in Mayo Clinic Proceedings [https://mcpress.mayoclinic.org/living-well/iv-vitamin-therapy-understanding-the-lack-of-proven-benefit-and-potential-risks-of-this-health-fad/]. Book your drip at our Manhattan clinic."
       },
       "correct_verdict": "fake",
-      "why": "The poster sells the exact treatment they are citing. A direct financial stake is a red flag even when the source and language check out.",
+      "why": "Hedged language, plausible-sounding source, sounds careful, but the poster is a clinic that sells the exact treatment they're citing. Even when sources and language pass the test, a direct financial stake in your conclusion is a red flag (Poster signal).",
       "signals": ["poster"],
       "lesson_id": 5
     },
@@ -173,12 +172,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@harvard_sph",
-        "image_caption": "[Harvard School of Public Health logo]",
+	"image_url": "https://cloudfront-us-east-1.images.arcpublishing.com/bostonglobe/YBKOYFCMTPJIFN2BBSA4W4CHKM.jpg",
         "headline": "Estruch et al., NEJM, 2018. doi.org/10.1056/NEJMoa1800389",
-        "body": "Adherence to a Mediterranean diet was associated with a roughly 30% relative reduction in major cardiovascular events in high-risk adults. Findings are observational; effect sizes vary by population."
+        "body": "Adherence to a Mediterranean diet was associated with a ~30% relative reduction in major cardiovascular events in high-risk adults over ~5 years. Findings are observational at the diet level; effect sizes vary by population."
       },
       "correct_verdict": "real",
-      "why": "Peer-reviewed source with a DOI, hedged language, institutional poster with no commercial interest.",
+      "why": "Peer-reviewed primary source with a DOI from a top-tier journal, hedged language (\"associated with,\" \"observational,\" \"vary by population\"), institutional poster with no commercial interest. The post acknowledges its own methodological limits.",
       "signals": [],
       "lesson_id": 4
     },
@@ -187,12 +186,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@truth.health.community",
-        "image_caption": "[crossed-out sunscreen bottle]",
+	"image_url": "https://bpb-us-e1.wpmucdn.com/sites.suffolk.edu/dist/e/1232/files/2018/11/11.4.18-Ashlyn-Dowd-Image-17ji5t5.png",	
         "headline": "Sunscreen is causing the skin cancer epidemic, not preventing it.",
-        "body": "Dermatologists won't admit it because they're paid by Big Pharma. Use coconut oil and get sunlight."
+        "body": "The chemicals are toxic. Dermatologists won't admit it because they're paid by Big Pharma. Use coconut oil and get sunlight."
       },
       "correct_verdict": "fake",
-      "why": "Conspiracy framing, no source cited, and the claim contradicts decades of dermatology research.",
+      "why": "Conspiracy framing (\"won't admit it,\" \"Big Pharma\") is a manipulation tactic that pre-empts skepticism. The claim contradicts decades of dermatology research, no source is cited, and an anonymous \"truth community\" account has no expertise.",
       "signals": ["language", "source", "poster"],
       "lesson_id": 2
     },
@@ -201,12 +200,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@gutbalance_official",
-        "image_caption": "[probiotic capsules on a wooden surface]",
-        "headline": "New study: Lactobacillus rhamnosus GG may reduce stress markers in healthy adults [study link].",
-        "body": "Try our 12-strain Gut Balance blend. 20% off this week."
+        "image_url": "https://media.istockphoto.com/id/880866450/photo/handful-of-round-probiotic-tablets-on-wooden-table.jpg?s=612x612&w=0&k=20&c=BV1OTp33lqKY9FGrspAmsKeQiPUBWMm38_nIzmumPn4=",
+        "headline": "New study: Lactobacillus rhamnosus GG may reduce stress markers in healthy adults [https://pubmed.ncbi.nlm.nih.gov/30741841/].",
+        "body": "Try our 12-strain Gut Balance blend: formulated with research-backed probiotics. 20% off this week."
       },
       "correct_verdict": "fake",
-      "why": "The cited research is real but their product is a different blend. Citing real research to sell a different product is a classic poster-bias tactic.",
+      "why": "The cited research on L. rhamnosus GG is real and properly hedged, but the seller's product is a different 12-strain blend that may not contain L. rhamnosus GG at clinical doses. Citing real research to sell a different product is a classic poster-bias tactic.",
       "signals": ["poster"],
       "lesson_id": 5
     },
@@ -215,12 +214,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@biohackerbrad",
-        "image_caption": "[guy stepping into an ice bath]",
+	"image_url": "https://urbanicetribe.com/wp-content/uploads/2025/06/857b7347-a755-4396-b927-22f7796d12b5-768x439.png",
         "headline": "Cold plunges boost dopamine 250% (Stanford).",
-        "body": "I do 3 minutes at 38F every morning. Mood, focus, energy -- completely different person."
+        "body": "I do 3 minutes at 38°F every morning. Mood, focus, energy: completely different person. Don't sleep on this."
       },
       "correct_verdict": "fake",
-      "why": "Stanford is name-dropped without a citation, and the 250% figure misrepresents a small unrelated study.",
+      "why": "\"Stanford\" is name-dropped without a citation, and the \"250%\" figure is actually a misrepresentation, and no explanation is given for this figure. Also the post generalizes transient dopamine elevation as a daily life-outcome metric. Personal anecdote is presented as evidence.",
       "signals": ["language", "source"],
       "lesson_id": 4
     },
@@ -229,12 +228,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@meat.heals_",
-        "image_caption": "[plate of seared ribeye steaks]",
+	"image_url": "https://justcook.butcherbox.com/wp-content/uploads/2019/11/Perfect-Pan-Seared-Ribeye-Steak-1-800x450.jpg",
         "headline": "The carnivore diet REVERSED my autoimmune disease in 90 days.",
-        "body": "Doctors said I'd be on medication for life. They were wrong. Try it for 30 days and tell me I'm crazy."
+        "body": "Doctors said I'd be on medication for life. They were wrong. The results speak for themselves: try it for 30 days and tell me I'm crazy."
       },
       "correct_verdict": "fake",
-      "why": "A single anecdote is not evidence, no clinical source is cited, and 'reversed' is an overclaim.",
+      "why": "A single anecdote isn't evidence, no clinical source supports the broader claim, and the \"doctors were wrong\" framing pre-empts medical skepticism. \"Reversed\" is an overclaim; chronic conditions rarely reverse from dietary change alone.",
       "signals": ["language", "source", "poster"],
       "lesson_id": 2
     },
@@ -243,12 +242,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@nih_news",
-        "image_caption": "[NIH building exterior]",
+	"image_url": "https://static01.nyt.com/images/2024/12/03/multimedia/03-NIH-02-PRINT/00nih-tmjb-videoSixteenByNineJumbo1600.jpg",
         "headline": "Bouillon et al., Endocrine Reviews, 2019. doi.org/10.1210/er.2018-00126",
-        "body": "Vitamin D supplementation appears to provide modest benefits mainly in adults with documented deficiency. Routine supplementation in replete adults shows little to no clinical effect."
+        "body": "Vitamin D supplementation appears to provide modest benefits primarily in adults with documented deficiency. Routine supplementation in vitamin-D-replete adults shows little to no clinical effect in most outcomes studied."
       },
       "correct_verdict": "real",
-      "why": "Peer-reviewed source with a DOI, hedged language, government institutional poster.",
+      "why": "Peer-reviewed source with a DOI, properly hedged language (\"appears,\" \"modest,\" \"little to no\"), institutional government poster, and the post deliberately distinguishes between deficient and replete populations rather than promoting blanket use.",
       "signals": [],
       "lesson_id": 4
     },
@@ -257,12 +256,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@magnesiumdaily",
-        "image_caption": "[bottles of magnesium glycinate on a vanity]",
-        "headline": "If you have anxiety, brain fog, headaches, fatigue, or trouble sleeping -- you're probably magnesium deficient.",
+        "image_url": "https://photos-us.bazaarvoice.com/photo/2/cGhvdG86Ymlvc2Nod2FydHo/7a838af0-dd6f-53fd-842c-1443323c7e49",
+        "headline": "If you have anxiety, brain fog, headaches, fatigue, or trouble sleeping, you're probably magnesium deficient.",
         "body": "Our triple-blend magnesium fixes all of it in 7 days. Use code RELAX20 for 20% off."
       },
       "correct_verdict": "fake",
-      "why": "One supplement claiming to fix five symptoms is an overgeneralization. 'Fixes all of it in 7 days' is an overclaim, and the discount code makes the financial motive explicit.",
+      "why": "A single supplement claimed to fix five different symptoms is a textbook overgeneralization. \"Probably deficient\" with no diagnostic basis, \"fixes all of it in 7 days\" is an overclaim, and the discount code makes the financial motive explicit.",
       "signals": ["language", "source", "poster"],
       "lesson_id": 2
     },
@@ -271,12 +270,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@ancestral_md",
-        "image_caption": "[graphic comparing canola oil to butter]",
-        "headline": "A 2024 study confirms: seed oils trigger heart disease at the cellular level.",
-        "body": "Linoleic acid oxidizes inside arterial walls. Switch to butter, ghee, or tallow."
+	"image_url": "https://thecoconutmama.com/wp-content/uploads/2023/05/Canola-Oil-vs-Butter-The-Ultimate-Verdict-jpg.webp",
+        "headline": "A 2024 study confirms what we've known for years: seed oils trigger heart disease at the cellular level.",
+        "body": "Linoleic acid oxidizes inside arterial walls. Switch to butter, ghee, or tallow. Your future self will thank you."
       },
       "correct_verdict": "fake",
-      "why": "No journal, authors, or DOI. The mechanistic claim oversimplifies contested research, and 'md' in a handle is not a real credential.",
+      "why": "\"A 2024 study\" with no journal, authors, or DOI cannot be verified. The mechanistic claim oversimplifies decades of contested research on linoleic acid. \"Ancestral_md\" is credential mimicry, anyone can use \"md\" in a handle.",
       "signals": ["source", "poster"],
       "lesson_id": 3
     },
@@ -285,12 +284,12 @@
       "type": "swipe_verdict",
       "post": {
         "username": "@evidencebased_md",
-        "image_caption": "[coffee cup next to a clock at 2 PM]",
+        "image_url": "https://images.stockcake.com/public/b/f/e/bfe42fd8-548f-4b0b-a234-9d9e46da0707_large/workspace-coffee-break-stockcake.jpg",
         "headline": "Drysdale et al., Sleep Medicine Reviews, 2023. doi.org/10.1016/j.smrv.2023.101764",
-        "body": "Meta-analysis of 24 studies: caffeine within roughly 9 hours of bedtime may reduce sleep quality on average. Individual sensitivity varies widely."
+        "body": "Meta-analysis of 24 studies: caffeine within ~9 hours of bedtime may meaningfully reduce sleep quality on average. Individual sensitivity varies widely: some people are unaffected, others should cut off earlier."
       },
       "correct_verdict": "real",
-      "why": "Peer-reviewed meta-analysis with a DOI, hedged language, and the post explicitly acknowledges individual variation.",
+      "why": "Peer-reviewed meta-analysis with a DOI, hedged language (\"may,\" \"on average,\" \"varies widely\"), and the post explicitly acknowledges individual variation rather than prescribing a one-size-fits-all rule.",
       "signals": [],
       "lesson_id": 4
     }
