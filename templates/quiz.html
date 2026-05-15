@@ -21,6 +21,22 @@
   h1, h2, h3 { color: #1a1a18 !important; }
 </style>
 
+{% macro image_block(caption) %}
+  {% if caption %}
+  <div style="width: 120px; height: 120px; border-radius: 10px; overflow: hidden; flex-shrink: 0; margin-bottom: 14px;">
+    {% if "yoga" in caption %}
+    <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=300&q=80" style="width:100%; height:100%; object-fit:cover;">
+    {% elif "PubMed" in caption or "study" in caption %}
+    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=300&q=80" style="width:100%; height:100%; object-fit:cover;">
+    {% elif "headshot" in caption or "professional" in caption %}
+    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&q=80" style="width:100%; height:100%; object-fit:cover;">
+    {% else %}
+    <div style="background: linear-gradient(135deg, #d4c9b8, #c5b99a); width:100%; height:100%;"></div>
+    {% endif %}
+  </div>
+  {% endif %}
+{% endmacro %}
+
 <div class="lesson-header mb-4">
   <div class="text-muted small">Question {{ n }} of {{ total }}</div>
   <h1 class="h3 mb-0">{{ question.prompt }}</h1>
@@ -30,7 +46,7 @@
   <div class="card mb-4">
     <div class="card-body">
       <div class="fw-bold mb-2">{{ question.post.username }}</div>
-      <div class="text-muted small mb-3">{{ question.post.image_caption }}</div>
+      {{ image_block(question.post.image_caption) }}
       <div class="border rounded p-3 mb-3 bg-light">
         {% for seg in question.post.headline_segments %}
           {%- if seg.type == "flag" -%}
@@ -51,11 +67,12 @@
       </div>
     </div>
   </div>
+
 {% elif question.type == "drag_bucket" %}
   <div class="card mb-4">
     <div class="card-body">
       <div class="fw-bold mb-2">{{ question.post.username }}</div>
-      <div class="text-muted small mb-2">{{ question.post.image_caption }}</div>
+      {{ image_block(question.post.image_caption) }}
       <div class="border rounded p-3 mb-3 bg-light fst-italic">{{ question.post.study_preview }}</div>
       <div>{{ question.post.body }}</div>
     </div>
@@ -80,11 +97,12 @@
       </div>
     {% endfor %}
   </div>
+
 {% elif question.type == "slider_justify" %}
   <div class="card mb-4">
     <div class="card-body">
       <div class="fw-bold mb-2">{{ question.post.username }}</div>
-      <div class="text-muted small mb-2">{{ question.post.image_caption }}</div>
+      {{ image_block(question.post.image_caption) }}
       <div class="border rounded p-3 mb-3 bg-light">
         <strong>{{ question.post.headline }}</strong>
       </div>
@@ -119,6 +137,7 @@
       </div>
     {% endfor %}
   </div>
+
 {% else %}
   <div class="alert alert-light border">
     <p class="mb-1"><strong>Question type:</strong> <code>{{ question.type }}</code></p>
