@@ -48,6 +48,8 @@
       "accent": "red",
       "post": {
         "username": "@healthadvice",
+        "image_url": "https://images.unsplash.com/photo-1618038754693-ded6426550dd?w=800&q=80&auto=format",
+        "image_alt": "Person holding a supplement bottle",
 	"segments": [
   	{"text": "Ashwagandha", "key": "w1", "color": null},
   	{"text": "has", "key": "w2", "color": null},
@@ -129,6 +131,8 @@
       "accent": "yellow",
       "post": {
         "username": "@vitamin&co",
+        "image_url": "https://images.unsplash.com/photo-1611072965169-e1534f6f300c?w=800&q=80&auto=format",
+        "image_alt": "Supplement bottles on a wooden shelf",
 	"segments": [
   	{"text": "Nutrients.", "key": "w1", "color": null},
   	{"text": "2024.", "key": "w2", "color": null},
