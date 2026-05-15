@@ -177,8 +177,8 @@
   }
 
   .phone {
-    width: 320px;
-    height: 620px;
+    width: 340px;
+    height: 660px;
     background: #1a1a1a;
     border-radius: 60px;
     padding: 14px;
@@ -225,26 +225,24 @@
     opacity: 0.7;
   }
 
-  /* ── PHONE INTERIOR: tightened to fit both cards ── */
-
   .screen-header {
-    padding: 10px 22px 14px;         /* was 16px 28px 22px */
+    padding: 10px 22px 14px;
     border-bottom: 1px solid var(--tan-light);
     flex-shrink: 0;
   }
 
   .screen-eyebrow {
-    font-size: 10px;                  /* was 12px */
+    font-size: 10px;
     font-weight: 400;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--tan);
-    margin-bottom: 6px;              /* was 10px */
+    margin-bottom: 6px;
   }
 
   .screen-title {
     font-family: 'Fraunces', serif;
-    font-size: 22px;                  /* was 28px */
+    font-size: 22px;
     font-weight: 300;
     color: var(--ink);
     line-height: 1.2;
@@ -256,58 +254,58 @@
   }
 
   .screen-body {
-    padding: 12px 16px;              /* was 20px 22px */
+    padding: 12px 20px 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;                       /* was 14px */
+    gap: 10px;
     overflow: hidden;
   }
 
   .post-card {
     background: var(--cream);
-    border-radius: 14px;             /* was 18px */
-    padding: 12px 14px;              /* was 18px 20px */
+    border-radius: 14px;
+    padding: 12px 14px;
     border: 1px solid var(--tan-light);
-    flex: 1;
     display: flex;
     flex-direction: column;
   }
 
   .post-meta {
-    font-size: 9px;                  /* was 11px */
+    font-size: 9px;
     font-weight: 400;
     color: var(--tan);
-    margin-bottom: 6px;              /* was 10px */
+    margin-bottom: 6px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   .post-text {
-    font-size: 12px;                 /* was 15px */
+    font-size: 12px;
     font-weight: 300;
     color: #555;
-    line-height: 1.45;              /* was 1.55 */
-    margin-bottom: 10px;            /* was 14px */
+    line-height: 1.45;
+    margin-bottom: 10px;
     flex: 1;
   }
 
   .badge {
-    font-size: 9px;                  /* was 10px */
+    font-size: 9px;
     font-weight: 700;
     border-radius: 100px;
-    padding: 5px 12px;              /* was 6px 14px */
+    padding: 5px 12px;
     display: inline-block;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     align-self: flex-start;
+    margin-top: auto;
   }
 
   .badge.bad  { color: #a63228; background: #f5e8e7; }
   .badge.good { color: #1f6b42; background: #e6f2ec; }
 
   .screen-footer {
-    padding: 10px 18px 22px;         /* was 14px 18px 26px */
+    padding: 10px 18px 22px;
     border-top: 1px solid var(--tan-light);
     flex-shrink: 0;
   }
@@ -402,10 +400,20 @@
           </div>
           <div class="post-card">
             <div class="post-meta">Post · Nutrition</div>
+            <div style="background: #f5f5f5; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; border: 1px solid #e0e0e0; flex-shrink: 0;">
+              <div style="width: 28px; height: 28px; background: #003366; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="color: white; font-size: 8px; font-weight: 900; letter-spacing: -0.5px;">C</span>
+              </div>
+              <div>
+                <div style="font-size: 9px; font-weight: 700; color: #1a1a18; letter-spacing: 0.02em;">Cochrane Library</div>
+                <div style="font-size: 8px; color: #a89880; margin-top: 1px;">doi.org/10.1002/14651858</div>
+              </div>
+            </div>
             <div class="post-text">"Vitamin C supplements reduce cold duration, peer-reviewed meta-analysis"</div>
             <span class="badge good">Credible</span>
           </div>
         </div>
+
       </div>
     </div>
   </div>
