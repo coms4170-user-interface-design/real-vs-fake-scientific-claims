@@ -2,8 +2,7 @@
 {% block title %}Lesson {{ n }} — {{ lesson.title }}{% endblock %}
 {% block content %}
 <style>
-  @import 
-url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 
 body, .lesson-page {
   background: #f0ede6 !important;
@@ -17,12 +16,9 @@ body, .lesson-page {
   font-size: 12px; font-weight: 600; transition: all 0.2s;
   text-decoration: none;
 }
-.stepper-dot.active { background: #1a1a18; color: #f0ede6; border: 2px 
-solid #1a1a18; }
-.stepper-dot.done   { background: #1a1a18; color: #f0ede6; border: 2px 
-solid #1a1a18; }
-.stepper-dot.future { background: transparent; color: #a89880; border: 2px 
-solid #c5b99a; }
+.stepper-dot.active { background: #1a1a18; color: #f0ede6; border: 2px solid #1a1a18; }
+.stepper-dot.done   { background: #1a1a18; color: #f0ede6; border: 2px solid #1a1a18; }
+.stepper-dot.future { background: transparent; color: #a89880; border: 2px solid #c5b99a; }
 .stepper-line { flex: 1; height: 1px; }
 .stepper-line.done   { background: #1a1a18; }
 .stepper-line.future { background: #c5b99a; }
@@ -244,6 +240,7 @@ solid #c5b99a; }
   border-radius: 14px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   padding: 24px;
+  align-self: start;
 }
 .tap-post-handle { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
 .tap-post-avatar {
@@ -262,9 +259,6 @@ solid #c5b99a; }
   font-weight: 600; color: #1a1a18; position: relative;
 }
 .hot-word:hover { background: #ece8e0; }
-.hot-word.found-red    { background: #fee2e2; color: #991b1b; border-bottom-color: #f87171; }
-.hot-word.found-yellow { background: #fef9c3; color: #854d0e; border-bottom-color: #fbbf24; }
-.hot-word.found-teal   { background: #e0f2fe; color: #0369a1; border-bottom-color: #38bdf8; }
 
 .tap-hint-row { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 0.8rem; color: #a89880; }
 .hint-dot {
@@ -273,17 +267,36 @@ solid #c5b99a; }
 }
 @keyframes blink { 0%,100%{opacity:0.3} 50%{opacity:1} }
 
+/* Banner lives inside the left card now */
+.all-found-banner {
+  margin-top: 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: #15803d;
+  font-weight: 600;
+  align-items: center;
+  gap: 8px;
+  display: none;
+  pointer-events: none;
+}
+.all-found-banner.show { display: flex; }
+
 .findings-grid { display: flex; flex-direction: column; gap: 12px; }
 .finding-card {
   border-radius: 12px; border: 1px solid #ddd8cc; background: #ece8e0;
-  padding: 16px 18px; opacity: 0.25;
+  padding: 16px 18px;
+  opacity: 0; visibility: hidden;
   transform: translateY(6px) scale(0.98);
   transition: opacity 0.35s cubic-bezier(0.34,1.4,0.64,1),
               transform 0.35s cubic-bezier(0.34,1.4,0.64,1),
+              visibility 0.35s,
               background 0.2s, border-color 0.2s;
   pointer-events: none;
 }
-.finding-card.revealed { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.finding-card.revealed { opacity: 1; visibility: visible; transform: translateY(0) scale(1); pointer-events: auto; }
 .finding-card.color-red    { background: #fff1f2; border-color: #fecdd3; }
 .finding-card.color-yellow { background: #fffbeb; border-color: #fde68a; }
 .finding-card.color-teal   { background: #f0f9ff; border-color: #bae6fd; }
@@ -297,15 +310,6 @@ solid #c5b99a; }
 .color-red    .finding-body { color: #b91c1c; }
 .color-yellow .finding-body { color: #92400e; }
 .color-teal   .finding-body { color: #0369a1; }
-
-.all-found-banner {
-  margin-top: 16px; background: #f0fdf4; border: 1px solid #bbf7d0;
-  border-radius: 10px; padding: 12px 16px;
-  font-size: 0.85rem; color: #15803d; font-weight: 600;
-  display: flex; align-items: center; gap: 8px;
-  opacity: 0; transition: opacity 0.4s; pointer-events: none;
-}
-.all-found-banner.show { opacity: 1; }
 
 @media (max-width: 1100px) {
   .scenario-layout { grid-template-columns: 1fr; }
@@ -626,11 +630,11 @@ solid #c5b99a; }
 
 {% elif lesson.type == "signal_detail" %}
 <p style="color:#a89880; font-size:0.88rem; margin-bottom:1.5rem;">
-  Tap the <strong style="color:#1a1a18;">suspicious words</strong> in the 
-post, then submit.
+  Tap the <strong style="color:#1a1a18;">suspicious words</strong> in the post, then submit.
 </p>
 
 <div class="row g-4 align-items-start">
+  <!-- LEFT: post card with submit/retry/banner inside -->
   <div class="col-md-6">
     <div class="tap-post-wrap">
       <div class="tap-post-handle">
@@ -645,27 +649,33 @@ post, then submit.
             data-key="{{ seg.key }}"
             data-color="{{ seg.color if seg.color and seg.color != 'None' else '' }}"
             data-correct="{{ 'true' if seg.color and seg.color != 'None' else 'false' }}"
-	    onclick="tapWord(this)"> {{ seg.text }} </span>
+            onclick="tapWord(this)"> {{ seg.text }} </span>
         {% endfor %}
       </div>
       <div class="tap-hint-row" id="tap-hint">
         <div class="hint-dot"></div>
         <span id="hint-text">{{ lesson.annotations | length }} things to find</span>
       </div>
-      <button id="submit-btn" onclick="submitAnswers()" 
-style="display:none; margin-top:16px; width:100%; background:#1a1a18; 
-color:#f0ede6; border:none; border-radius:8px; padding:10px 0; 
-font-weight:600; font-size:0.9rem; cursor:pointer;">
+      <button id="submit-btn" onclick="submitAnswers()"
+        style="display:none; margin-top:16px; width:100%; background:#1a1a18;
+        color:#f0ede6; border:none; border-radius:8px; padding:10px 0;
+        font-weight:600; font-size:0.9rem; cursor:pointer;">
         Submit
       </button>
-      <button id="retry-btn" onclick="retryQuestion()" 
-style="display:none; margin-top:8px; width:100%; background:transparent; 
-color:#1a1a18; border:1.5px solid #a89880; border-radius:8px; padding:10px 
-0; font-weight:600; font-size:0.9rem; cursor:pointer;">
+      <button id="retry-btn" onclick="retryQuestion()"
+        style="display:none; margin-top:8px; width:100%; background:transparent;
+        color:#1a1a18; border:1.5px solid #a89880; border-radius:8px; padding:10px 0;
+        font-weight:600; font-size:0.9rem; cursor:pointer;">
         Retry
       </button>
+      <!-- Banner now lives here, below the buttons -->
+      <div class="all-found-banner" id="all-found-banner">
+        ✓ Nice — you found everything. You're already thinking like a fact-checker.
+      </div>
     </div>
   </div>
+
+  <!-- RIGHT: finding cards -->
   <div class="col-md-6">
     <div class="findings-grid">
       {% for ann in lesson.annotations %}
@@ -675,9 +685,6 @@ color:#1a1a18; border:1.5px solid #a89880; border-radius:8px; padding:10px
         <p class="finding-body">{{ ann.body }}</p>
       </div>
       {% endfor %}
-    </div>
-    <div class="all-found-banner" id="all-found-banner">
-      Nice — you found everything. You're already thinking like a fact-checker.
     </div>
   </div>
 </div>
@@ -729,32 +736,37 @@ color:#1a1a18; border:1.5px solid #a89880; border-radius:8px; padding:10px
         el.style.color = '#991b1b';
         el.style.borderBottomColor = '#f87171';
       } else if (!wasSelected && isCorrect) {
-        // missed — highlight yellow so they can see what they missed
         el.style.background = '#fef9c3';
         el.style.color = '#854d0e';
         el.style.borderBottomColor = '#fbbf24';
       }
     });
 
-    // Reveal all finding cards
-    annotatedKeys.forEach(key => {
-      const card = document.getElementById('finding-' + key);
-      if (card) card.classList.add('revealed');
+    // Stagger finding cards top to bottom
+    let delay = 0;
+    document.querySelectorAll('.finding-card').forEach(card => {
+      setTimeout(() => card.classList.add('revealed'), delay);
+      delay += 200;
     });
 
-    // Banner
+    // Calculate correctness BEFORE the setTimeout
     const allCorrect = [...annotatedKeys].every(k => selected.has(k)) &&
                        [...selected].every(k => annotatedKeys.has(k));
+
+    // Show banner at same time as last card
+    const bannerDelay = (annotatedKeys.size - 1) * 200;
     const banner = document.getElementById('all-found-banner');
-    if (allCorrect) {
-      banner.classList.add('show');
-    } else {
-      banner.style.background = '#fff7ed';
-      banner.style.borderColor = '#fed7aa';
-      banner.style.color = '#c2410c';
-      banner.textContent = 'Not quite — yellow words are ones you missed, red are incorrect picks.';
-      banner.classList.add('show');
-    }
+    setTimeout(() => {
+      if (allCorrect) {
+        banner.classList.add('show');
+      } else {
+        banner.style.background = '#fff7ed';
+        banner.style.borderColor = '#fed7aa';
+        banner.style.color = '#c2410c';
+        banner.textContent = 'Not quite — yellow words are ones you missed, red are incorrect picks.';
+        banner.classList.add('show');
+      }
+    }, bannerDelay);
 
     document.getElementById('retry-btn').style.display = 'block';
   }
@@ -768,16 +780,15 @@ color:#1a1a18; border:1.5px solid #a89880; border-radius:8px; padding:10px
       el.style.borderBottomColor = '';
       el.style.cursor = '';
     });
-    annotatedKeys.forEach(key => {
-      const card = document.getElementById('finding-' + key);
-      if (card) card.classList.remove('revealed');
+    document.querySelectorAll('.finding-card').forEach(card => {
+      card.classList.remove('revealed');
     });
     const banner = document.getElementById('all-found-banner');
     banner.classList.remove('show');
     banner.style.background = '';
     banner.style.borderColor = '';
     banner.style.color = '';
-    banner.textContent = 'Nice — you found everything. You\'re already thinking like a fact-checker.';
+    banner.textContent = '✓ Nice — you found everything. You\'re already thinking like a fact-checker.';
     document.getElementById('tap-hint').style.display = 'flex';
     document.getElementById('hint-text').textContent = annotatedKeys.size + ' things to find';
     document.getElementById('submit-btn').style.display = 'none';
