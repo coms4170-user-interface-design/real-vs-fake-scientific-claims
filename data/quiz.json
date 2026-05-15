@@ -10,7 +10,7 @@
         "headline_segments": [
           {"type": "flag", "id": "h1", "value": "Ashwagandha", "is_red_flag": false, "why": "Just the subject; not a red flag."},
           {"type": "flag", "id": "h2", "value": "is", "is_red_flag": false, "why": "Not a red flag."},
-          {"type": "flag", "id": "h3", "value": "GUARANTEED", "is_red_flag": true, "why": "'Guaranteed' is an overclaim. No supplement can guarantee outcomes (Language signal)."},
+          {"type": "flag", "id": "h3", "value": "GUARANTEED", "is_red_flag": true, "signal": "language", "why": "'Guaranteed' is an overclaim. No supplement can guarantee outcomes (Language signal)."},
           {"type": "flag", "id": "h4", "value": "to improve your focus,", "is_red_flag": false, "why": "Not a red flag on its own."},
           {"type": "flag", "id": "h5", "value": "attention,", "is_red_flag": false, "why": "Not a red flag."},
           {"type": "flag", "id": "h6", "value": "and clarity of mind", "is_red_flag": false, "why": "Not a red flag."}
@@ -20,7 +20,7 @@
           {"type": "flag", "id": "b2", "value": "Get in touch with your zen", "is_red_flag": false, "why": "Not a red flag."},
           {"type": "flag", "id": "b3", "value": "by attending yoga classes", "is_red_flag": false, "why": "Not a red flag."},
           {"type": "flag", "id": "b4", "value": "at our Queens location", "is_red_flag": false, "why": "Not a red flag."},
-          {"type": "flag", "id": "b5", "value": "and picking up some Ashwagandha supplements on your way out", "is_red_flag": true, "why": "@healthguru sells supplements from their yoga studio; there is a financial motive (Poster signal)."},
+          {"type": "flag", "id": "b5", "value": "and picking up some Ashwagandha supplements on your way out", "is_red_flag": true, "signal": "poster", "why": "@healthguru sells supplements from their yoga studio; there is a financial motive (Poster signal)."},
           {"type": "flag", "id": "b6", "value": "Ashwagandha", "is_red_flag": false, "why": "Just naming the supplement, not a red flag."},
           {"type": "flag", "id": "b7", "value": "has been shown", "is_red_flag": false, "why": "Vague sourcing, but the actual red flag is the missing DOI, not this phrase alone."},
           {"type": "flag", "id": "b8", "value": "by the", "is_red_flag": false, "why": "Not a red flag."},
@@ -75,10 +75,10 @@
         "correct_range": [0, 35]
       },
       "signals": [
-        {"id": "s1", "label": "Source: no study or journal linked", "is_red_flag": true, "why": "No DOI, no journal, no study linked."},
-        {"id": "s2", "label": "Language: 'proven' and 'cures' are overclaims", "is_red_flag": true, "why": "Science uses 'suggests' or 'may reduce risk', not 'proven' or 'cures'."},
-        {"id": "s3", "label": "Language: conspiracy framing ('doctors don't want you to know')", "is_red_flag": true, "why": "Conspiracy framing is a manipulation tactic."},
-        {"id": "s4", "label": "Poster: 'dr.' in the username means this is a credible expert", "is_red_flag": false, "why": "Anyone can put 'dr.' in a handle. Check for institutional affiliation instead."}
+        {"id": "s1", "label": "Source: no study or journal linked", "is_red_flag": true, "signal": "source", "why": "No DOI, no journal, no study linked."},
+        {"id": "s2", "label": "Language: 'proven' and 'cures' are overclaims", "is_red_flag": true, "signal": "language", "why": "Science uses 'suggests' or 'may reduce risk', not 'proven' or 'cures'."},
+        {"id": "s3", "label": "Language: conspiracy framing ('doctors don't want you to know')", "is_red_flag": true, "signal": "language", "why": "Conspiracy framing is a manipulation tactic."},
+        {"id": "s4", "label": "Poster: 'dr.' in the username means this is a credible expert", "is_red_flag": false, "signal": "poster", "why": "Anyone can put 'dr.' in a handle. Check for institutional affiliation instead."}
       ],
       "correct_signal_ids": ["s1", "s2", "s3"],
       "explanation": "No source, multiple language red flags, and 'dr.' in a handle is not a real credential.",

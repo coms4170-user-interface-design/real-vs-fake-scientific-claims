@@ -130,6 +130,7 @@ def quiz_result():
         score=score,
         total=len(CLASSIC_QUIZ),
         breakdown=breakdown,
+        signal_stats=_compute_signal_stats(breakdown),
         mode="classic",
     )
 
@@ -167,6 +168,7 @@ def feed_result():
         score=score,
         total=len(breakdown),
         breakdown=breakdown,
+        signal_stats=_compute_signal_stats(breakdown),
         mode="feed",
     )
 
@@ -238,6 +240,66 @@ def _build_details(question, answer):
             "signals": question.get("signals", []),
         }
     return {}
+
+
+SIGNALS = ("source", "language", "poster")
+
+
+def _compute_signal_stats(breakdown):
+    """Aggregate per-signal correct/total counts across all answered questions."""
+    stats = {s: {"correct": 0, "total": 0} for s in SIGNALS}
+
+    for item in breakdown:
+        q = item["question"]
+        qtype = q["type"]
+        answer = item.get("answer") or {}
+
+        if qtype == "click_flag":
+            selected = set(answer.get("selected_ids", []))
+            segments = q["post"]["headline_segments"] + q["post"]["body_segments"]
+            for seg in segments:
+                signal = seg.get("signal")
+                if signal not in SIGNALS:
+                    continue
+                stats[signal]["total"] += 1
+                user_selected = seg["id"] in selected
+                if user_selected == seg["is_red_flag"]:
+                    stats[signal]["correct"] += 1
+
+        elif qtype == "drag_bucket":
+            placements = answer.get("placements", {})
+            for d in q["draggables"]:
+                bucket = d["correct_bucket"]
+                if bucket not in SIGNALS:
+                    continue
+                stats[bucket]["total"] += 1
+                if placements.get(d["id"]) == bucket:
+                    stats[bucket]["correct"] += 1
+
+        elif qtype == "slider_justify":
+            selected = set(answer.get("selected_signal_ids", []))
+            for s in q["signals"]:
+                signal = s.get("signal")
+                if signal not in SIGNALS:
+                    continue
+                stats[signal]["total"] += 1
+                user_selected = s["id"] in selected
+                if user_selected == s["is_red_flag"]:
+                    stats[signal]["correct"] += 1
+
+        elif qtype == "swipe_verdict":
+            user_verdict = answer.get("verdict")
+            correct_verdict = q.get("correct_verdict")
+            if not user_verdict:
+                continue
+            for signal in q.get("signals", []):
+                if signal not in SIGNALS:
+                    continue
+                stats[signal]["total"] += 1
+                if user_verdict == correct_verdict:
+                    stats[signal]["correct"] += 1
+
+    return stats
 
 
 def _grade(question, answer):

@@ -5,206 +5,481 @@
 
 {% block content %}
 <style>
-  body, html { color: #2c2018 !important; }
-  h1, h2 { color: #2c2018; }
-  .result-score { color: #8b5e3c; letter-spacing: -0.02em; }
-  .text-muted { color: #7a6a58 !important; }
-  .result-card {
-    background: #faf8f4;
+  body, html { background: #f0ede6 !important; color: #2c2018 !important; }
+  .result-page { max-width: 760px; margin: 0 auto; padding-top: 8px; }
+
+  /* Hero score card */
+  .score-hero {
+    background: #faf8f3;
+    border: 1px solid #ddd8ce;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+  .score-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #a89880;
+    margin-bottom: 10px;
+  }
+  .score-number {
+    font-family: 'Fraunces', 'Georgia', serif;
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+    color: #1a1a18;
+    letter-spacing: -0.02em;
+  }
+  .score-number .denom { color: #c5b99a; }
+  .score-blurb {
+    font-size: 17px;
+    color: #4a3f32;
+    margin: 14px 0 0;
+    line-height: 1.55;
+    max-width: 520px;
+  }
+
+  /* Signal scorecard chips */
+  .signal-scorecard {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid #ece8e0;
+  }
+  .signal-scorecard-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a89880;
+    margin-bottom: 12px;
+  }
+  .signal-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .signal-chip {
+    flex: 1 1 0;
+    min-width: 140px;
+    background: #fff;
+    border: 1px solid #ddd8ce;
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .signal-chip-name {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .signal-chip-score {
+    font-family: 'Fraunces', 'Georgia', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #1a1a18;
+  }
+  .signal-chip-score .denom { color: #c5b99a; font-size: 18px; }
+  .signal-chip-bar {
+    margin-top: 8px;
+    height: 4px;
+    border-radius: 99px;
+    background: #ece8e0;
+    overflow: hidden;
+  }
+  .signal-chip-bar > span {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.4s ease-out;
+  }
+  .signal-chip.source .signal-chip-name { color: #0369a1; }
+  .signal-chip.source .signal-chip-bar > span { background: #38bdf8; }
+  .signal-chip.language .signal-chip-name { color: #854d0e; }
+  .signal-chip.language .signal-chip-bar > span { background: #fbbf24; }
+  .signal-chip.poster .signal-chip-name { color: #991b1b; }
+  .signal-chip.poster .signal-chip-bar > span { background: #ef4444; }
+
+  /* Section header */
+  .section-head {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #a89880;
+    margin: 28px 0 14px;
+  }
+
+  /* Question cards */
+  .q-card {
+    background: #faf8f3;
     border: 1px solid #ddd8ce;
     border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
   }
-  .result-list .list-group-item {
-    background: transparent;
-    color: #2c2018;
-    border-color: #ddd8ce;
+  .q-card.correct { border-color: #bbf7d0; background: #f6fdf8; }
+  .q-card.incorrect { border-color: #fecdd3; background: #fff7f7; }
+
+  .q-row1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
   }
-  .result-list code {
-    background: rgba(139,94,60,0.12);
-    color: #8b5e3c;
-    padding: 0.1rem 0.4rem;
-    border-radius: 6px;
+  .q-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a89880;
   }
-  .takeaway-dark {
-    background: rgba(139,94,60,0.08);
-    border: 1px solid rgba(139,94,60,0.2);
+  .q-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 99px;
+    text-transform: uppercase;
+  }
+  .q-badge.correct { background: #dcfce7; color: #166534; }
+  .q-badge.incorrect { background: #fee2e2; color: #991b1b; }
+
+  .q-username { color: #6b5f4e; font-size: 14px; margin-bottom: 4px; }
+  .q-headline { font-weight: 600; font-size: 17px; color: #1a1a18; margin-bottom: 14px; line-height: 1.45; }
+  .q-prompt { font-weight: 500; font-size: 16px; color: #1a1a18; margin-bottom: 14px; line-height: 1.5; }
+
+  .takeaway-line {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: rgba(139,94,60,0.06);
     border-radius: 10px;
+    border-left: 3px solid #8b5e3c;
+    font-size: 16px;
+    line-height: 1.55;
     color: #2c2018;
   }
-  .btn-outline-secondary { border-color: #b8b2a6 !important; color: #2c2018 !important; }
+  .takeaway-line .ico { flex-shrink: 0; line-height: 1.5; }
+  .takeaway-line strong { font-weight: 600; }
+
+  /* Disclosure */
+  details.q-details {
+    margin-top: 10px;
+  }
+  details.q-details > summary {
+    list-style: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b5f4e;
+    padding: 8px 0;
+    user-select: none;
+  }
+  details.q-details > summary::-webkit-details-marker { display: none; }
+  details.q-details > summary::before {
+    content: "▸ ";
+    display: inline-block;
+    transition: transform 0.15s;
+    margin-right: 4px;
+  }
+  details.q-details[open] > summary::before { content: "▾ "; }
+  details.q-details > summary:hover { color: #1a1a18; }
+
+  .detail-list {
+    list-style: none;
+    padding: 12px 0 0;
+    margin: 0;
+    border-top: 1px solid #ece8e0;
+    margin-top: 10px;
+  }
+  .detail-list li {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0ebe1;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .detail-list li:last-child { border-bottom: none; }
+  .detail-list .ico { flex-shrink: 0; font-weight: 700; width: 16px; font-size: 16px; }
+  .detail-list .ico.right { color: #16a34a; }
+  .detail-list .ico.wrong { color: #dc2626; }
+  .detail-list .item-value { color: #1a1a18; font-weight: 500; }
+  .detail-list code {
+    background: rgba(139,94,60,0.1);
+    color: #8b5e3c;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  .detail-list .item-why { color: #6b5f4e; margin-top: 3px; font-size: 14px; }
+
+  .empty-correct {
+    color: #a89880;
+    font-size: 13px;
+    font-style: italic;
+    padding: 12px 0;
+  }
+
+  /* Right-answer section: super compact list */
+  .correct-summary { margin-top: 4px; }
+  .correct-summary details > summary {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b5f4e;
+    padding: 8px 0;
+    list-style: none;
+  }
+  .correct-summary details > summary::-webkit-details-marker { display: none; }
+  .correct-summary details > summary::before {
+    content: "▸ ";
+    margin-right: 4px;
+  }
+  .correct-summary details[open] > summary::before { content: "▾ "; }
+  .correct-list { padding-top: 8px; }
+  .correct-list .q-card { padding: 16px 20px; }
+  .correct-list .takeaway-line { padding: 12px 14px; font-size: 15px; }
+
+  .actions-row { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary {
+    background: #1a1a18 !important;
+    border-color: #1a1a18 !important;
+    color: #f0ede6 !important;
+    border-radius: 99px !important;
+    padding: 10px 22px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+  .btn-outline-secondary {
+    border: 1px solid #c5b99a !important;
+    color: #4a3f32 !important;
+    background: transparent !important;
+    border-radius: 99px !important;
+    padding: 10px 22px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
 </style>
-<div class="mb-4">
-  <div class="text-muted small text-uppercase fw-bold mb-1" style="letter-spacing: 0.08em;">
-    {% if mode == "feed" %}Feed Results{% else %}Quiz Result{% endif %}
-  </div>
-  <h1 class="mb-1">Your Score</h1>
-  {% if total > 0 %}
-    <p class="display-3 mb-0 result-score">{{ score }} / {{ total }}</p>
-    {% if mode == "feed" %}
-      <p class="text-muted small mt-2 mb-0">Across the {{ total }} post{{ '' if total == 1 else 's' }} you swiped on so far.</p>
+
+{# ───────────── helper macros (defined before use) ───────────── #}
+{% macro render_breakdown(q, details) %}
+  {% if q.type == "click_flag" %}
+    {% set missed = details.flaggables | rejectattr('user_correct') | list %}
+    {% if missed %}
+    <details class="q-details" open>
+      <summary>What you missed ({{ missed | length }})</summary>
+      <ul class="detail-list">
+        {% for f in missed %}
+        <li>
+          <span class="ico wrong">✗</span>
+          <div>
+            <div><code>{{ f.value }}</code> — {{ 'red flag you missed' if f.is_red_flag else 'incorrectly flagged' }}</div>
+            <div class="item-why">{{ f.why }}</div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </details>
     {% endif %}
-  {% else %}
-    <p class="display-3 mb-0 result-score">— / —</p>
-    <p class="text-muted mt-3">You haven't answered any posts yet. Head back to the feed to start swiping.</p>
-  {% endif %}
-</div>
 
-{% if breakdown %}
-<h2 class="h4 mb-3">Breakdown</h2>
-{% endif %}
+  {% elif q.type == "drag_bucket" %}
+    {% set missed = details.rows | rejectattr('user_correct') | list %}
+    {% if missed %}
+    <details class="q-details" open>
+      <summary>What you missed ({{ missed | length }})</summary>
+      <ul class="detail-list">
+        {% for d in missed %}
+        <li>
+          <span class="ico wrong">✗</span>
+          <div>
+            <div class="item-value">{{ d.text }}</div>
+            <div class="item-why">
+              You placed it in <strong>{{ d.user_bucket }}</strong>; correct is <strong>{{ d.correct_bucket }}</strong>. {{ d.why }}
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </details>
+    {% endif %}
 
-{% for item in breakdown %}
-  <div class="card mb-3 result-card">
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-start mb-2">
-        <div class="text-muted small text-uppercase fw-bold">Question {{ item.question.id }}</div>
-        {% if item.is_correct %}
-          <span class="badge bg-success">Correct</span>
-        {% else %}
-          <span class="badge bg-danger">Incorrect</span>
+  {% elif q.type == "slider_justify" %}
+    {% set missed_signals = details.signals | rejectattr('user_correct') | list %}
+    {% if not details.slider_ok or missed_signals %}
+    <details class="q-details" open>
+      <summary>What you missed</summary>
+      <ul class="detail-list">
+        {% if not details.slider_ok %}
+        <li>
+          <span class="ico wrong">✗</span>
+          <div>
+            <div class="item-value">Credibility rating</div>
+            <div class="item-why">
+              You rated
+              {% if details.slider_value is none %}(not submitted){% else %}{{ details.slider_value }}{% endif %}.
+              Correct range: {{ details.correct_range[0] }}–{{ details.correct_range[1] }}.
+            </div>
+          </div>
+        </li>
         {% endif %}
-      </div>
-      {% if item.question.prompt %}
-        <p class="mb-3">{{ item.question.prompt }}</p>
-      {% elif item.question.post and item.question.post.headline %}
-        <div class="text-muted small mb-1">{{ item.question.post.username }}</div>
-        <p class="mb-3 fw-semibold">{{ item.question.post.headline }}</p>
-      {% endif %}
+        {% for s in missed_signals %}
+        <li>
+          <span class="ico wrong">✗</span>
+          <div>
+            <div class="item-value">{{ s.label }}</div>
+            <div class="item-why">{{ s.why }}</div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </details>
+    {% endif %}
 
-      {% if item.question.type == "click_flag" %}
-        <ul class="list-group list-group-flush mb-3 result-list">
-          {% for f in item.details.flaggables %}
-            <li class="list-group-item px-0">
-              <div class="d-flex">
-                <div class="me-2">
-                  {% if f.user_correct %}
-                    <span class="text-success">&#10004;</span>
-                  {% else %}
-                    <span class="text-danger">&#10008;</span>
-                  {% endif %}
-                </div>
-                <div class="flex-grow-1">
-                  <div><code>{{ f.value }}</code></div>
-                  <div class="small text-muted">
-                    {% if f.is_red_flag %}Red flag{% else %}Not a red flag{% endif %} —
-                    you {% if f.user_selected %}selected{% else %}did not select{% endif %} this.
-                    {{ f.why }}
-                  </div>
-                </div>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
-
-      {% elif item.question.type == "drag_bucket" %}
-        <ul class="list-group list-group-flush mb-3 result-list">
-          {% for d in item.details.rows %}
-            <li class="list-group-item px-0">
-              <div class="d-flex">
-                <div class="me-2">
-                  {% if d.user_correct %}
-                    <span class="text-success">&#10004;</span>
-                  {% else %}
-                    <span class="text-danger">&#10008;</span>
-                  {% endif %}
-                </div>
-                <div class="flex-grow-1">
-                  <div>{{ d.text }}</div>
-                  <div class="small text-muted">
-                    You placed it in <strong>{{ d.user_bucket }}</strong>;
-                    correct bucket is <strong>{{ d.correct_bucket }}</strong>. {{ d.why }}
-                  </div>
-                </div>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
-
-      {% elif item.question.type == "slider_justify" %}
-        <ul class="list-group list-group-flush mb-3 result-list">
-          <li class="list-group-item px-0">
-            <div class="d-flex">
-              <div class="me-2">
-                {% if item.details.slider_ok %}
-                  <span class="text-success">&#10004;</span>
-                {% else %}
-                  <span class="text-danger">&#10008;</span>
-                {% endif %}
-              </div>
-              <div class="flex-grow-1">
-                <div><strong>Credibility rating</strong></div>
-                <div class="small text-muted">
-                  You rated
-                  {% if item.details.slider_value is none %}(not submitted){% else %}{{ item.details.slider_value }}{% endif %}
-                  (correct range: {{ item.details.correct_range[0] }}–{{ item.details.correct_range[1] }}).
-                </div>
-              </div>
+  {% elif q.type == "swipe_verdict" %}
+    <details class="q-details" open>
+      <summary>What you missed</summary>
+      <ul class="detail-list">
+        <li>
+          <span class="ico wrong">✗</span>
+          <div>
+            <div>You said
+              <strong>{{ (details.user_verdict or '—') | capitalize }}</strong>;
+              correct answer is
+              <strong>{{ (details.correct_verdict or '—') | capitalize }}</strong>.
             </div>
-          </li>
-          {% for s in item.details.signals %}
-            <li class="list-group-item px-0">
-              <div class="d-flex">
-                <div class="me-2">
-                  {% if s.user_correct %}
-                    <span class="text-success">&#10004;</span>
-                  {% else %}
-                    <span class="text-danger">&#10008;</span>
-                  {% endif %}
-                </div>
-                <div class="flex-grow-1">
-                  <div>{{ s.label }}</div>
-                  <div class="small text-muted">
-                    {% if s.is_red_flag %}Red flag{% else %}Not a red flag{% endif %} —
-                    you {% if s.user_selected %}selected{% else %}did not select{% endif %} this.
-                    {{ s.why }}
-                  </div>
-                </div>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
+            {% if details.signals %}
+            <div class="item-why">Signals at play: {{ details.signals | join(', ') }}</div>
+            {% endif %}
+          </div>
+        </li>
+      </ul>
+    </details>
+  {% endif %}
+{% endmacro %}
 
-      {% elif item.question.type == "swipe_verdict" %}
-        <ul class="list-group list-group-flush mb-3 result-list">
-          <li class="list-group-item px-0">
-            <div class="d-flex">
-              <div class="me-2">
-                {% if item.details.user_correct %}
-                  <span class="text-success">&#10004;</span>
-                {% else %}
-                  <span class="text-danger">&#10008;</span>
-                {% endif %}
-              </div>
-              <div class="flex-grow-1">
-                <div>
-                  You said
-                  <strong>{{ (item.details.user_verdict or "—") | capitalize }}</strong>;
-                  correct answer is
-                  <strong>{{ (item.details.correct_verdict or "—") | capitalize }}</strong>.
-                </div>
-                {% if item.details.signals %}
-                  <div class="small text-muted mt-1">
-                    Signals at play: {{ item.details.signals | join(", ") }}
-                  </div>
-                {% endif %}
-              </div>
+{% macro render_question(item, expanded) %}
+  {% set q = item.question %}
+  {% set details = item.details or {} %}
+  <div class="q-card {{ 'correct' if item.is_correct else 'incorrect' }}">
+    <div class="q-row1">
+      <span class="q-num">Question {{ q.id }}</span>
+      <span class="q-badge {{ 'correct' if item.is_correct else 'incorrect' }}">
+        {{ 'Correct' if item.is_correct else 'Missed' }}
+      </span>
+    </div>
+
+    {% if q.post and q.post.username %}
+      <div class="q-username">{{ q.post.username }}</div>
+    {% endif %}
+    {% if q.post and q.post.headline %}
+      <div class="q-headline">{{ q.post.headline }}</div>
+    {% elif q.prompt %}
+      <div class="q-prompt">{{ q.prompt }}</div>
+    {% endif %}
+
+    <div class="takeaway-line">
+      <span class="ico">💡</span>
+      <span><strong>Takeaway —</strong> {{ q.explanation or q.why }}</span>
+    </div>
+
+    {% if not item.is_correct and expanded %}
+      {{ render_breakdown(q, details) }}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+<div class="result-page">
+
+  {# ─── Hero score block ─── #}
+  <div class="score-hero">
+    <div class="score-eyebrow">
+      {% if mode == "feed" %}Feed results{% else %}Quiz result{% endif %}
+    </div>
+    {% if total > 0 %}
+      <div class="score-number">{{ score }}<span class="denom"> / {{ total }}</span></div>
+      <p class="score-blurb">
+        {% set pct = (score * 100 / total) | round | int %}
+        {% if pct == 100 %}
+          Perfect score. You're spotting every signal.
+        {% elif pct >= 75 %}
+          Solid — you're already thinking like a fact-checker.
+        {% elif pct >= 50 %}
+          Halfway there. Review the misses below to lock in the 3 signals.
+        {% else %}
+          Plenty of room to grow. Walk through the misses below.
+        {% endif %}
+      </p>
+    {% else %}
+      <div class="score-number">—<span class="denom"> / —</span></div>
+      <p class="score-blurb">You haven't answered any posts yet. Head back to start.</p>
+    {% endif %}
+
+    {% if signal_stats and total > 0 %}
+    {% set has_any_signal = signal_stats.source.total or signal_stats.language.total or signal_stats.poster.total %}
+    {% if has_any_signal %}
+    <div class="signal-scorecard">
+      <div class="signal-scorecard-label">Your signal strengths</div>
+      <div class="signal-chips">
+        {% for s in ['source', 'language', 'poster'] %}
+          {% set stat = signal_stats[s] %}
+          {% if stat.total > 0 %}
+          <div class="signal-chip {{ s }}">
+            <div class="signal-chip-name">{{ s }}</div>
+            <div class="signal-chip-score">
+              {{ stat.correct }}<span class="denom"> / {{ stat.total }}</span>
             </div>
-          </li>
-        </ul>
-      {% endif %}
-
-      <div class="p-3 takeaway-dark">
-        <div class="small text-muted text-uppercase fw-bold mb-1">Takeaway</div>
-        <div>{{ item.question.explanation or item.question.why }}</div>
+            <div class="signal-chip-bar">
+              <span style="width: {{ (stat.correct * 100 / stat.total) | round | int }}%;"></span>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
+    {% endif %}
+    {% endif %}
   </div>
-{% endfor %}
 
-<div class="mt-4 d-flex gap-2">
-  <a href="/" class="btn btn-outline-secondary">Back to Home</a>
-  {% if mode == "feed" %}
-    <a href="/feed" class="btn btn-primary">Keep scrolling →</a>
+  {# ─── Wrong answers section ─── #}
+  {% set wrong_items = breakdown | selectattr('is_correct', 'equalto', false) | list %}
+  {% set right_items = breakdown | selectattr('is_correct', 'equalto', true) | list %}
+
+  {% if wrong_items %}
+  <div class="section-head">Review your misses ({{ wrong_items | length }})</div>
+  {% for item in wrong_items %}
+    {{ render_question(item, expanded=true) }}
+  {% endfor %}
   {% endif %}
+
+  {# ─── Right answers section (collapsed) ─── #}
+  {% if right_items %}
+  <div class="section-head">What you got right ({{ right_items | length }})</div>
+  <div class="correct-summary">
+    <details>
+      <summary>Show the {{ right_items | length }} you nailed</summary>
+      <div class="correct-list">
+        {% for item in right_items %}
+          {{ render_question(item, expanded=false) }}
+        {% endfor %}
+      </div>
+    </details>
+  </div>
+  {% endif %}
+
+  <div class="actions-row">
+    <a href="/" class="btn btn-outline-secondary">Back to Home</a>
+    {% if mode == "feed" %}
+      <a href="/feed" class="btn btn-primary">Keep scrolling →</a>
+    {% else %}
+      <a href="/feed" class="btn btn-primary">Try the swipe feed →</a>
+    {% endif %}
+  </div>
 </div>
+
 {% endblock %}
